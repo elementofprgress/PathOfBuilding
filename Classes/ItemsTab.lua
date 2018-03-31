@@ -16,6 +16,57 @@ local m_ceil = math.ceil
 local m_floor = math.floor
 local m_modf = math.modf
 
+--[[
+Ordered table iterator, allow to iterate on the natural order of the keys of a
+table.
+
+Example:
+]]
+
+function __genOrderedIndex( t )
+    local orderedIndex = {}
+    for key in pairs(t) do
+        table.insert( orderedIndex, key )
+    end
+    table.sort( orderedIndex )
+    return orderedIndex
+end
+
+function orderedNext(t, state)
+    -- Equivalent of the next function, but returns the keys in the alphabetic
+    -- order. We use a temporary ordered key table that is stored in the
+    -- table being iterated.
+
+    local key = nil
+    --print("orderedNext: state = "..tostring(state) )
+    if state == nil then
+        -- the first time, generate the index
+        t.__orderedIndex = __genOrderedIndex( t )
+        key = t.__orderedIndex[1]
+    else
+        -- fetch the next value
+        for i = 1,table.getn(t.__orderedIndex) do
+            if t.__orderedIndex[i] == state then
+                key = t.__orderedIndex[i+1]
+            end
+        end
+    end
+
+    if key then
+        return key, t[key]
+    end
+
+    -- no more value to return, cleanup
+    t.__orderedIndex = nil
+    return
+end
+
+function orderedPairs(t)
+    -- Equivalent of the pairs() function on tables. Allows to iterate
+    -- in order
+    return orderedNext, t, nil
+end
+
 local rarityDropList = { 
 	{ label = colorCodes.NORMAL.."Normal", rarity = "NORMAL" },
 	{ label = colorCodes.MAGIC.."Magic", rarity = "MAGIC" },
@@ -210,6 +261,8 @@ If there's 2 slots an item can go in, holding Shift will put it in the second.]]
 	self.controls.statWeightsCalc = common.New("ButtonControl", {"TOPLEFT", self.controls.craftDisplayItem, "BOTTOMLEFT"}, 0, 470, 120, 20, "Calculate Weights", function()
 		self:CalcStatWeights()
 	end)
+	--self.CalcStatWeights = function(self) end;
+
 	-- Display item
 	self.displayItemTooltip = common.New("Tooltip")
 	self.displayItemTooltip.maxWidth = 458
@@ -1289,39 +1342,62 @@ function ItemsTabClass:CraftItem()
 	main:OpenPopup(370, 130, "Craft Item", controls)
 end
 
+--Item State Weight Calculation
 function ItemsTabClass:CalcStatWeights()
 	local calcFunc, calcBase = self.build.calcsTab:GetMiscCalculator()
 	local basestats = {
 		["+1% to Global Critical Strike Multiplier"] = {{"CritMultiplier", "BASE", 1}},
 		["1% increased Global Critical Strike Chance"] = {{"CritChance", "INC", 1}},
 		["1% increased Attack Speed"] ={{"Speed", "INC", 1}},
+		["Adds 1 to 1 Chaos Damage to Attacks"] = {{"ChaosMin", "BASE", 1}, {"ChaosMax", "BASE", 1}},
 		["Adds 1 to 1 Cold Damage to Attacks"] = {{"ColdMin", "BASE", 1}, {"ColdMax", "BASE", 1}},
 		["Adds 1 to 1 Fire Damage to Attacks"] = {{"FireMin", "BASE", 1}, {"FireMax", "BASE", 1}},
 		["Adds 1 to 1 Lightning Damage to Attacks"] = {{"LightningMin", "BASE", 1}, {"LightningMax", "BASE", 1}},
 		["Adds 1 to 1 Physical Damage to Attacks"] = {{"PhysicalMin", "BASE", 1}, {"PhysicalMax", "BASE", 1}},
 		["Damage Penetrates 1% Elemental Resistance"] = {{"ElementalPenetration", "BASE", 1}},
 		["Gain 1% of Physical Damage as Extra Fire Damage"] = {{"PhysicalDamageGainAsFire", "BASE", 1}},
+		["Gain 1% of Physical Damage as Extra Cold Damage"] = {{"PhysicalDamageGainAsCold", "BASE", 1}},
+		["Gain 1% of Physical Damage as Extra Lightning Damage"] = {{"PhysicalDamageGainAsLightning", "BASE", 1}},
+		["Gain 1% of Physical Damage as Extra Chaos Damage"] = {{"PhysicalDamageGainAsChaos", "BASE", 1}},
 		["1% increased Cold Damage"] = {{"ColdDamage", "INC", 1}},
 		["1% increased Fire Damage"] = {{"FireDamage", "INC", 1}},
 		["1% increased Lightning Damage"] = {{"LightningDamage", "INC", 1}},
+		["1% increased Chaos Damage"] = {{"ChaosDamage", "INC", 1}},
+		["1% increased Elemental Damage"] = {{"ElementalDamage", "INC", 1}},
 		["1% increased Physical Damage"] = {{"PhysicalDamage", "INC", 1}},
 		["1% increased Damage"] = {{"Damage", "INC", 1}},
-		["1% increased Elemental Damage"] = {{"ElementalDamage", "INC", 1}},
+		["fire an additional projectile"] = {{"ProjectileCount", "BASE", 1}},
+		["1% of Physical Damage Converted to Fire Damage"] = {{"PhysicalDamageConvertToFire", "BASE", 1}},
+		["1% of Cold Damage Converted to Fire Damage"] = {{"LightningDamageConvertToFire", "BASE", 1}},
+		["1% of Lightning Damage Converted to Fire Damage"] = {{"ColdDamageConvertToFire", "BASE", 1}},
+		["1% of Physical Damage Converted to Cold Damage"] = {{"PhysicalDamageConvertToCold", "BASE", 1}},
+		["1% of Physical Damage Converted to Lightning Damage"] = {{"PhysicalDamageConvertToLightning", "BASE", 1}},
+		["+1 to Accuracy Rating"] = {{"Accuracy", "BASE", 1}},
+		["1% to Accuracy Rating"] = {{"Accuracy", "INC", 1}},
 	}
 	local item = nil;
 	local controls = { }
 	local outstr = "";
 	local modDB = self.build.calcsTab.mainEnv.modDB
 	local output = self.build.calcsTab.mainOutput
+	local ordered_basestats = {}
+	local ordered_outstr = "";
 	local function buildRaw (stat)
 		return "Rarity: Rare\nTmp\nCrimson Jewel\n"..stat;
 	end
-	for k, v in pairs(basestats) do
+	for k, v in orderedPairs(basestats) do
 		output = calcFunc({addMods = v})
-		outstr = outstr..k..": "..tostring(math.floor(((output.TotalDPS-calcBase.TotalDPS)/10)+0.5)).."\n";
+		statdmg = string.format("%06d", (math.floor(output.TotalDPS-calcBase.TotalDPS+0.5)))
+		outstr = outstr..k..": "..string.format("%06d", (math.floor(output.TotalDPS-calcBase.TotalDPS+0.5))).."\n";
+		--outstr = outstr..k..": "..tostring(math.floor(((output.TotalDPS-calcBase.TotalDPS)/10)+0.5)).."\n";
+		ordered_basestats[statdmg..": "..k] = k
+	end
+	for k1, v1 in orderedPairs(ordered_basestats) do
+		ordered_outstr = ordered_outstr.."+"..k1.."\n";
 	end
 	controls.edit = common.New("EditControl", nil, 0, 40, 480, 420, "", nil, "^%C\t\n", nil, nil, 14)
-	controls.edit:SetText("Stat Weights go here:\n"..outstr)
+	controls.edit:SetText("Stat Weights go here:\n"..ordered_outstr.."\n Base DPS: "..calcBase.TotalDPS.."\n      DPS: "..output.TotalDPS)
+	--controls.edit:SetText("Stat Weights go here:\n"..outstr)
 	controls.edit.font = "FIXED"
 	controls.cancel = common.New("ButtonControl", nil, 0, 470, 80, 20, "Cancel", function()
 		main:ClosePopup()
