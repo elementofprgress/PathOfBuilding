@@ -239,6 +239,7 @@ local function doActorMisc(env, actor)
 	output.EnduranceChargesMax = modDB:Sum("BASE", nil, "EnduranceChargesMax")
 	output.SiphoningChargesMax = modDB:Sum("BASE", nil, "SiphoningChargesMax")
 	output.CrabBarriersMax = modDB:Sum("BASE", nil, "CrabBarriersMax")
+
 	if modDB:Sum("FLAG", nil, "UsePowerCharges") then
 		output.PowerCharges = modDB:Sum("OVERRIDE", nil, "PowerCharges") or output.PowerChargesMax
 	else

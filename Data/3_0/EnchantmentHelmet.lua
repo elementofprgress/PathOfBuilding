@@ -1695,6 +1695,18 @@ return {
 			"40% increased Unearth damage",
 		},
 	},
+	["Unearth"] = {
+		["MERCILESS"] = {
+			"8% increased Unearth cast speed",
+			"Unearth Creates Corpses with +3 Level",
+			"25% increased Unearth damage",
+		},
+		["ENDGAME"] = {
+			"12% increased Unearth cast speed",
+			"Unearth Creates Corpses with +5 Level",
+			"40% increased Unearth damage",
+		},
+	},
 	["Vengeance"] = {
 		["MERCILESS"] = {
 			"20% increased Vengeance Cooldown Recovery Speed",

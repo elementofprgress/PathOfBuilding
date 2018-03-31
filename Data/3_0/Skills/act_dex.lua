@@ -5551,6 +5551,13 @@ skills["WildStrike"] = {
 			chaining = false,
 			area = false,
 		},
+		{
+			name = "Mixed hit",
+			melee = true,
+			projectile = false,
+			chaining = false,
+			area = false,
+        },
 	},
 	baseFlags = {
 		attack = true,
@@ -5576,6 +5583,9 @@ skills["WildStrike"] = {
 		mod("PhysicalDamageConvertToLightning", "BASE", 100, 0, 0, { type = "SkillPart", skillPart = 4 }), 
 		mod("PhysicalDamageConvertToCold", "BASE", 100, 0, 0, { type = "SkillPart", skillPart = 5 }), 
 		mod("PhysicalDamageConvertToCold", "BASE", 100, 0, 0, { type = "SkillPart", skillPart = 6 }), 
+		mod("PhysicalDamageConvertToFire", "BASE", 33.33, 0, 0, { type = "SkillPart", skillPart = 7 }),
+		mod("PhysicalDamageConvertToLightning", "BASE", 33.33, 0, 0, { type = "SkillPart", skillPart = 7 }),
+		mod("PhysicalDamageConvertToCold", "BASE", 33.34, 0, 0, { type = "SkillPart", skillPart = 7 }),
 	},
 	qualityMods = {
 		mod("ElementalDamage", "INC", 1), --"elemental_damage_+%" = 1

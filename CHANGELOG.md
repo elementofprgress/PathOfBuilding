@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ### 1.4.85 - 2018/03/22
  * Added Helmet enchantments for Spectral Shield Throw and Tectonic Slam
  * Added Light Radius Mod to the Other Defences section of the Calcs tab
@@ -25,6 +26,8 @@
  * Added an option to the Configuration tab for "Energy Shield Recharge started Recently?"
  * Fixed error caused by Zizaran trying to add mods onto an item
 
+=======
+>>>>>>> ghr74/master
 ### 1.4.83 - 2018/03/03
  * Added the following new uniques:
     * Crystal Vault
