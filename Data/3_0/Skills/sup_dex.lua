@@ -321,7 +321,7 @@ skills["SupportCastOnDeath"] = {
 	gemStr = 0,
 	gemDex = 60,
 	gemInt = 40,
-	description = "Each supported spell skill will be triggered when you die. Cannot support Totems, Traps, or Mines. Vaal skills and skills that reserve mana cannot be triggered.",
+	description = "Each supported spell skill will be triggered when you die. Cannot support skills used by totems, traps, or mines. Vaal skills and skills that reserve mana cannot be triggered.",
 	color = 2,
 	support = true,
 	requireSkillTypes = { 36, },
@@ -393,7 +393,7 @@ skills["SupportChain"] = {
 	excludeSkillTypes = { },
 	baseMods = {
 		mod("ManaCost", "MORE", 50), 
-		mod("ChainCount", "BASE", 2), --"number_of_additional_projectiles_in_chain" = 2
+		mod("ChainCountMax", "BASE", 2), --"number_of_additional_projectiles_in_chain" = 2
 	},
 	qualityMods = {
 		mod("ProjectileSpeed", "INC", 1), --"base_projectile_speed_+%" = 1
@@ -750,7 +750,7 @@ skills["SupportAdditionalQuality"] = {
 	gemStr = 0,
 	gemDex = 100,
 	gemInt = 0,
-	description = "Supports any skill gem. Once this gem reaches level 2 or above, will raise the quality of supported gems. Cannot support skills that don&#39;t come from gems.",
+	description = "Supports any skill gem. Once this gem reaches level 2 or above, will raise the quality of supported gems. Cannot support skills that don't come from gems.",
 	color = 2,
 	support = true,
 	requireSkillTypes = { },
@@ -1044,7 +1044,7 @@ skills["SupportDamageAgainstChilled"] = {
 	excludeSkillTypes = { },
 	baseMods = {
 		mod("ManaCost", "MORE", 20), 
-		mod("EnemyFreezeChance", "BASE", 10, ModFlag.Hit, 0, { type = "EnemyCondition", var = "Chilled" }), --"additional_chance_to_freeze_chilled_enemies_%" = 10
+		mod("EnemyFreezeChance", "BASE", 10, ModFlag.Hit, 0, { type = "ActorCondition", actor = "enemy", var = "Chilled" }), --"additional_chance_to_freeze_chilled_enemies_%" = 10
 		mod("EnemyChillEffect", "INC", 20), --"chill_effect_+%" = 20
 	},
 	qualityMods = {
@@ -1052,7 +1052,7 @@ skills["SupportDamageAgainstChilled"] = {
 	},
 	levelMods = {
 		[1] = nil, 
-		[2] = mod("Damage", "MORE", nil, 0, bit.bor(KeywordFlag.Hit, KeywordFlag.Ailment), { type = "EnemyCondition", var = "Chilled" }), --"support_hypothermia_damage_+%_vs_chilled_enemies_final"
+		[2] = mod("Damage", "MORE", nil, 0, bit.bor(KeywordFlag.Hit, KeywordFlag.Ailment), { type = "ActorCondition", actor = "enemy", var = "Chilled" }), --"support_hypothermia_damage_+%_vs_chilled_enemies_final"
 	},
 	levels = {
 		[1] = { 31, 20, },
@@ -1098,18 +1098,18 @@ skills["SupportFrenzyChargeOnSlayingFrozenEnemy"] = {
 	gemStr = 0,
 	gemDex = 100,
 	gemInt = 0,
-	description = "Supports any skill that hits enemies.",
+	description = "Supports any skill you use to hit enemies yourself. Cannot support skills used by totems, traps, or mines.",
 	color = 2,
 	support = true,
 	requireSkillTypes = { 10, 1, },
 	addSkillTypes = { },
-	excludeSkillTypes = { },
+	excludeSkillTypes = { 37, 41, 30, },
 	baseMods = {
 		mod("ManaCost", "MORE", 30), 
 		mod("EnemyFreezeChance", "BASE", 15), --"base_chance_to_freeze_%" = 15
 	},
 	qualityMods = {
-		mod("Damage", "INC", 1, ModFlag.Hit, 0, { type = "EnemyCondition", var = "Frozen" }), --"damage_+%_vs_frozen_enemies" = 1
+		mod("Damage", "INC", 1, ModFlag.Hit, 0, { type = "ActorCondition", actor = "enemy", var = "Frozen" }), --"damage_+%_vs_frozen_enemies" = 1
 	},
 	levelMods = {
 		[1] = nil, 
@@ -1334,6 +1334,74 @@ skills["SupportManaLeech"] = {
 		[28] = { 86, 54, },
 		[29] = { 88, 56, },
 		[30] = { 90, 58, },
+	},
+}
+skills["SupportGemMirageArcher"] = {
+	name = "Mirage Archer",
+	gemTags = {
+		bow = true,
+		attack = true,
+		dexterity = true,
+		support = true,
+		duration = true,
+	},
+	gemTagString = "Bow, Attack, Support, Duration",
+	gemStr = 0,
+	gemDex = 100,
+	gemInt = 0,
+	description = "Supports attack skills that can be used with bows. Supported skills can only be used with bows. Cannot support Vaal skills, minion skills, movement skills, or skills used by totems, traps, or mines.",
+	color = 2,
+	support = true,
+	requireSkillTypes = { 69, },
+	addSkillTypes = { 12, },
+	excludeSkillTypes = { 43, 30, 37, 41, 9, },
+	baseMods = {
+		mod("ManaCost", "MORE", 40), 
+		--"support_mirage_archer_base_duration" = 4000
+		--"support_mirage_archer_attack_speed_+%_final" = -60
+		--"mirage_archer_projectile_additional_height_offset" = -138
+		--"skill_can_own_mirage_archers" = ?
+		--"summon_mirage_archer_on_hit" = ?
+		--"disable_skill_if_weapon_not_bow" = ?
+	},
+	qualityMods = {
+		mod("Damage", "INC", 0.5, ModFlag.Attack), --"attack_damage_+%" = 0.5
+	},
+	levelMods = {
+		[1] = nil, 
+		--[2] = "support_mirage_archer_damage_+%_final"
+	},
+	levels = {
+		[1] = { 4, -30, },
+		[2] = { 6, -29, },
+		[3] = { 9, -28, },
+		[4] = { 12, -27, },
+		[5] = { 16, -26, },
+		[6] = { 20, -25, },
+		[7] = { 24, -24, },
+		[8] = { 28, -23, },
+		[9] = { 32, -22, },
+		[10] = { 36, -21, },
+		[11] = { 40, -20, },
+		[12] = { 44, -19, },
+		[13] = { 48, -18, },
+		[14] = { 52, -17, },
+		[15] = { 55, -16, },
+		[16] = { 58, -15, },
+		[17] = { 61, -14, },
+		[18] = { 64, -13, },
+		[19] = { 67, -12, },
+		[20] = { 70, -11, },
+		[21] = { 72, -10, },
+		[22] = { 74, -9, },
+		[23] = { 76, -8, },
+		[24] = { 78, -7, },
+		[25] = { 80, -6, },
+		[26] = { 82, -5, },
+		[27] = { 84, -4, },
+		[28] = { 86, -3, },
+		[29] = { 88, -2, },
+		[30] = { 90, -1, },
 	},
 }
 skills["SupportMultiTrap"] = {
@@ -1853,7 +1921,7 @@ skills["SupportTrap"] = {
 		mod("ManaCost", "MORE", 40), 
 		skill("cooldown", 4), 
 		--"is_trap" = 1
-		--"base_trap_duration" = 16000
+		--"base_trap_duration" = 4000
 		--"trap_override_pvp_scaling_time_ms" = 900
 		--"base_skill_is_trapped" = ?
 		--"disable_skill_if_melee_attack" = ?
@@ -2041,7 +2109,7 @@ skills["SupportDebilitate"] = {
 	excludeSkillTypes = { },
 	baseMods = {
 		mod("ManaCost", "MORE", 20), 
-		mod("Damage", "MORE", 5, ModFlag.Hit, 0, { type = "Multiplier", var = "PoisonOnEnemy", limitVar = "VileToxinsPoisonLimit" }), --"support_debilitate_hit_damage_+%_final_per_poison_stack" = 5
+		mod("Damage", "MORE", 5, ModFlag.Hit, 0, { type = "Multiplier", actor = "enemy", var = "PoisonStack", limitVar = "VileToxinsPoisonLimit" }), --"support_debilitate_hit_damage_+%_final_per_poison_stack" = 5
 	},
 	qualityMods = {
 		mod("Damage", "INC", 1, 0, KeywordFlag.Poison), --"base_poison_damage_+%" = 1
@@ -2143,5 +2211,68 @@ skills["SupportVoidManipulation"] = {
 		[28] = { 86, 47, },
 		[29] = { 88, 48, },
 		[30] = { 90, 49, },
+	},
+}
+skills["SupportParallelProjectiles"] = {
+	name = "Volley",
+	gemTags = {
+		dexterity = true,
+		support = true,
+		projectile = true,
+	},
+	gemTagString = "Support, Projectile",
+	gemStr = 0,
+	gemDex = 100,
+	gemInt = 0,
+	description = "Supports skills that fire projectiles from the user. Does not affect projectiles fired from other locations as secondary effects.",
+	color = 2,
+	support = true,
+	requireSkillTypes = { 68, },
+	addSkillTypes = { },
+	excludeSkillTypes = { 70, 71, },
+	baseMods = {
+		mod("ManaCost", "MORE", 40), 
+		--"support_parallel_projectile_number_of_points_per_side" = 2
+		--"additional_projectiles_fire_parallel_x_dist" = 80
+		mod("ProjectileCount", "BASE", 2), --"number_of_additional_projectiles" = 2
+	},
+	qualityMods = {
+		mod("Damage", "INC", 1, ModFlag.Projectile), --"projectile_damage_+%" = 1
+	},
+	levelMods = {
+		[1] = nil, 
+		[2] = mod("Damage", "MORE", nil, ModFlag.Projectile), --"support_parallel_projectiles_damage_+%_final"
+	},
+	levels = {
+		[1] = { 4, -25, },
+		[2] = { 6, -25, },
+		[3] = { 9, -24, },
+		[4] = { 12, -24, },
+		[5] = { 16, -23, },
+		[6] = { 20, -23, },
+		[7] = { 24, -22, },
+		[8] = { 28, -22, },
+		[9] = { 32, -21, },
+		[10] = { 36, -21, },
+		[11] = { 40, -20, },
+		[12] = { 44, -20, },
+		[13] = { 48, -19, },
+		[14] = { 52, -19, },
+		[15] = { 55, -18, },
+		[16] = { 58, -18, },
+		[17] = { 61, -17, },
+		[18] = { 64, -17, },
+		[19] = { 67, -16, },
+		[20] = { 70, -16, },
+		[21] = { 72, -15, },
+		[22] = { 74, -15, },
+		[23] = { 76, -14, },
+		[24] = { 78, -14, },
+		[25] = { 80, -13, },
+		[26] = { 82, -13, },
+		[27] = { 84, -12, },
+		[28] = { 86, -12, },
+		[29] = { 88, -11, },
+		[30] = { 90, -11, },
 	},
 }

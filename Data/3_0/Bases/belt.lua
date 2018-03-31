@@ -5,7 +5,7 @@ local itemBases = ...
 itemBases["Rustic Sash"] = {
 	type = "Belt",
 	tags = { default = true, belt = true, },
-	implicit = "(12-24)% increased Physical Damage",
+	implicit = "(12-24)% increased Global Physical Damage",
 	req = { },
 }
 itemBases["Chain Belt"] = {
@@ -49,6 +49,12 @@ itemBases["Crystal Belt"] = {
 	tags = { default = true, belt = true, not_for_sale = true, atlas_base_type = true, beltatlas2 = true, },
 	implicit = "+(60-80) to maximum Energy Shield",
 	req = { level = 79, },
+}
+itemBases["Stygian Vise"] = {
+	type = "Belt",
+	tags = { default = true, belt = true, not_for_sale = true, },
+	implicit = "Has 1 Abyssal Socket",
+	req = { },
 }
 
 itemBases["Golden Obi"] = {

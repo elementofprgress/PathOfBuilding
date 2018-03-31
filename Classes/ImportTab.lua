@@ -202,6 +202,9 @@ You can get this from your web browser's cookies while logged into the Path of E
 		if not xmlText then
 			return
 		end
+		if launch.devMode and IsKeyDown("SHIFT") then
+			Copy(xmlText)
+		end
 		self.importCodeState = "VALID"
 		self.importCodeXML = xmlText
 		if not self.build.dbFileName then
@@ -454,24 +457,24 @@ function ImportTabClass:DownloadItems()
 end
 
 local rarityMap = { [0] = "NORMAL", "MAGIC", "RARE", "UNIQUE", [9] = "RELIC" }
-local colorMap = { S = "R", D = "G", I = "B", G = "W" }
 local slotMap = { ["Weapon"] = "Weapon 1", ["Offhand"] = "Weapon 2", ["Weapon2"] = "Weapon 1 Swap", ["Offhand2"] = "Weapon 2 Swap", ["Helm"] = "Helmet", ["BodyArmour"] = "Body Armour", ["Gloves"] = "Gloves", ["Boots"] = "Boots", ["Amulet"] = "Amulet", ["Ring"] = "Ring 1", ["Ring2"] = "Ring 2", ["Belt"] = "Belt" }
 
-function ImportTabClass:ImportItem(itemData, sockets)
-	local slotName
-	if itemData.inventoryId == "PassiveJewels" and sockets then
-		slotName = "Jewel "..sockets[itemData.x + 1]
-	elseif itemData.inventoryId == "Flask" then
-		slotName = "Flask "..(itemData.x + 1)
-	else
-		slotName = slotMap[itemData.inventoryId]
+function ImportTabClass:ImportItem(itemData, sockets, slotName)
+	if not slotName then
+		if itemData.inventoryId == "PassiveJewels" and sockets then
+			slotName = "Jewel "..sockets[itemData.x + 1]
+		elseif itemData.inventoryId == "Flask" then
+			slotName = "Flask "..(itemData.x + 1)
+		else
+			slotName = slotMap[itemData.inventoryId]
+		end
 	end
 	if not slotName then
 		-- Ignore any items that won't go into known slots
 		return
 	end
 
-	local item = { }
+	local item = common.New("Item", self.build.targetVersion)
 
 	-- Determine rarity, display name and base type of the item
 	item.rarity = rarityMap[itemData.frameType]
@@ -519,6 +522,8 @@ function ImportTabClass:ImportItem(itemData, sockets)
 
 	-- Import item data
 	item.uniqueID = itemData.id
+	item.shaper = itemData.shaper
+	item.elder = itemData.elder
 	if itemData.ilvl > 0 then
 		item.itemLevel = itemData.ilvl
 	end
@@ -556,14 +561,14 @@ function ImportTabClass:ImportItem(itemData, sockets)
 	if itemData.corrupted then
 		item.corrupted = true
 	end
-	if itemData.sockets[1] then
+	if itemData.sockets and itemData.sockets[1] then
 		item.sockets = { }
 		for i, socket in pairs(itemData.sockets) do
-			item.sockets[i] = { group = socket.group, color = colorMap[socket.attr] }
+			item.sockets[i] = { group = socket.group, color = socket.sColour }
 		end
 	end
 	if itemData.socketedItems then
-		self:ImportSocketedSkills(item, itemData.socketedItems, slotName)
+		self:ImportSocketedItems(item, itemData.socketedItems, slotName)
 	end
 	if itemData.requirements and (not itemData.socketedItems or not itemData.socketedItems[1]) then
 		-- Requirements cannot be trusted if there are socketed gems, as they may override the item's natural requirements
@@ -610,10 +615,9 @@ function ImportTabClass:ImportItem(itemData, sockets)
 	end
 
 	-- Add and equip the new item
-	item.raw = itemLib.createItemRaw(item)
---	ConPrintf("%s", item.raw)
-	local newItem = itemLib.makeItemFromRaw(self.build.targetVersion, item.raw)
-	if newItem then
+	item:BuildAndParseRaw()
+	--ConPrintf("%s", item.raw)
+	if item.base then
 		local repIndex, repItem
 		for index, item in pairs(self.build.itemsTab.items) do
 			if item.uniqueID == itemData.id then
@@ -624,40 +628,46 @@ function ImportTabClass:ImportItem(itemData, sockets)
 		end
 		if repIndex then
 			-- Item already exists in the build, overwrite it
-			newItem.id = repItem.id
-			self.build.itemsTab.items[newItem.id] = newItem
-			itemLib.buildItemModList(newItem)
+			item.id = repItem.id
+			self.build.itemsTab.items[item.id] = item
+			item:BuildModList()
 		else
-			self.build.itemsTab:AddItem(newItem, true)
+			self.build.itemsTab:AddItem(item, true)
 		end
-		self.build.itemsTab.slots[slotName]:SetSelItemId(newItem.id)
+		self.build.itemsTab.slots[slotName]:SetSelItemId(item.id)
 	end
 end
 
-function ImportTabClass:ImportSocketedSkills(item, socketedItems, slotName)
+function ImportTabClass:ImportSocketedItems(item, socketedItems, slotName)
 	-- Build socket group list
 	local itemSocketGroupList = { }
+	local abyssalSocketId = 1
 	for _, socketedItem in ipairs(socketedItems) do
-		local gem = { level = 20, quality = 0, enabled = true}
-		gem.nameSpec = socketedItem.typeLine:gsub(" Support","")
-		gem.support = socketedItem.support
-		for _, property in pairs(socketedItem.properties) do
-			if property.name == "Level" then
-				gem.level = tonumber(property.values[1][1]:match("%d+"))
-			elseif property.name == "Quality" then
-				gem.quality = tonumber(property.values[1][1]:match("%d+"))
-			end
-		end
-		local groupID = item.sockets[socketedItem.socket + 1].group
-		if not itemSocketGroupList[groupID] then
-			itemSocketGroupList[groupID] = { label = "", enabled = true, gemList = { }, slot = slotName }
-		end
-		local socketGroup = itemSocketGroupList[groupID]
-		if not socketedItem.support and socketGroup.gemList[1] and socketGroup.gemList[1].support then
-			-- If the first gem is a support gem, put the first active gem before it
-			t_insert(socketGroup.gemList, 1, gem)
+		if socketedItem.abyssJewel then
+			self:ImportItem(socketedItem, nil, slotName .. " Abyssal Socket "..abyssalSocketId)
+			abyssalSocketId = abyssalSocketId + 1
 		else
-			t_insert(socketGroup.gemList, gem)
+			local gem = { level = 20, quality = 0, enabled = true}
+			gem.nameSpec = socketedItem.typeLine:gsub(" Support","")
+			gem.support = socketedItem.support
+			for _, property in pairs(socketedItem.properties) do
+				if property.name == "Level" then
+					gem.level = tonumber(property.values[1][1]:match("%d+"))
+				elseif property.name == "Quality" then
+					gem.quality = tonumber(property.values[1][1]:match("%d+"))
+				end
+			end
+			local groupID = item.sockets[socketedItem.socket + 1].group
+			if not itemSocketGroupList[groupID] then
+				itemSocketGroupList[groupID] = { label = "", enabled = true, gemList = { }, slot = slotName }
+			end
+			local socketGroup = itemSocketGroupList[groupID]
+			if not socketedItem.support and socketGroup.gemList[1] and socketGroup.gemList[1].support then
+				-- If the first gem is a support gem, put the first active gem before it
+				t_insert(socketGroup.gemList, 1, gem)
+			else
+				t_insert(socketGroup.gemList, gem)
+			end
 		end
 	end
 
@@ -697,14 +707,15 @@ end
 function ImportTabClass:OpenPastebinImportPopup()
 	local controls = { }
 	controls.editLabel = common.New("LabelControl", nil, 0, 20, 0, 16, "Enter Pastebin.com link:")
-	controls.edit = common.New("EditControl", nil, 0, 40, 250, 18, "", nil, nil, nil, function(buf)
+	controls.edit = common.New("EditControl", nil, 0, 40, 250, 18, "", nil, "^%w%p%s", nil, function(buf)
 		controls.msg.label = ""
 	end)
 	controls.msg = common.New("LabelControl", nil, 0, 58, 0, 16, "")
 	controls.import = common.New("ButtonControl", nil, -45, 80, 80, 20, "Import", function()
 		controls.import.enabled = false
 		controls.msg.label = "Retrieving paste..."
-		launch:DownloadPage(controls.edit.buf:gsub("pastebin%.com/(%w+)$","pastebin.com/raw/%1"), function(page, errMsg)
+		controls.edit.buf = controls.edit.buf:gsub("^%s+", ""):gsub("%s+$", "") -- Quick Trim
+		launch:DownloadPage(controls.edit.buf:gsub("pastebin%.com/(%w+)%s*$","pastebin.com/raw/%1"), function(page, errMsg)
 			if errMsg then
 				controls.msg.label = "^1"..errMsg
 				controls.import.enabled = true

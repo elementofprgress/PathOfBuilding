@@ -36,6 +36,37 @@ local skills, mod, flag, skill = ...
 #baseMod skill("radius", 26)
 #mods
 
+#skill CorpseWarp
+#flags spell area fire movement
+#baseMod skill("explodeCorpse", true, { type = "SkillPart", skillPart = 2 })
+#setMod spell_minimum_base_fire_damage==skill("FireMin", nil, { type = "SkillPart", skillPart = 1 })
+#setMod spell_maximum_base_fire_damage==skill("FireMax", nil, { type = "SkillPart", skillPart = 1 })
+	parts = {
+		{
+			name = "Self Explosion",
+			spell = true,
+			cast = false,
+		},
+		{
+			name = "Corpse Explosion",
+			spell = false,
+			cast =  true,
+		},
+	},
+	setupFunc = function(actor, output)
+		if actor.mainSkill.skillPart == 1 then
+			local skillData = actor.mainSkill.skillData
+			if actor.mainSkill.skillFlags.totem then
+				skillData.FireBonusMin = output.TotemLife * skillData.selfFireExplosionLifeMultiplier
+				skillData.FireBonusMax = output.TotemLife * skillData.selfFireExplosionLifeMultiplier
+			else
+				skillData.FireBonusMin = output.Life * skillData.selfFireExplosionLifeMultiplier
+				skillData.FireBonusMax = output.Life * skillData.selfFireExplosionLifeMultiplier
+			end
+		end
+	end,
+#mods
+
 #skill BoneOffering
 #flags spell duration
 #baseMod skill("buffMinions", true)
@@ -109,6 +140,12 @@ local skills, mod, flag, skill = ...
 		actor.mainSkill.skillData.ChaosMin = actor.mainSkill.skillData.ChaosMin + add
 		actor.mainSkill.skillData.ChaosMax = actor.mainSkill.skillData.ChaosMax + add
 	end,
+#mods
+
+#skill Despair
+#flags spell curse area duration
+#baseMod skill("debuff", true)
+#baseMod skill("radius", 22)
 #mods
 
 #skill Discharge
@@ -256,7 +293,7 @@ local skills, mod, flag, skill = ...
 
 #skill GlacialCascade
 #flags spell area cold
-#baseMod skill("radius", 14)
+#baseMod skill("radius", 12)
 #mods
 
 #skill HeraldOfThunder
@@ -314,9 +351,8 @@ local skills, mod, flag, skill = ...
 #baseMod skill("radius", 14)
 #mods
 
-#skill LightningTendrils
+#skill LightningTendrilsChannelled
 #flags spell area lightning
-#baseMod skill("dpsMultiplier", 4)
 #baseMod skill("radius", 22)
 #mods
 
@@ -364,7 +400,8 @@ local skills, mod, flag, skill = ...
 #mods
 
 #skill RaiseSpectre
-#flags spell minion spectre
+#flags spell minion spectre duration
+#setMod accuracy_rating==mod("MinionModifier", "LIST", { mod = mod("Accuracy", "BASE", nil) })
 	minionList = {
 	},
 #mods
@@ -411,6 +448,7 @@ local skills, mod, flag, skill = ...
 		},
 	},
 #setMod fire_beam_enemy_fire_resistance_%_per_stack==mod("FireResist", "BASE", {val}, 0, 0, { type = "GlobalEffect", effectType = "Debuff" })
+#baseMod skill("stackCount", 1, { type = "SkillPart", skillPart = 1 })
 #baseMod skill("stackCount", 4, { type = "SkillPart", skillPart = 2 })
 #baseMod skill("stackCount", 8, { type = "SkillPart", skillPart = 3 })
 #baseMod mod("Damage", "MORE", 180, 0, 0, { type = "SkillPart", skillPart = 2 })
@@ -522,12 +560,6 @@ local skills, mod, flag, skill = ...
 #baseMod skill("dotIsArea", true)
 #mods
 
-#skill Vulnerability
-#flags spell curse area duration
-#baseMod skill("debuff", true)
-#baseMod skill("radius", 22)
-#mods
-
 #skill Wither
 #flags spell area duration chaos
 	parts = {
@@ -541,14 +573,15 @@ local skills, mod, flag, skill = ...
 			name = "10 Stacks",
 		},
 		{
-			name = "20 Stacks",
+			name = "15 Stacks",
 		},
 	},
 #global Debuff
 #baseMod skill("debuff", true)
+#baseMod skill("stackCount", 1, { type = "SkillPart", skillPart = 1 })
 #baseMod skill("stackCount", 5, { type = "SkillPart", skillPart = 2 })
 #baseMod skill("stackCount", 10, { type = "SkillPart", skillPart = 3 })
-#baseMod skill("stackCount", 20, { type = "SkillPart", skillPart = 4 })
+#baseMod skill("stackCount", 15, { type = "SkillPart", skillPart = 4 })
 #setMod base_skill_effect_duration==nil
 #setMod base_secondary_skill_effect_duration==skill("duration", {val});div=1000
 #mods

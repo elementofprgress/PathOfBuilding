@@ -21,7 +21,7 @@ skills["AbyssalCry"] = {
 	gemDex = 0,
 	gemInt = 0,
 	color = 1,
-	description = "Performs a warcry, Hindering nearby enemies and causing them to explode when killed. The hinder effect is increased by surrounding enemies. Taunts all nearby enemies to attack the user. Shares a cooldown with other Warcry skills.",
+	description = "Performs a warcry, Hindering nearby enemies and causing them to explode when killed. The Hinder effect is proportional to the number of surrounding enemies. Taunts all nearby enemies to attack the user. Shares a cooldown with other Warcry skills.",
 	skillTypes = { [11] = true, [12] = true, [50] = true, [10] = true, },
 	baseFlags = {
 		warcry = true,
@@ -97,7 +97,7 @@ skills["TotemMelee"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Summons an Ancestor Totem which will attack enemies with melee strikes while you stand close to it. Being near it grants you more attack speed.",
-	skillTypes = { [1] = true, [30] = true, [12] = true, [6] = true, [25] = true, [24] = true, [17] = true, [19] = true, },
+	skillTypes = { [1] = true, [30] = true, [12] = true, [25] = true, [24] = true, [17] = true, [19] = true, },
 	weaponTypes = {
 		["None"] = true,
 		["One Handed Mace"] = true,
@@ -193,7 +193,7 @@ skills["AncestorTotemSlam"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Summons an Ancestor Totem that will attack enemies with a powerful main hand slam while you stand close to it. Being near it grants you more melee damage.",
-	skillTypes = { [1] = true, [30] = true, [12] = true, [6] = true, [24] = true, [17] = true, [19] = true, [11] = true, },
+	skillTypes = { [1] = true, [30] = true, [12] = true, [24] = true, [17] = true, [19] = true, [11] = true, },
 	weaponTypes = {
 		["None"] = true,
 		["One Handed Mace"] = true,
@@ -447,7 +447,7 @@ skills["Cleave"] = {
 	gemInt = 0,
 	color = 1,
 	description = "The character swings their weapon (or both weapons if dual wielding) in an arc towards the target. Also does damage to other nearby monsters. Only works with Axes and Swords.",
-	skillTypes = { [1] = true, [6] = true, [8] = true, [11] = true, [28] = true, [24] = true, [53] = true, },
+	skillTypes = { [1] = true, [8] = true, [11] = true, [28] = true, [24] = true, [53] = true, },
 	weaponTypes = {
 		["Two Handed Axe"] = true,
 		["Thrusting One Handed Sword"] = true,
@@ -746,7 +746,7 @@ skills["DominatingBlow"] = {
 	gemInt = 40,
 	color = 1,
 	description = "Attacks the enemy with a melee strike. If a non-unique enemy is killed shortly after being hit by Dominating Blow, that enemy is revived as a minion until the skill duration ends.",
-	skillTypes = { [1] = true, [6] = true, [9] = true, [12] = true, [21] = true, [25] = true, [28] = true, [24] = true, },
+	skillTypes = { [1] = true, [9] = true, [12] = true, [21] = true, [25] = true, [28] = true, [24] = true, },
 	minionSkillTypes = { [1] = true, [24] = true, [25] = true, [28] = true, [2] = true, [10] = true, [11] = true, [3] = true, [23] = true, [12] = true, [30] = true, [37] = true, [41] = true, [40] = true, [58] = true, [32] = true, [48] = true, [26] = true, },
 	weaponTypes = {
 		["None"] = true,
@@ -831,7 +831,7 @@ skills["Earthquake"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Smashes the ground with an Axe, Mace or Staff, dealing damage in an area and cracking the earth. The crack will erupt in a powerful aftershock after a short duration. Earthquakes created before the first one has erupted will not generate their own aftershocks.",
-	skillTypes = { [1] = true, [6] = true, [11] = true, [24] = true, [7] = true, [10] = true, [28] = true, [12] = true, },
+	skillTypes = { [1] = true, [11] = true, [24] = true, [7] = true, [10] = true, [28] = true, [12] = true, },
 	weaponTypes = {
 		["One Handed Mace"] = true,
 		["Sceptre"] = true,
@@ -862,7 +862,7 @@ skills["Earthquake"] = {
 		--"is_area_damage" = ?
 		skill("showAverage", true, { type = "SkillPart", skillPart = 2 }), 
 		skill("radius", 18, { type = "SkillPart", skillPart = 1 }), 
-		skill("radius", 25, { type = "SkillPart", skillPart = 2 }), 
+		skill("radius", 28, { type = "SkillPart", skillPart = 2 }), 
 	},
 	qualityMods = {
 		mod("PhysicalDamage", "INC", 1), --"physical_damage_+%" = 1
@@ -993,7 +993,7 @@ skills["FlameTotem"] = {
 	gemInt = 40,
 	color = 1,
 	description = "Summons a totem that fires a stream of flame at nearby enemies.",
-	skillTypes = { [2] = true, [3] = true, [10] = true, [12] = true, [17] = true, [19] = true, [30] = true, [33] = true, },
+	skillTypes = { [2] = true, [3] = true, [68] = true, [10] = true, [12] = true, [17] = true, [19] = true, [30] = true, [33] = true, },
 	skillTotemId = 8,
 	baseFlags = {
 		spell = true,
@@ -1072,7 +1072,7 @@ skills["GlacialHammer"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Hits the enemy, converting some of your physical damage to cold damage. If the enemy is frozen and is on less than one third life, they will shatter when hit by Glacial Hammer. Requires a Mace or Staff.",
-	skillTypes = { [1] = true, [6] = true, [25] = true, [28] = true, [24] = true, [34] = true, [53] = true, },
+	skillTypes = { [1] = true, [25] = true, [28] = true, [24] = true, [34] = true, [53] = true, },
 	weaponTypes = {
 		["Two Handed Mace"] = true,
 		["Staff"] = true,
@@ -1152,7 +1152,7 @@ skills["VaalGlacialHammer"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Hits the enemy, converting some of your physical damage to cold damage. It traps the enemy with you in a circle of ice so that it can't escape. Requires a Mace or Staff.",
-	skillTypes = { [1] = true, [6] = true, [25] = true, [24] = true, [12] = true, [11] = true, [43] = true, [34] = true, },
+	skillTypes = { [1] = true, [25] = true, [24] = true, [12] = true, [11] = true, [43] = true, [34] = true, },
 	weaponTypes = {
 		["Two Handed Mace"] = true,
 		["Staff"] = true,
@@ -1231,7 +1231,7 @@ skills["GroundSlam"] = {
 	gemInt = 0,
 	color = 1,
 	description = "The character slams the ground in front of them with their main hand weapon, creating a wave that travels forward and damages enemies with an increased chance to stun. Only works with Staves or Maces.",
-	skillTypes = { [1] = true, [6] = true, [7] = true, [11] = true, [28] = true, [24] = true, },
+	skillTypes = { [1] = true, [7] = true, [11] = true, [28] = true, [24] = true, },
 	weaponTypes = {
 		["Two Handed Mace"] = true,
 		["Staff"] = true,
@@ -1308,7 +1308,7 @@ skills["VaalGroundSlam"] = {
 	gemInt = 0,
 	color = 1,
 	description = "The character slams the ground with their main hand weapon, creating a wave that travels in all directions and damages enemies. Only works with Staves or Maces.",
-	skillTypes = { [1] = true, [6] = true, [7] = true, [11] = true, [24] = true, [43] = true, },
+	skillTypes = { [1] = true, [7] = true, [11] = true, [24] = true, [43] = true, },
 	weaponTypes = {
 		["Two Handed Mace"] = true,
 		["Staff"] = true,
@@ -1386,7 +1386,7 @@ skills["HeavyStrike"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Attacks the enemy with a forceful blow, knocking them back. Requires a Mace, Axe, Sword or Two-Handed Weapon.",
-	skillTypes = { [1] = true, [6] = true, [25] = true, [28] = true, [24] = true, },
+	skillTypes = { [1] = true, [25] = true, [28] = true, [24] = true, },
 	weaponTypes = {
 		["One Handed Mace"] = true,
 		["Sceptre"] = true,
@@ -1465,7 +1465,7 @@ skills["HeraldOfAsh"] = {
 	gemDex = 0,
 	gemInt = 40,
 	color = 1,
-	description = "Grants a buff providing fire damage based on your physical damage. While you have this buff, if you kill an enemy with an attack, other enemies near them will be burned based on the overkill damage. The burn inflicted by this skill can only be affected by modifiers to damage over time (burning damage is damage over time).",
+	description = "Grants a buff providing fire damage based on your physical damage. While you have this buff, if you kill an enemy, other enemies near them will be burned based on the overkill damage. The burn inflicted by this skill can only be affected by modifiers to damage over time (burning damage is damage over time).",
 	skillTypes = { [2] = true, [5] = true, [15] = true, [16] = true, [29] = true, [11] = true, [40] = true, [33] = true, [27] = true, [63] = true, [12] = true, },
 	baseFlags = {
 		spell = true,
@@ -1478,6 +1478,7 @@ skills["HeraldOfAsh"] = {
 		skill("cooldown", 1), 
 		mod("PhysicalDamageGainAsFire", "BASE", 15, 0, 0, { type = "GlobalEffect", effectType = "Buff" }), --"physical_damage_%_to_add_as_fire" = 15
 		skill("duration", 4), --"base_skill_effect_duration" = 4000
+		--"herald_of_ash_burning_%_overkill_damage_per_minute" = 1500
 		--"is_area_damage" = ?
 		skill("radius", 10), 
 	},
@@ -1487,38 +1488,39 @@ skills["HeraldOfAsh"] = {
 	levelMods = {
 		[1] = skill("levelRequirement", nil), 
 		--[2] = "herald_of_ash_burning_damage_+%_final"
+		[3] = mod("FireDamage", "MORE", nil, ModFlag.Spell, 0, { type = "GlobalEffect", effectType = "Buff" }), --"herald_of_ash_spell_fire_damage_+%_final"
 	},
 	levels = {
-		[1] = { 16, 0, },
-		[2] = { 20, 2, },
-		[3] = { 24, 4, },
-		[4] = { 28, 6, },
-		[5] = { 31, 8, },
-		[6] = { 34, 10, },
-		[7] = { 37, 12, },
-		[8] = { 40, 14, },
-		[9] = { 43, 16, },
-		[10] = { 46, 18, },
-		[11] = { 49, 20, },
-		[12] = { 52, 22, },
-		[13] = { 55, 24, },
-		[14] = { 58, 26, },
-		[15] = { 60, 28, },
-		[16] = { 62, 30, },
-		[17] = { 64, 32, },
-		[18] = { 66, 34, },
-		[19] = { 68, 36, },
-		[20] = { 70, 38, },
-		[21] = { 72, 40, },
-		[22] = { 74, 42, },
-		[23] = { 76, 44, },
-		[24] = { 78, 46, },
-		[25] = { 80, 48, },
-		[26] = { 82, 50, },
-		[27] = { 84, 52, },
-		[28] = { 86, 54, },
-		[29] = { 88, 56, },
-		[30] = { 90, 58, },
+		[1] = { 16, 0, 9, },
+		[2] = { 20, 2, 9, },
+		[3] = { 24, 4, 9, },
+		[4] = { 28, 6, 9, },
+		[5] = { 31, 8, 9, },
+		[6] = { 34, 10, 10, },
+		[7] = { 37, 12, 10, },
+		[8] = { 40, 14, 10, },
+		[9] = { 43, 16, 10, },
+		[10] = { 46, 18, 10, },
+		[11] = { 49, 20, 11, },
+		[12] = { 52, 22, 11, },
+		[13] = { 55, 24, 11, },
+		[14] = { 58, 26, 11, },
+		[15] = { 60, 28, 11, },
+		[16] = { 62, 30, 12, },
+		[17] = { 64, 32, 12, },
+		[18] = { 66, 34, 12, },
+		[19] = { 68, 36, 12, },
+		[20] = { 70, 38, 12, },
+		[21] = { 72, 40, 13, },
+		[22] = { 74, 42, 13, },
+		[23] = { 76, 44, 13, },
+		[24] = { 78, 46, 13, },
+		[25] = { 80, 48, 13, },
+		[26] = { 82, 50, 14, },
+		[27] = { 84, 52, 14, },
+		[28] = { 86, 54, 14, },
+		[29] = { 88, 56, 14, },
+		[30] = { 90, 58, 14, },
 	},
 }
 skills["IceCrash"] = {
@@ -1537,7 +1539,7 @@ skills["IceCrash"] = {
 	gemInt = 40,
 	color = 1,
 	description = "Slam the ground with your main hand weapon, damaging enemies in an area around the impact in three stages. Enemies take slightly less damage on the second and third stage. Works with Swords, Maces, Axes, Staves and Unarmed. Cannot be supported by Multistrike.",
-	skillTypes = { [1] = true, [6] = true, [11] = true, [24] = true, [7] = true, [34] = true, },
+	skillTypes = { [1] = true, [11] = true, [24] = true, [7] = true, [34] = true, },
 	weaponTypes = {
 		["None"] = true,
 		["One Handed Mace"] = true,
@@ -1575,7 +1577,7 @@ skills["IceCrash"] = {
 		mod("Damage", "MORE", -10, 0, 0, { type = "SkillPart", skillPart = 2 }), --"ice_crash_second_hit_damage_+%_final" = -10
 		mod("Damage", "MORE", -20, 0, 0, { type = "SkillPart", skillPart = 3 }), --"ice_crash_third_hit_damage_+%_final" = -20
 		--"is_area_damage" = ?
-		skill("radius", 24), 
+		skill("radius", 26), 
 	},
 	qualityMods = {
 		mod("ColdDamage", "INC", 1), --"cold_damage_+%" = 1
@@ -1768,7 +1770,7 @@ skills["InfernalBlow"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Hits the enemy, converting some of your physical damage to fire damage. If the enemy dies soon after being hit, they will explode, dealing fire damage to nearby enemies. The damage from this explosion cannot be reflected. Requires a Sword, Axe, Mace, Staff or Unarmed.",
-	skillTypes = { [1] = true, [6] = true, [11] = true, [25] = true, [28] = true, [24] = true, [33] = true, },
+	skillTypes = { [1] = true, [11] = true, [25] = true, [28] = true, [24] = true, [33] = true, },
 	weaponTypes = {
 		["None"] = true,
 		["One Handed Mace"] = true,
@@ -1852,7 +1854,7 @@ skills["LeapSlam"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Jump into the air, damaging enemies (and knocking back some) with your main hand where you land. Enemies you would land on are pushed out of the way. Requires an axe, mace, sword or staff. Cannot be supported by Multistrike.",
-	skillTypes = { [1] = true, [6] = true, [7] = true, [11] = true, [24] = true, [38] = true, },
+	skillTypes = { [1] = true, [7] = true, [11] = true, [24] = true, [38] = true, },
 	weaponTypes = {
 		["One Handed Mace"] = true,
 		["Sceptre"] = true,
@@ -2092,7 +2094,7 @@ skills["MoltenStrike"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Attacks a target with physical and fire damage, causing balls of molten magma to launch forth from your weapon as you swing. These will explode, causing AoE attack damage to enemies where they land.",
-	skillTypes = { [1] = true, [3] = true, [6] = true, [11] = true, [24] = true, [25] = true, [28] = true, [33] = true, [48] = true, },
+	skillTypes = { [1] = true, [3] = true, [11] = true, [24] = true, [25] = true, [28] = true, [33] = true, [48] = true, },
 	weaponTypes = {
 		["One Handed Mace"] = true,
 		["Sceptre"] = true,
@@ -2193,7 +2195,7 @@ skills["Punishment"] = {
 	gemInt = 40,
 	color = 1,
 	description = "Curses all targets in an area, causing them to grant a buff to anyone they hit with melee attacks. The buff grants more Melee Damage and increased Attack Speed.",
-	skillTypes = { [2] = true, [11] = true, [12] = true, [17] = true, [18] = true, [19] = true, [26] = true, [32] = true, [36] = true, },
+	skillTypes = { [2] = true, [11] = true, [12] = true, [17] = true, [18] = true, [19] = true, [26] = true, [32] = true, [36] = true, [67] = true, },
 	baseFlags = {
 		spell = true,
 		curse = true,
@@ -2336,7 +2338,7 @@ skills["RallyingCry"] = {
 	gemDex = 0,
 	gemInt = 0,
 	color = 1,
-	description = "Performs a warcry, granting increased damage and mana regeneration to you and your allies if there are nearby enemies. The damage increase is scaled by surrounding enemies. Taunts all nearby enemies to attack the user. Shares a cooldown with other Warcry skills.",
+	description = "Performs a warcry, granting increased damage and mana regeneration to the user and nearby allies if there are nearby enemies. The damage increase is proportional to the number of surrounding enemies. Taunts all nearby enemies to attack the user. Shares a cooldown with other Warcry skills.",
 	skillTypes = { [5] = true, [11] = true, [12] = true, },
 	baseFlags = {
 		warcry = true,
@@ -2807,7 +2809,7 @@ skills["StaticStrike"] = {
 	gemInt = 40,
 	color = 1,
 	description = "Strike your enemies with a melee weapon, building up static energy on you. This energy damages enemies around you when it expires. ",
-	skillTypes = { [1] = true, [6] = true, [25] = true, [28] = true, [24] = true, [11] = true, [12] = true, [35] = true, },
+	skillTypes = { [1] = true, [25] = true, [28] = true, [24] = true, [11] = true, [12] = true, [35] = true, },
 	weaponTypes = {
 		["One Handed Mace"] = true,
 		["Sceptre"] = true,
@@ -2845,7 +2847,7 @@ skills["StaticStrike"] = {
 		skill("duration", 0.75), --"base_skill_effect_duration" = 750
 		mod("Damage", "MORE", -40, 0, 0, { type = "SkillPart", skillPart = 2 }), --"static_strike_explosion_damage_+%_final" = -40
 		mod("EnemyShockChance", "BASE", 10), --"base_chance_to_shock_%" = 10
-		skill("radius", 19), 
+		skill("radius", 20), 
 	},
 	qualityMods = {
 		mod("AreaOfEffect", "INC", 0.5), --"base_skill_area_of_effect_+%" = 0.5
@@ -2907,7 +2909,7 @@ skills["SummonFireGolem"] = {
 	color = 1,
 	description = "Summons a Flame Golem that grants you increased Damage. The Flame Golem can use a fire spray, a wave of fire damage, and an explosive arcing projectile.",
 	skillTypes = { [36] = true, [33] = true, [19] = true, [9] = true, [21] = true, [26] = true, [2] = true, [18] = true, [17] = true, [49] = true, [62] = true, },
-	minionSkillTypes = { [10] = true, [11] = true, [3] = true, [2] = true, },
+	minionSkillTypes = { [10] = true, [11] = true, [3] = true, [68] = true, [2] = true, },
 	minionList = {
 		"SummonedFlameGolem",
 	},
@@ -3063,7 +3065,7 @@ skills["Sunder"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Slams the ground with your main hand weapon, creating a wave of broken ground that damages enemies in an area in front of you. Enemies hit by the wave will release a circular shockwave, dealing damage to other enemies around them. Requires a Mace, Axe, or Staff.",
-	skillTypes = { [1] = true, [6] = true, [7] = true, [11] = true, [28] = true, [24] = true, },
+	skillTypes = { [1] = true, [7] = true, [11] = true, [28] = true, [24] = true, },
 	weaponTypes = {
 		["One Handed Mace"] = true,
 		["Sceptre"] = true,
@@ -3211,6 +3213,89 @@ skills["Sweep"] = {
 		[30] = { 90, 44, 6, 1.58, 1.58, },
 	},
 }
+skills["EnduranceChargeSlam"] = {
+	name = "Tectonic Slam",
+	gemTags = {
+		fire = true,
+		strength = true,
+		active_skill = true,
+		attack = true,
+		area = true,
+		melee = true,
+	},
+	gemTagString = "Fire, Attack, AoE, Melee",
+	gemStr = 100,
+	gemDex = 0,
+	gemInt = 0,
+	color = 1,
+	description = "Slam the ground with your main hand weapon, unleashing a fiery fissure in front of you, dealing area damage and releasing a random number of smaller fissures branching off from it. If you have Endurance Charges, the number of fissures will be maximised, and one Endurance Charge will be consumed. Requires a Mace, Sword, Axe, Staff, or Unarmed.",
+	skillTypes = { [1] = true, [7] = true, [11] = true, [28] = true, [24] = true, [33] = true, },
+	weaponTypes = {
+		["None"] = true,
+		["One Handed Mace"] = true,
+		["Sceptre"] = true,
+		["Thrusting One Handed Sword"] = true,
+		["Two Handed Sword"] = true,
+		["Staff"] = true,
+		["Two Handed Axe"] = true,
+		["Two Handed Mace"] = true,
+		["One Handed Axe"] = true,
+		["One Handed Sword"] = true,
+	},
+	baseFlags = {
+		attack = true,
+		melee = true,
+		area = true,
+	},
+	baseMods = {
+		skill("castTime", 1), 
+		skill("manaCost", 10), 
+		mod("Damage", "MORE", 18, 0, 0, { type = "StatThreshold", stat = "EnduranceCharges", threshold = 1 }), --"endurance_charge_slam_damage_+%_final_with_endurance_charge" = 18
+		mod("Speed", "MORE", 0, ModFlag.Attack), --"active_skill_attack_speed_+%_final" = 0
+		mod("SkillPhysicalDamageConvertToFire", "BASE", 60), --"skill_physical_damage_%_to_convert_to_fire" = 60
+		--"is_area_damage" = ?
+	},
+	qualityMods = {
+		mod("AreaOfEffect", "INC", 0.5), --"base_skill_area_of_effect_+%" = 0.5
+	},
+	levelMods = {
+		[1] = skill("levelRequirement", nil), 
+		[2] = skill("damageEffectiveness", nil), 
+		[3] = skill("baseMultiplier", nil), 
+	},
+	levels = {
+		[1] = { 28, 1.3, 1.3, },
+		[2] = { 31, 1.32, 1.316, },
+		[3] = { 34, 1.33, 1.332, },
+		[4] = { 37, 1.35, 1.348, },
+		[5] = { 40, 1.36, 1.364, },
+		[6] = { 42, 1.38, 1.38, },
+		[7] = { 44, 1.4, 1.396, },
+		[8] = { 46, 1.41, 1.412, },
+		[9] = { 48, 1.43, 1.428, },
+		[10] = { 50, 1.44, 1.444, },
+		[11] = { 52, 1.46, 1.46, },
+		[12] = { 54, 1.48, 1.476, },
+		[13] = { 56, 1.49, 1.492, },
+		[14] = { 58, 1.51, 1.508, },
+		[15] = { 60, 1.52, 1.524, },
+		[16] = { 62, 1.54, 1.54, },
+		[17] = { 64, 1.56, 1.556, },
+		[18] = { 66, 1.57, 1.572, },
+		[19] = { 68, 1.59, 1.588, },
+		[20] = { 70, 1.6, 1.604, },
+		[21] = { 72, 1.62, 1.62, },
+		[22] = { 74, 1.64, 1.636, },
+		[23] = { 76, 1.65, 1.652, },
+		[24] = { 78, 1.67, 1.668, },
+		[25] = { 80, 1.68, 1.684, },
+		[26] = { 82, 1.7, 1.7, },
+		[27] = { 84, 1.72, 1.716, },
+		[28] = { 86, 1.73, 1.732, },
+		[29] = { 88, 1.75, 1.748, },
+		[30] = { 90, 1.76, 1.764, },
+	},
+}
 skills["Vengeance"] = {
 	name = "Vengeance",
 	gemTags = {
@@ -3227,7 +3312,7 @@ skills["Vengeance"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Chance to perform a swift counter-attack against all enemies around you when you are hit. Weapon range increases the area of this attack. Requires a Melee Weapon.",
-	skillTypes = { [1] = true, [11] = true, [24] = true, [47] = true, [6] = true, [57] = true, },
+	skillTypes = { [1] = true, [11] = true, [24] = true, [47] = true, [57] = true, },
 	weaponTypes = {
 		["One Handed Mace"] = true,
 		["Sceptre"] = true,
@@ -3309,7 +3394,7 @@ skills["VigilantStrike"] = {
 	gemInt = 40,
 	color = 1,
 	description = "Attacks the enemy with a powerful melee strike. You gain the Fortify buff, granting damage reduction. The cooldown can be bypassed by expending an Endurance Charge. Requires a Melee Weapon.",
-	skillTypes = { [1] = true, [5] = true, [24] = true, [6] = true, [28] = true, [25] = true, [53] = true, },
+	skillTypes = { [1] = true, [5] = true, [24] = true, [28] = true, [25] = true, [53] = true, },
 	weaponTypes = {
 		["One Handed Mace"] = true,
 		["Sceptre"] = true,
@@ -3445,6 +3530,81 @@ skills["Vitality"] = {
 		[30] = { 90, 2.15, 29, },
 	},
 }
+skills["Vulnerability"] = {
+	name = "Vulnerability",
+	gemTags = {
+		curse = true,
+		strength = true,
+		active_skill = true,
+		spell = true,
+		area = true,
+		duration = true,
+	},
+	gemTagString = "Curse, Spell, AoE, Duration",
+	gemStr = 100,
+	gemDex = 0,
+	gemInt = 0,
+	color = 1,
+	description = "Curse all targets in an area, causing them to take increased physical damage and further increased physical damage over time. Attacks against cursed enemies have a chance to inflict bleeding and maim.",
+	skillTypes = { [2] = true, [11] = true, [12] = true, [17] = true, [18] = true, [19] = true, [26] = true, [32] = true, [36] = true, [67] = true, },
+	baseFlags = {
+		spell = true,
+		curse = true,
+		area = true,
+		duration = true,
+	},
+	baseMods = {
+		skill("castTime", 0.5), 
+		skill("duration", 9), --"base_skill_effect_duration" = 9000
+		mod("SelfBleedChance", "BASE", 20, 0, 0, { type = "GlobalEffect", effectType = "Curse" }), --"receive_bleeding_chance_%_when_hit_by_attack" = 20
+		--"chance_to_be_maimed_when_hit_%" = 20
+		mod("PhysicalDamageTakenOverTime", "INC", 30, 0, 0, { type = "GlobalEffect", effectType = "Curse" }), --"base_physical_damage_over_time_taken_+%" = 30
+		--"base_deal_no_damage" = ?
+		skill("debuff", true), 
+		skill("radius", 22), 
+	},
+	qualityMods = {
+		mod("SelfBleedChance", "BASE", 0.5, 0, 0, { type = "GlobalEffect", effectType = "Curse" }), --"receive_bleeding_chance_%_when_hit_by_attack" = 0.5
+	},
+	levelMods = {
+		[1] = skill("levelRequirement", nil), 
+		[2] = skill("manaCost", nil), 
+		[3] = skill("radiusExtra", nil), --"active_skill_base_radius_+"
+		[4] = mod("PhysicalDamageTaken", "INC", nil, 0, 0, { type = "GlobalEffect", effectType = "Curse" }), --"physical_damage_taken_+%"
+	},
+	levels = {
+		[1] = { 24, 24, 0, 30, },
+		[2] = { 27, 26, 1, 30, },
+		[3] = { 30, 27, 1, 31, },
+		[4] = { 33, 29, 2, 31, },
+		[5] = { 36, 30, 2, 32, },
+		[6] = { 39, 32, 3, 32, },
+		[7] = { 42, 34, 3, 33, },
+		[8] = { 45, 35, 4, 33, },
+		[9] = { 48, 37, 4, 34, },
+		[10] = { 50, 38, 5, 34, },
+		[11] = { 52, 39, 5, 35, },
+		[12] = { 54, 40, 6, 35, },
+		[13] = { 56, 42, 6, 36, },
+		[14] = { 58, 43, 7, 36, },
+		[15] = { 60, 44, 7, 37, },
+		[16] = { 62, 45, 8, 37, },
+		[17] = { 64, 46, 8, 38, },
+		[18] = { 66, 47, 9, 38, },
+		[19] = { 68, 48, 9, 39, },
+		[20] = { 70, 50, 10, 39, },
+		[21] = { 72, 51, 10, 40, },
+		[22] = { 74, 52, 11, 40, },
+		[23] = { 76, 53, 11, 41, },
+		[24] = { 78, 54, 12, 41, },
+		[25] = { 80, 56, 12, 42, },
+		[26] = { 82, 57, 13, 42, },
+		[27] = { 84, 58, 13, 43, },
+		[28] = { 86, 59, 14, 43, },
+		[29] = { 88, 60, 14, 44, },
+		[30] = { 90, 61, 15, 44, },
+	},
+}
 skills["WarlordsMark"] = {
 	name = "Warlord's Mark",
 	gemTags = {
@@ -3461,7 +3621,7 @@ skills["WarlordsMark"] = {
 	gemInt = 0,
 	color = 1,
 	description = "Curses all targets in an area, making them more vulnerable to stuns. Hitting the cursed targets will leech life and mana, and killing them will result in a chance to gain an endurance charge.",
-	skillTypes = { [2] = true, [11] = true, [12] = true, [17] = true, [18] = true, [19] = true, [26] = true, [32] = true, [36] = true, },
+	skillTypes = { [2] = true, [11] = true, [12] = true, [17] = true, [18] = true, [19] = true, [26] = true, [32] = true, [36] = true, [67] = true, },
 	baseFlags = {
 		spell = true,
 		curse = true,

@@ -35,43 +35,86 @@ function calcs.initModDB(env, modDB)
 	modDB:NewMod("MovementSpeed", "INC", -30, "Base", { type = "Condition", var = "Maimed" })
 	modDB:NewMod("Condition:Burning", "FLAG", true, "Base", { type = "IgnoreCond" }, { type = "Condition", var = "Ignited" })
 	modDB:NewMod("Condition:Chilled", "FLAG", true, "Base", { type = "IgnoreCond" }, { type = "Condition", var = "Frozen" })
+	modDB:NewMod("Condition:Poisoned", "FLAG", true, "Base", { type = "IgnoreCond" }, { type = "MultiplierThreshold", var = "PoisonStack", threshold = 1 })
+	modDB:NewMod("Chill", "FLAG", true, "Base", { type = "Condition", var = "Chilled" })
+	modDB:NewMod("Freeze", "FLAG", true, "Base", { type = "Condition", var = "Frozen" })
 	modDB:NewMod("Fortify", "FLAG", true, "Base", { type = "Condition", var = "Fortify" })
 	modDB:NewMod("Onslaught", "FLAG", true, "Base", { type = "Condition", var = "Onslaught" })
 	modDB:NewMod("UnholyMight", "FLAG", true, "Base", { type = "Condition", var = "UnholyMight" })
+	modDB:NewMod("Tailwind", "FLAG", true, "Base", { type = "Condition", var = "Tailwind" })
+	modDB:NewMod("Adrenaline", "FLAG", true, "Base", { type = "Condition", var = "Adrenaline" })
 	modDB.conditions["Buffed"] = env.mode_buffs
 	modDB.conditions["Combat"] = env.mode_combat
 	modDB.conditions["Effective"] = env.mode_effective
 end
 
+function calcs.buildModListForNode(env, node)
+	local modList = common.New("ModList")
+	if node.type == "Keystone" then
+		modList:AddMod(node.keystoneMod)
+	else
+		modList:AddList(node.modList)
+	end
+
+	-- Run first pass radius jewels
+	for _, rad in pairs(env.radiusJewelList) do
+		if rad.type == "Other" and rad.nodes[node.id] then
+			rad.func(node, modList, rad.data)
+		end
+	end
+
+	if modList:Sum("FLAG", nil, "PassiveSkillHasNoEffect") then
+		wipeTable(modList)
+	end
+
+	-- Apply effect scaling
+	local scale = calcLib.mod(modList, nil, "PassiveSkillEffect")
+	if scale ~= 1 then
+		local scaledList = common.New("ModList")
+		scaledList:ScaleAddList(modList, scale)
+		modList = scaledList
+	end
+
+	-- Run second pass radius jewels
+	for _, rad in pairs(env.radiusJewelList) do
+		if rad.nodes[node.id] and (rad.type == "Threshold" or (rad.type == "Self" and node.alloc)) then
+			rad.func(node, modList, rad.data)
+		end
+	end
+
+	return modList
+end
+
 -- Build list of modifiers from the listed tree nodes
-function calcs.buildNodeModList(env, nodeList, finishJewels)
+function calcs.buildModListForNodeList(env, nodeList, finishJewels)
 	-- Initialise radius jewels
 	for _, rad in pairs(env.radiusJewelList) do
 		wipeTable(rad.data)
+		rad.data.modSource = "Tree:"..rad.nodeId
 	end
 
 	-- Add node modifers
 	local modList = common.New("ModList")
 	for _, node in pairs(nodeList) do
-		-- Merge with output list
-		if node.type == "keystone" then
-			modList:AddMod(node.keystoneMod)
-		else
-			modList:AddList(node.modList)
-		end
-
-		-- Run radius jewels
-		for _, rad in pairs(env.radiusJewelList) do
-			if rad.nodes[node.id] then
-				rad.func(node.modList, modList, rad.data)
-			end
+		local nodeModList = calcs.buildModListForNode(env, node)
+		modList:AddList(nodeModList)
+		if env.mode == "MAIN" then	
+			node.finalModList = nodeModList
 		end
 	end
 
 	if finishJewels then
+		-- Process extra radius nodes; these are unallocated nodes near conversion or threshold jewels that need to be processed
+		for _, node in pairs(env.extraRadiusNodeList) do
+			local nodeModList = calcs.buildModListForNode(env, node)
+			if env.mode == "MAIN" then	
+				node.finalModList = nodeModList
+			end
+		end
+		
 		-- Finalise radius jewels
 		for _, rad in pairs(env.radiusJewelList) do
-			rad.func(nil, modList, rad.data, rad.attributes)
+			rad.func(nil, modList, rad.data)
 			if env.mode == "MAIN" then
 				if not rad.item.jewelRadiusData then
 					rad.item.jewelRadiusData = { }
@@ -157,6 +200,11 @@ function calcs.initEnv(build, mode, override)
 	modDB:NewMod("Damage", "MORE", 4, "Base", { type = "Multiplier", var = "FrenzyCharge" })
 	modDB:NewMod("PhysicalDamageReduction", "BASE", 4, "Base", { type = "Multiplier", var = "EnduranceCharge" })
 	modDB:NewMod("ElementalResist", "BASE", 4, "Base", { type = "Multiplier", var = "EnduranceCharge" })
+	modDB:NewMod("Multiplier:RageEffect", "BASE", 1, "Base")
+	modDB:NewMod("Damage", "INC", 1, "Base", ModFlag.Attack, { type = "Multiplier", var = "Rage", limit = 50 }, { type = "Multiplier", var = "RageEffect" })
+	modDB:NewMod("Speed", "INC", 1, "Base", ModFlag.Attack, { type = "Multiplier", var = "Rage", limit = 25, div = 2 }, { type = "Multiplier", var = "RageEffect" })
+	modDB:NewMod("MovementSpeed", "INC", 1, "Base", { type = "Multiplier", var = "Rage", limit = 10, div = 5 }, { type = "Multiplier", var = "RageEffect" })
+	modDB:NewMod("LifeDegen", "BASE", 0.001, "Base", { type = "PerStat", stat = "Life" }, { type = "Multiplier", var = "Rage", limit = 50 }, { type = "Multiplier", var = "RageEffect" })
 	modDB:NewMod("ActiveTrapLimit", "BASE", 3, "Base")
 	modDB:NewMod("ActiveMineLimit", "BASE", 5, "Base")
 	modDB:NewMod("ActiveTotemLimit", "BASE", 1, "Base")
@@ -166,9 +214,9 @@ function calcs.initEnv(build, mode, override)
 	modDB:NewMod("PhysicalDamage", "MORE", 20, "Base", ModFlag.Attack, { type = "Condition", var = "DualWielding" })
 	modDB:NewMod("BlockChance", "BASE", 15, "Base", { type = "Condition", var = "DualWielding" })
 	if build.targetVersion == "2_6" then
-		modDB:NewMod("Damage", "MORE", 500, "Base", 0, KeywordFlag.Bleed, { type = "EnemyCondition", var = "Moving" })
+		modDB:NewMod("Damage", "MORE", 500, "Base", 0, KeywordFlag.Bleed, { type = "ActorCondition", actor = "enemy", var = "Moving" })
 	else
-		modDB:NewMod("Damage", "MORE", 200, "Base", 0, KeywordFlag.Bleed, { type = "EnemyCondition", var = "Moving" }, { type = "Condition", var = "NoExtraBleedDamageToMovingEnemy", neg = true })
+		modDB:NewMod("Damage", "MORE", 200, "Base", 0, KeywordFlag.Bleed, { type = "ActorCondition", actor = "enemy", var = "Moving" }, { type = "Condition", var = "NoExtraBleedDamageToMovingEnemy", neg = true })
 	end
 
 	-- Add bandit mods
@@ -233,7 +281,6 @@ function calcs.initEnv(build, mode, override)
 	-- Create player/enemy actors
 	env.player = {
 		modDB = modDB,
-		enemy = env.enemy,
 	}
 	modDB.actor = env.player
 	env.enemy = {
@@ -266,11 +313,12 @@ function calcs.initEnv(build, mode, override)
 
 	-- Build and merge item modifiers, and create list of radius jewels
 	env.radiusJewelList = wipeTable(env.radiusJewelList)
+	env.extraRadiusNodeList = wipeTable(env.extraRadiusNodeList)
 	env.player.itemList = { }
 	env.itemGrantedSkills = { }
 	env.flasks = { }
-	env.modDB.conditions["UsingAllCorruptedItems"] = true
-	for slotName, slot in pairs(build.itemsTab.slots) do
+	for _, slot in pairs(build.itemsTab.orderedSlots) do
+		local slotName = slot.slotName
 		local item
 		if slotName == override.repSlotName then
 			item = override.repItem
@@ -300,24 +348,33 @@ function calcs.initEnv(build, mode, override)
 				item = nil
 			elseif item and item.jewelRadiusIndex then
 				-- Jewel has a radius,  add it to the list
-				local funcList = item.jewelData.funcList or { function(nodeMods, out, data)
+				local funcList = item.jewelData.funcList or { { type = "Self", func = function(node, out, data)
 					-- Default function just tallies all stats in radius
-					if nodeMods then
+					if node then
 						for _, stat in pairs({"Str","Dex","Int"}) do
-							data[stat] = (data[stat] or 0) + nodeMods:Sum("BASE", nil, stat)
+							data[stat] = (data[stat] or 0) + out:Sum("BASE", nil, stat)
 						end
 					end
-				end }
+				end } }
 				for _, func in ipairs(funcList) do
 					local node = build.spec.nodes[slot.nodeId]
 					t_insert(env.radiusJewelList, {
 						nodes = node.nodesInRadius[item.jewelRadiusIndex],
-						func = func,
+						func = func.func,
+						type = func.type,
 						item = item,
 						nodeId = slot.nodeId,
 						attributes = node.attributesInRadius[item.jewelRadiusIndex],
 						data = { }
 					})
+					if func.type ~= "Self" then
+						-- Add nearby unallocated nodes to the extra node list
+						for nodeId, node in pairs(node.nodesInRadius[item.jewelRadiusIndex]) do
+							if not nodes[nodeId] then
+								env.extraRadiusNodeList[nodeId] = env.spec.nodes[nodeId]
+							end
+						end
+					end
 				end
 			end
 		end
@@ -326,6 +383,16 @@ function calcs.initEnv(build, mode, override)
 				env.flasks[item] = true
 			end
 			item = nil
+		end
+		local scale = 1
+		if item and item.type == "Jewel" and item.base.subType == "Abyss" and slot.parentSlot then
+			-- Check if the item in the parent slot has enough Abyssal Sockets
+			local parentItem = env.player.itemList[slot.parentSlot.slotName]
+			if not parentItem or parentItem.abyssalSocketCount < slot.slotNum then
+				item = nil
+			else
+				scale = parentItem.socketedJewelEffectModifier
+			end
 		end
 		if item then
 			env.player.itemList[slotName] = item
@@ -341,6 +408,15 @@ function calcs.initEnv(build, mode, override)
 					Int = item.requirements.intMod,
 				})
 			end
+			if item.type == "Jewel" and item.base.subType == "Abyss" then
+				-- Update Abyss Jewel conditions/multipliers
+				local cond = "Have"..item.baseName:gsub(" ","")
+				if not env.modDB.conditions[cond] then
+					env.modDB.conditions[cond] = true
+					env.modDB.multipliers["AbyssJewelType"] = (env.modDB.multipliers["AbyssJewelType"] or 0) + 1
+				end
+				env.modDB.multipliers["AbyssJewel"] = (env.modDB.multipliers["AbyssJewel"] or 0) + 1
+			end
 			if item.type == "Shield" and nodes[45175] then
 				-- Special handling for Necromantic Aegis
 				env.aegisModList = common.New("ModList")
@@ -354,9 +430,9 @@ function calcs.initEnv(build, mode, override)
 						end
 					end
 					if add then
-						env.aegisModList:AddMod(mod)
+						env.aegisModList:ScaleAddMod(mod, scale)
 					else
-						env.modDB:AddMod(mod)
+						env.modDB:ScaleAddMod(mod, scale)
 					end
 				end
 			elseif slotName == "Weapon 1" and item.grantedSkills[1] and item.grantedSkills[1].name == "UniqueAnimateWeapon" then
@@ -372,13 +448,13 @@ function calcs.initEnv(build, mode, override)
 						end
 					end
 					if add then
-						env.weaponModList1:AddMod(mod)
+						env.weaponModList1:ScaleAddMod(mod, scale)
 					else
-						env.modDB:AddMod(mod)
+						env.modDB:ScaleAddMod(mod, scale)
 					end
 				end
 			else
-				env.modDB:AddList(srcList)
+				env.modDB:ScaleAddList(srcList, scale)
 			end
 			if item.type ~= "Jewel" and item.type ~= "Flask" then
 				-- Update item counts
@@ -396,7 +472,19 @@ function calcs.initEnv(build, mode, override)
 				if item.corrupted then
 					env.modDB.multipliers.CorruptedItem = (env.modDB.multipliers.CorruptedItem or 0) + 1
 				else
-					env.modDB.conditions["UsingAllCorruptedItems"] = false
+					env.modDB.multipliers.NonCorruptedItem = (env.modDB.multipliers.NonCorruptedItem or 0) + 1
+				end
+				if item.shaper then
+					env.modDB.multipliers.ShaperItem = (env.modDB.multipliers.ShaperItem or 0) + 1
+					env.modDB.conditions["ShaperItemIn"..slotName] = true
+				else
+					env.modDB.multipliers.NonShaperItem = (env.modDB.multipliers.NonShaperItem or 0) + 1
+				end
+				if item.elder then
+					env.modDB.multipliers.ElderItem = (env.modDB.multipliers.ElderItem or 0) + 1
+					env.modDB.conditions["ElderItemIn"..slotName] = true
+				else
+					env.modDB.multipliers.NonElderItem = (env.modDB.multipliers.NonElderItem or 0) + 1
 				end
 			end
 		end
@@ -485,7 +573,7 @@ function calcs.initEnv(build, mode, override)
 	end
 
 	-- Merge modifiers for allocated passives
-	env.modDB:AddList(calcs.buildNodeModList(env, nodes, true))
+	env.modDB:AddList(calcs.buildModListForNodeList(env, nodes, true))
 
 	-- Determine main skill group
 	if env.mode == "CALCS" then

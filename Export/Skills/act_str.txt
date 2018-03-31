@@ -82,7 +82,7 @@ local skills, mod, flag, skill = ...
 	},
 #baseMod skill("showAverage", true, { type = "SkillPart", skillPart = 2 })
 #baseMod skill("radius", 18, { type = "SkillPart", skillPart = 1 })
-#baseMod skill("radius", 25, { type = "SkillPart", skillPart = 2 })
+#baseMod skill("radius", 28, { type = "SkillPart", skillPart = 2 })
 #mods
 
 #skill EnduringCry
@@ -133,7 +133,7 @@ local skills, mod, flag, skill = ...
 			name = "Third Hit",
 		},
 	},
-#baseMod skill("radius", 24)
+#baseMod skill("radius", 26)
 #mods
 
 #skill ImmortalCall
@@ -232,7 +232,7 @@ local skills, mod, flag, skill = ...
 			area = true,
 		},
 	},
-#baseMod skill("radius", 19)
+#baseMod skill("radius", 20)
 #mods
 
 #skill SummonFireGolem
@@ -270,6 +270,10 @@ local skills, mod, flag, skill = ...
 #baseMod skill("radius", 26)
 #mods
 
+#skill EnduranceChargeSlam
+#flags attack melee area
+#mods
+
 #skill Vengeance
 #flags attack melee area
 #mods
@@ -281,6 +285,12 @@ local skills, mod, flag, skill = ...
 #skill Vitality
 #flags spell aura area
 #baseMod skill("radius", 36)
+#mods
+
+#skill Vulnerability
+#flags spell curse area duration
+#baseMod skill("debuff", true)
+#baseMod skill("radius", 22)
 #mods
 
 #skill WarlordsMark

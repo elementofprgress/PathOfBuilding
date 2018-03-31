@@ -1,3 +1,253 @@
+VERSION[1.4.85][2018/03/22]
+ * Added Helmet enchantments for Spectral Shield Throw and Tectonic Slam
+ * Added Light Radius Mod to the Other Defences section of the Calcs tab
+ * Fixed issue preventing additional Projectile enchantments for Bow skills from being recognised
+ * Fixed the conditional damage multiplier on Hypothermia
+ * Fixed an error that sometimes occurred when trying to craft a jewel
+VERSION[1.4.84][2018/03/21]
+ * Added the following new uniques:
+	* All 16 uniques from the Beastiary bosses (including all granted skills and associated mechanics)
+    * Asenath's Chant
+	* The Effigon
+	* Hyrri's Demise
+	* Indigon (partial)
+	* Loreweave
+	* Malachai's Awakening
+	* Sanguine Gambol
+	* Voidforge (partial; the random extra damage cannot be simulated yet)
+ * Updated the modifier rolls on Panquetzalibizapizzatli
+ * Updated the modifier rolls on several other new uniques
+ * Updated the stat parsing to account for various stat wording changes made in 3.2
+    * Notably, this fixes the various additional Arrow/Projectile stats that were no longer being recognised
+ * Added support for the Icicle Burst skill granted by Cameria's Avarice
+ * Added options to the Configuration tab to override the number of Power/Frenzy/Endurance Charges used when they are enabled
+ * Added an option to the Configuration tab for "Energy Shield Recharge started Recently?"
+ * Fixed error caused by Zizaran trying to add mods onto an item
+VERSION[1.4.83][2018/03/03]
+ * Added the following new uniques:
+    * Crystal Vault
+	* Dreadbeak
+	* Dreadsurge
+	* Duskblight
+	* Frostferno
+    * Geofri's Devotion
+	* Mark of the Elder
+	* Mark of the Red Covenant
+	* Mark of the Shaper
+	* Mirebough
+	* Sunspite
+    * Timetwist
+	* Wildwrap
+    * Winterweave
+ * Updated Doryani's Fist with the new stat wording; this stops it from incorrectly benefiting Spectral Shield Throw
+VERSION[1.4.82][2018/03/03]
+ * Fixed a few odd UI glitches when using Summon Phantasm on Kill with an active skill that has multiple parts
+    * A side effect is that the sidebar stat box now expands upwards to fill any empty space below the main skill selector
+VERSION[1.4.81][2018/03/02]
+ * Added the 3 new skill gems introduced in 3.2
+    * Summoned Phantasms are not fully supported, as their projectile spell cannot be added yet
+ * Applied the minion changes for 3.2
+VERSION[1.4.80][2018/03/02]
+ * The maximum Chain count for chaining skills is now shown in the "Skill type-specific Stats" section of the Calcs tab
+ * Added an option to the Configuration tab for "# of times Skill has Chained"
+    * This allows all per-Chain modifiers to work, including Ricochet
+ * Added an option to the Configuration tab for "# of Poisons applied Recently"
+ * Added the following new uniques:
+    * The Nomad
+	* The Tactician
+    * Windshriek
+VERSION[1.4.79][2018/03/01]
+ * Added an option to the Configuration tab for "Is there only one nearby Enemy?"
+ * Updated Gladiator's "Blocked a Hit from a Unique Enemy" option to reflect the 3.2 change ("Recently" -> "past 10 seconds")
+ * Added support for White Wind's "while your off hand is empty" condition (thanks chollinger)
+ * Rage is now correctly enabled when taking War Bringer
+ * The life loss from Rage is now factored into Life Regen
+ * Fixed the missing increased Physical Damage modifier on Cameria's Avarice
+ * Fixed the missing flat Physical Damage modifier on Disintegrator
+ * Vaal Summon Skeletons now correctly benefits from modifiers that apply to Summon Skeleton
+ * Updated the passive tree export links to 3.2.0
+VERSION[1.4.78][2018/03/01]
+ * Passive tree updated to 3.2; most of the new nodes and mechanics are supported, with the notable exceptions being:
+    * Hierophant's Arcane Surge nodes
+	* Elementalist's Golem nodes
+ * Added support for action speed modifiers (Tailwind, Temporal Chains, Chill/Freeze)
+ * Added the following new uniques:
+    * Cameria's Avarice
+	* The Dancing Duo
+	* Stormfire
+ * Corrected the tooltip for the Intimidate option in 3.0 builds
+VERSION[1.4.77][2018/02/24]
+ * Added Might of the Meek
+ * Improved the handling of radius jewels; this mainly addresses issues with overlapping jewels
+    * Notably, threshold jewels will now correctly handle nearby nodes that have converted attributes
+VERSION[1.4.76][2018/02/23]
+ * Added Atziri's Reflection
+ * Unique items can now be made Elder/Shaper
+ * Corrected the stat ranges on Ahn's Might
+ * Prismatic Eclipse's "+ Melee Weapon Range per White Socket" modifier now works correctly
+ * The second variant selection on Watcher's Eye is now correctly preserved when the build is saved
+ * The artwork for the passive tree is now loaded asynchronously, which should improve startup time
+VERSION[1.4.75][2018/02/22]
+I apologise for the lack of updates recently; I hadn't had time to work on this, but I will be
+putting in a fair bit of work over the coming weeks.
+ * Added the following uniques announced for 3.2:
+   * Disintegrator (including Siphoning Charge support)
+   * Gorgon's Gaze (excluding the Summon Petrification Statue skill)
+   * Voidfletcher (partial)
+   * Doedre's Malevolence
+   * Fox's Fortune
+   * Greedtrap
+   * Panquetzalitzibitzipretzeliztli
+   * The Stormwall
+   * Craiceann's items will be implemented once I find out what the hell Crab Barriers are
+ * Added Helmet enchantments for the new skills added in 3.1
+ * Elder modifiers now correctly appear on crafted Shields
+ * Reservation calculations should now always be accurate when you have increased Mana Reserved
+ * Fixed error that could appear when editing certain Elder or Shaper items
+ * Intimidate's increased Damage bonus now correctly applies to Attack Damage only
+ * Oni-Goroshi's Her Embrace no longer persists after the item is unequipped
+ * Added support for the added Critical Strike Chance to Socketed Attacks/Spells stats on Shaper/Elder helmets
+ * The reduced Elemental Damage taken modifier on Nebuloch now functions correctly
+ * Hidden Potential's increased Damage modifier should now be correctly recognised
+ * Fixed the missing defences on Magna Eclipsis
+ * Fixed the typo in Beltimber Blade's name
+ * Corrected the Life roll on the Physical variant of Impresence
+VERSION[1.4.74][2017/12/25]
+ * Added support for the Her Embrace buff granted by Oni-Goroshi
+    * It can be enabled using a new option in the Combat section of the Configuration tab
+ * You can now choose the aura modifiers on Watcher's Eye
+ * Added an option to the Configuration tab for "Have you Shocked an Enemy Recently?"
+ * Added an option to the Configuration tab for "Have you used a Minion Skill Recently?"
+ * The "Your X Damage can Poison" stats on Volkuur's Guidance should now be correctly recognised
+ * Fixed issue with the damage calculations for Bodyswap
+ * Fixed error caused by setting the travel distance option for Charged Dash
+VERSION[1.4.73][2017/12/25]
+ * Fixed error that occured when changing some items to Shaper or Elder
+VERSION[1.4.72][2017/12/25]
+ * Added 2 Abyssal Socket variants to the Abyss league uniques
+ * Cremation now correctly benefits from modifiers to Area Damage
+VERSION[1.4.71][2017/12/25]
+This update adds full support for Abyss Jewels:
+ * You can now socket Abyss Jewels in items that have Abyssal Sockets
+ * Item modifiers that interact with Abyss Jewels are now supported
+ * Abyss Jewels can now be crafted using the "Craft item..." option
+ * Abyss Jewels socketed in items will now be imported when importing a character's Items and Skills
+This update also adds support for item sockets:
+ * An item's sockets are now shown in the tooltip
+ * When editing an item you can now edit the sockets and links
+ * Item modifiers that interact with socket colours are now supported (e.g Prismatic Eclipse)
+This update also adds support for Shaper/Elder items:
+ * Item tooltips now indicate if an item is a Shaper or Elder Item
+    * These items will need to be re-imported to be recognised as such
+ * When editing a Normal, Magic or Rare item you can set the item to be Shaper or Elder
+ * When crafting an item, setting it to Shaper or Elder will enable the corresponding modifiers
+Other changes:
+ * Added Oni-Goroshi
+ * Added support for the Elemental Penetration support provided by Shroud of the Lightless
+ * Corrected the Critical Strike Chance per Power Charge modifier on Shimmeron
+ * Corrected the radius values of several skills that were updated in 3.1
+ * Fixed exported passive tree links to use the correct tree version
+VERSION[1.4.70][2017/12/17]
+ * Added the following new uniques:
+    * Ahn's Contempt
+	* Augyre
+	* Beltimer Blade
+	* Blasphemer's Grasp
+	   * Detection/counting of equipped of Elder Items does not work yet
+	* Darkness Enthroned
+	   * Does not function, as support for socketing Abyss Jewels in items is not implemented yet
+	* Hopeshredder
+	* Impresence (non-Cold variants)
+	* Inpulsa's Broken Heart (mostly non-functional for now)
+	* Lightpoacher (mostly non-functional; however Spirit Burst is supported)
+	* Magna Eclipsis
+	* Shimmeron
+	* Shroud of the Lightless
+	* Tombfist (mostly non-functional for now)
+	* Vulconus
+ * Added Corpse Explosion skill parts to the following skills:
+    * Bodyswap
+    * Cremation
+    * Detonate Dead (this allows the Spell part to benefit from Spell modifiers)
+	* Volatile Dead
+ * Updated rolls on many of the new uniques
+ * Added an option to the Configuration tab for "Are you always moving?"
+ * Corrected the maximum stack count for Wither (thanks DragoonZ)
+ * "Adds X to Y <Type> Damage to <Weapon> Attacks" stats should now be recognised correctly
+ * The "more Life" stat on Minion Life Support should now work correctly
+VERSION[1.4.69][2017/12/09]
+ * Added the following new uniques:
+    * Balefire
+	* Cyclopean Coil
+	* Gloomfang
+	* Grelwood Shank
+	* Impresence
+	* Nebuloch
+	* Watcher's Eye
+ * Updated Ahn's Might with its final mods
+ * Removed the obsolete 4x DPS multiplier from Lightning Tendrils
+VERSION[1.4.68][2017/12/09]
+ * Added the following new uniques:
+    * Bloodbond (including partial support for the Blood Offering skill; only the damage bonus works at present)
+	* Bubonic Trail (including the Death Walk skill)
+    * Coralito's Signature
+	* The Golden Rule
+	* Invictus Solaris
+    * Iron Heart
+	* Kalisa's Grace
+	* The Long Winter
+	* Oskarm
+	* Soul's Wick
+ * The "Corpse Life" option has been moved from the Skill Options section to the General section of the
+   Configuration tab, as it is now used by several skills
+ * Added an option to the Configuration tab for "# of Poison on You"
+VERSION[1.4.67][2017/12/09]
+ * Fixed error that occurs when trying to import a character's items
+VERSION[1.4.66][2017/12/09]
+ * Added support for the new skill gems
+    * Most should be fully or almost fully functional, with the exception of Mirrage Archer
+ * Added the following new uniques:
+    * Arborix
+    * Cane of Unravelling
+    * Doedre's Skin
+    * Giantsbane
+    * Leper's Alms
+    * Memory Vault
+    * Pure Talent
+    * Ralakesh's Impatience
+    * Stormcharger
+    * The Hungry Loop
+       * Note that it may not be fully functional for a while due to the difficulty involved in handling it
+    * The Poet's Pen
+    * Vix Lunaris
+    * White Wind
+    * Wraithlord
+    * Yoke of Suffering
+ * Applied the 3.1 changes to the following uniques:
+	* Rise of the Phoenix (thanks twiz-ahk)
+    * Queen of the Forest (thanks xmesaj2)
+	* Atziri's Acuity
+	* The Baron
+	* Doomfletch/Doomfletch's Prism
+	* Lion's Roar
+    * Omen on the Winds
+	* Witchfire Brew
+	* Other uniques are awaiting confirmation of wording changes
+ * Added Dialla's Malefaction and Malachai's Mark
+    * Note that Dialla's Malefaction is non-functional as it requires significant changes to support it
+The following changes are courtesy of eps1lon:
+ * Added an option to the Configuration tab for "Used a Movement Skill Recently"
+ * Fixed variants for Berek's Pass's increased Fire Damage stat
+VERSION[1.4.65][2017/12/07]
+Apologies for the lack of updates recently; I've been very busy. I'll try and manage a few more updates over the
+coming weeks, but I can't make any promises yet.
+ * Passive tree updated to 3.1
+ * You can now rename builds and folders to change only the case of letters
+ * Node tooltips now correctly update when cancelling alternate path tracing
+ * Fixed Discharge's damage penalty when triggered
+ * Fixed Multistrike's attack speed bonus to only apply to Melee attacks
+ * Fixed various Skeleton-related modifiers that were being recognised but were not functioning correctly
+ * Fixed issue where the program's UI wouldn't be correctly scaled when opened in a non-maximised state
 VERSION[1.4.64][2017/10/01]
  * Trap Throwing Time, Mine Laying Time, and Totem Placement Time are now calculated and shown in the sidebar
     * Special thanks to aggixx for measuring the base time of those animations

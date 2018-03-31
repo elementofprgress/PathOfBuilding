@@ -32,6 +32,12 @@ function calcs.defence(env, actor)
 
 	local condList = modDB.conditions
 
+	-- Action Speed
+	output.ActionSpeedMod = 1 + (m_max(-75, modDB:Sum("INC", nil, "TemporalChainsActionSpeed")) + modDB:Sum("INC", nil, "ActionSpeed")) / 100
+	if modDB:Sum("FLAG", nil, "ActionSpeedCannotBeBelowBase") then
+		output.ActionSpeedMod = m_max(1, output.ActionSpeedMod)
+	end
+
 	-- Resistances
 	output.PhysicalResist = m_min(90, modDB:Sum("BASE", nil, "PhysicalDamageReduction"))
 	for _, elem in ipairs(resistTypeList) do
@@ -40,8 +46,8 @@ function calcs.defence(env, actor)
 			max = 100
 			total = 100
 		else
-			max = modDB:Sum("BASE", nil, elem.."ResistMax")
-			total = modDB:Sum("BASE", nil, elem.."Resist", isElemental[elem] and "ElementalResist")
+			max = modDB:Sum("OVERRIDE", nil, elem.."ResistMax") or modDB:Sum("BASE", nil, elem.."ResistMax")
+			total = modDB:Sum("OVERRIDE", nil, elem.."Resist") or modDB:Sum("BASE", nil, elem.."Resist", isElemental[elem] and "ElementalResist")
 		end
 		output[elem.."Resist"] = m_min(total, max)
 		output[elem.."ResistTotal"] = total
@@ -54,12 +60,6 @@ function calcs.defence(env, actor)
 			}
 		end
 	end
-	condList.UncappedLightningResistIsLowest = (output.LightningResistTotal <= output.ColdResistTotal and output.LightningResistTotal <= output.FireResistTotal)
-	condList.UncappedColdResistIsLowest = (output.ColdResistTotal <= output.LightningResistTotal and output.ColdResistTotal <= output.FireResistTotal)
-	condList.UncappedFireResistIsLowest = (output.FireResistTotal <= output.LightningResistTotal and output.FireResistTotal <= output.ColdResistTotal)
-	condList.UncappedLightningResistIsHighest = (output.LightningResistTotal >= output.ColdResistTotal and output.LightningResistTotal >= output.FireResistTotal)
-	condList.UncappedColdResistIsHighest = (output.ColdResistTotal >= output.LightningResistTotal and output.ColdResistTotal >= output.FireResistTotal)
-	condList.UncappedFireResistIsHighest = (output.FireResistTotal >= output.LightningResistTotal and output.FireResistTotal >= output.ColdResistTotal)
 
 	-- Primary defences: Energy shield, evasion and armour
 	do
@@ -367,12 +367,20 @@ function calcs.defence(env, actor)
 			-- Hit
 			local takenInc = baseTakenInc + modDB:Sum("INC", nil, "DamageTakenWhenHit", damageType.."DamageTakenWhenHit")
 			local takenMore = baseTakenMore * modDB:Sum("MORE", nil, "DamageTakenWhenHit", damageType.."DamageTakenWhenHit")
+			if isElemental[damageType] then
+				takenInc = takenInc + modDB:Sum("INC", nil, "ElementalDamageTakenWhenHit")
+				takenMore = takenMore * modDB:Sum("MORE", nil, "ElementalDamageTakenWhenHit")
+			end
 			output[damageType.."TakenHit"] = (1 + takenInc / 100) * takenMore
 		end
 		do
 			-- Dot
 			local takenInc = baseTakenInc + modDB:Sum("INC", nil, "DamageTakenOverTime", damageType.."DamageTakenOverTime")
 			local takenMore = baseTakenMore * modDB:Sum("MORE", nil, "DamageTakenOverTime", damageType.."DamageTakenOverTime")
+			if isElemental[damageType] then
+				takenInc = takenInc + modDB:Sum("INC", nil, "ElementalDamageTakenOverTime")
+				takenMore = takenMore * modDB:Sum("MORE", nil, "ElementalDamageTakenOverTime")
+			end
 			local resist = output[damageType.."Resist"]
 			output[damageType.."TakenDotMult"] = (1 - resist / 100) * (1 + takenInc / 100) * takenMore
 			if breakdown then
@@ -500,6 +508,15 @@ function calcs.defence(env, actor)
 		if modDB:Sum("FLAG", nil, "MovementSpeedCannotBeBelowBase") then
 			output.MovementSpeedMod = m_max(output.MovementSpeedMod, 1)
 		end
+		output.EffectiveMovementSpeedMod = output.MovementSpeedMod * output.ActionSpeedMod
+		if breakdown then
+			breakdown.EffectiveMovementSpeedMod = { }
+			breakdown.multiChain(breakdown.EffectiveMovementSpeedMod, {
+				{ "%.2f ^8(movement speed modifier)", output.MovementSpeedMod },
+				{ "%.2f ^8(action speed modifier)", output.ActionSpeedMod },
+				total = s_format("= %.2f ^8(effective movement speed modifier)", output.EffectiveMovementSpeedMod)
+			})
+		end
 		output.BlockChanceMax = modDB:Sum("BASE", nil, "BlockChanceMax")
 		local baseBlockChance = 0
 		if actor.itemList["Weapon 2"] and actor.itemList["Weapon 2"].armourData then
@@ -571,6 +588,10 @@ function calcs.defence(env, actor)
 					s_format("= %.2fs", output.BlockDuration)
 				}
 			end
+		end
+		output.LightRadiusMod = calcLib.mod(modDB, nil, "LightRadius")
+		if breakdown then
+			breakdown.LightRadiusMod = breakdown.mod(nil, "LightRadius")
 		end
 	end
 end

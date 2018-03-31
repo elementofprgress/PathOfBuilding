@@ -96,7 +96,7 @@ end
 function calcs.getNodeCalculator(build)
 	return getCalculator(build, true, function(env, nodeList)
 		-- Build and merge modifiers for these nodes
-		env.modDB:AddList(calcs.buildNodeModList(env, nodeList))
+		env.modDB:AddList(calcs.buildModListForNodeList(env, nodeList))
 	end)
 end
 
@@ -147,21 +147,38 @@ function calcs.buildOutput(build, mode)
 		end
 
 		env.conditionsUsed = { }
+		env.multipliersUsed = { }
 		env.minionConditionsUsed = { }
 		env.enemyConditionsUsed = { }
+		env.enemyMultipliersUsed = { }
 		local function addCond(out, var, mod)
 			if not out[var] then
 				out[var] = { }
 			end
 			t_insert(out[var], mod)
 		end
-		local function addTag(out, tag, mod)
+		local function addCondTag(out, tag, mod)
 			if tag.varList then
 				for _, var in ipairs(tag.varList) do
 					addCond(out, var, mod)
 				end
 			else
 				addCond(out, tag.var, mod)
+			end
+		end
+		local function addMult(out, var, mod)
+			if not out[var] then
+				out[var] = { }
+			end
+			t_insert(out[var], mod)
+		end
+		local function addMultTag(out, tag, mod)
+			if tag.varList then
+				for _, var in ipairs(tag.varList) do
+					addMult(out, var, mod)
+				end
+			else
+				addMult(out, tag.var, mod)
 			end
 		end
 		for _, actor in ipairs({env.player, env.minion}) do
@@ -172,15 +189,23 @@ function calcs.buildOutput(build, mode)
 							break
 						elseif tag.type == "Condition" then
 							if actor == env.player then
-								addTag(env.conditionsUsed, tag, mod)
+								addCondTag(env.conditionsUsed, tag, mod)
 							else
-								addTag(env.minionConditionsUsed, tag, mod)
+								addCondTag(env.minionConditionsUsed, tag, mod)
 							end
-						elseif tag.type == "EnemyCondition" then
-							addTag(env.enemyConditionsUsed, tag, mod)
+						elseif tag.type == "ActorCondition" and tag.actor == "enemy" then
+							addCondTag(env.enemyConditionsUsed, tag, mod)
+						elseif tag.type == "Multiplier" or tag.type == "MultiplierThreshold" then
+							if not tag.actor then
+								if actor == env.player then
+									addMultTag(env.multipliersUsed, tag, mod)
+								end
+							elseif tag.actor == "enemy" then
+								addMultTag(env.enemyMultipliersUsed, tag, mod)
+							end
 						end
 					end
-				end
+				end		
 			end
 		end
 		for modName, modList in pairs(env.enemyDB.mods) do
@@ -189,21 +214,11 @@ function calcs.buildOutput(build, mode)
 					if tag.type == "IgnoreCond" then
 						break
 					elseif tag.type == "Condition" then
-						addTag(env.enemyConditionsUsed, tag, mod)
-					end
-				end
-			end
-		end
-
-		env.multipliersUsed = { }
-		for modName, modList in pairs(env.player.modDB.mods) do
-			for _, mod in ipairs(modList) do
-				for _, tag in ipairs(mod) do
-					if tag.type == "Multiplier" or tag.type == "MultiplierThreshold" then
-						if not env.multipliersUsed[tag.var] then
-							env.multipliersUsed[tag.var] = { }
+						addCondTag(env.enemyConditionsUsed, tag, mod)
+					elseif tag.type == "Multiplier" or tag.type == "MultiplierThreshold" then
+						if not tag.actor then
+							addMultTag(env.enemyMultipliersUsed, tag, mod)
 						end
-						t_insert(env.multipliersUsed[tag.var], mod)
 					end
 				end
 			end
@@ -221,6 +236,12 @@ function calcs.buildOutput(build, mode)
 		if output.EnduranceCharges > 0 then
 			t_insert(combatList, s_format("%d Endurance Charges", output.EnduranceCharges))
 		end
+		if output.SiphoningCharges > 0 then
+			t_insert(combatList, s_format("%d Siphoning Charges", output.SiphoningCharges))
+		end
+		if output.CrabBarriers > 0 then
+			t_insert(combatList, s_format("%d Crab Barriers", output.CrabBarriers))
+		end
 		if env.modDB:Sum("FLAG", nil, "Fortify") then
 			t_insert(combatList, "Fortify")
 		end
@@ -229,6 +250,15 @@ function calcs.buildOutput(build, mode)
 		end
 		if env.modDB:Sum("FLAG", nil, "UnholyMight") then
 			t_insert(combatList, "Unholy Might")
+		end
+		if env.modDB:Sum("FLAG", nil, "Tailwind") then
+			t_insert(combatList, "Tailwind")
+		end
+		if env.modDB:Sum("FLAG", nil, "Adrenaline") then
+			t_insert(combatList, "Adrenaline")
+		end
+		if env.modDB:Sum("FLAG", nil, "HerEmbrace") then
+			t_insert(combatList, "Her Embrace")
 		end
 		for name in pairs(env.buffs) do
 			t_insert(buffList, name)
@@ -247,11 +277,11 @@ function calcs.buildOutput(build, mode)
 			end
 		end
 		env.player.breakdown.SkillDebuffs = { modList = { } }
-		for name in pairs(env.debuffs) do
+		for name, modList in pairs(env.debuffs) do
 			t_insert(curseList, name)
 		end
 		table.sort(curseList)
-		for _, name in ipairs(curseList) do
+		for index, name in ipairs(curseList) do
 			for _, mod in ipairs(env.debuffs[name]) do
 				local value = env.enemy.modDB:EvalMod(mod)
 				if value and value ~= 0 then
@@ -260,6 +290,10 @@ function calcs.buildOutput(build, mode)
 						value = value,
 					})
 				end
+			end
+			local stackCount = env.debuffs[name]:Sum("BASE", nil, "Multiplier:"..name.."Stack")
+			if stackCount > 0 then
+				curseList[index] = name .. " (" .. stackCount .. " stack" .. (stackCount > 1 and "s" or "") .. ")"
 			end
 		end
 		for _, slot in ipairs(env.curseSlots) do

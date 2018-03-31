@@ -53,22 +53,34 @@ function common.NewClass(className, ...)
 		class._superParents = { }
 		addSuperParents(class, class)
 		-- Set up inheritance
-		if #class._parents == 1 then
+		setmetatable(class, {
+			__index = function(self, key)
+				for _, parent in ipairs(class._parents) do
+					local val = parent[key]
+					if val ~= nil then
+						self[key] = val
+						return val
+					end
+				end
+			end
+		})
+		--[[if #class._parents == 1 then
 			-- Single inheritance
 			setmetatable(class, class._parents[1]) 
 		else
 			-- Multiple inheritance
 			setmetatable(class, {
-				__index = function(self, key)
+				__index = setmetatable({ }, { __index = function(self, key)
 					for _, parent in ipairs(class._parents) do
 						local val = parent[key]
 						if val ~= nil then
+							self[key] = val
 							return val
 						end
 					end
-				end,
+				end })
 			})
-		end
+		end]]
 	end
 	return class
 end
@@ -203,14 +215,17 @@ function copyTable(tbl, noRecurse)
 end
 do
 	local subTableMap = { }
-	function copyTableSafe(tbl, noRecurse, isSubTable)
+	function copyTableSafe(tbl, noRecurse, preserveMeta, isSubTable)
 		local out = {}
 		if not noRecurse then
 			subTableMap[tbl] = out
 		end
+		if preserveMeta then
+			setmetatable(out, getmetatable(tbl))
+		end
 		for k, v in pairs(tbl) do
 			if not noRecurse and type(v) == "table" then
-				out[k] = subTableMap[v] or copyTableSafe(v, false, true)
+				out[k] = subTableMap[v] or copyTableSafe(v, false, preserveMeta, true)
 			else
 				out[k] = v
 			end

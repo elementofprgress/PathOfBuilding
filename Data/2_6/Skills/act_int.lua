@@ -41,7 +41,7 @@ skills["Arc"] = {
 		[2] = skill("manaCost", nil), 
 		[3] = skill("LightningMin", nil), --"spell_minimum_base_lightning_damage"
 		[4] = skill("LightningMax", nil), --"spell_maximum_base_lightning_damage"
-		[5] = mod("ChainCount", "BASE", nil), --"number_of_additional_projectiles_in_chain"
+		[5] = mod("ChainCountMax", "BASE", nil), --"number_of_additional_projectiles_in_chain"
 	},
 	levels = {
 		[1] = { 12, 9, 2, 35, 2, },
@@ -103,7 +103,7 @@ skills["VaalArcChain"] = {
 		skill("damageEffectiveness", 0.8), 
 		skill("CritChance", 5), 
 		mod("EnemyShockChance", "BASE", 100), --"base_chance_to_shock_%" = 100
-		mod("ChainCount", "BASE", 40), --"number_of_additional_projectiles_in_chain" = 40
+		mod("ChainCountMax", "BASE", 40), --"number_of_additional_projectiles_in_chain" = 40
 	},
 	qualityMods = {
 		mod("EnemyShockDuration", "INC", 1.5), --"shock_duration_+%" = 1.5
@@ -1965,7 +1965,7 @@ skills["FlameWhip"] = {
 	baseMods = {
 		skill("castTime", 0.5), 
 		skill("CritChance", 6), 
-		mod("Damage", "MORE", 50, bit.bor(ModFlag.Spell, ModFlag.Hit), 0, { type = "EnemyCondition", var = "Burning" }), --"flame_whip_damage_+%_final_vs_burning_enemies" = 50
+		mod("Damage", "MORE", 50, bit.bor(ModFlag.Spell, ModFlag.Hit), 0, { type = "ActorCondition", actor = "enemy", var = "Burning" }), --"flame_whip_damage_+%_final_vs_burning_enemies" = 50
 		flag("CannotIgnite"), --"never_ignite" = ?
 		--"is_area_damage" = ?
 		skill("radius", 30), 
@@ -3647,7 +3647,7 @@ skills["MagmaOrb"] = {
 		[2] = skill("manaCost", nil), 
 		[3] = skill("FireMin", nil), --"spell_minimum_base_fire_damage"
 		[4] = skill("FireMax", nil), --"spell_maximum_base_fire_damage"
-		[5] = mod("ChainCount", "BASE", nil), --"number_of_additional_projectiles_in_chain"
+		[5] = mod("ChainCountMax", "BASE", nil), --"number_of_additional_projectiles_in_chain"
 	},
 	levels = {
 		[1] = { 1, 5, 6, 9, 1, },
@@ -3712,7 +3712,7 @@ skills["OrbOfStorms"] = {
 		skill("CritChance", 5), 
 		skill("cooldown", 0.5), 
 		skill("duration", 6), --"base_skill_effect_duration" = 6000
-		mod("ChainCount", "BASE", 0), --"number_of_additional_projectiles_in_chain" = 0
+		mod("ChainCountMax", "BASE", 0), --"number_of_additional_projectiles_in_chain" = 0
 		--"storm_cloud_charged_damage_+%_final" = 0
 		--"skill_can_add_multiple_charges_per_action" = ?
 	},
@@ -4378,6 +4378,7 @@ skills["FireBeam"] = {
 		mod("FireResist", "BASE", -3, 0, 0, { type = "GlobalEffect", effectType = "Debuff" }), --"fire_beam_enemy_fire_resistance_%_per_stack" = -3
 		--"fire_beam_enemy_fire_resistance_%_maximum" = -24
 		skill("dotIsSpell", true), --"spell_damage_modifiers_apply_to_damage_over_time" = ?
+		skill("stackCount", 1, { type = "SkillPart", skillPart = 1 }), 
 		skill("stackCount", 4, { type = "SkillPart", skillPart = 2 }), 
 		skill("stackCount", 8, { type = "SkillPart", skillPart = 3 }), 
 		mod("Damage", "MORE", 180, 0, 0, { type = "SkillPart", skillPart = 2 }), 
@@ -5288,7 +5289,7 @@ skills["TempestShield"] = {
 		skill("CritChance", 6), 
 		mod("BlockChance", "BASE", 3, 0, 0, { type = "GlobalEffect", effectType = "Buff" }), --"shield_block_%" = 3
 		--"skill_override_pvp_scaling_time_ms" = 700
-		mod("ChainCount", "BASE", 1), --"number_of_additional_projectiles_in_chain" = 1
+		mod("ChainCountMax", "BASE", 1), --"number_of_additional_projectiles_in_chain" = 1
 		skill("duration", 12), --"base_skill_effect_duration" = 12000
 		--"skill_can_add_multiple_charges_per_action" = ?
 		skill("showAverage", true), --"base_skill_show_average_damage_instead_of_dps" = ?
@@ -5525,6 +5526,7 @@ skills["Wither"] = {
 		nil, --"base_skill_effect_duration" = 500
 		skill("duration", 2), --"base_secondary_skill_effect_duration" = 2000
 		skill("debuff", true), 
+		skill("stackCount", 1, { type = "SkillPart", skillPart = 1 }), 
 		skill("stackCount", 5, { type = "SkillPart", skillPart = 2 }), 
 		skill("stackCount", 10, { type = "SkillPart", skillPart = 3 }), 
 		skill("stackCount", 20, { type = "SkillPart", skillPart = 4 }), 

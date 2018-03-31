@@ -21,7 +21,7 @@ local skills, mod, flag, skill = ...
 #setMod attack_maximum_added_physical_damage==mod("MinionModifier", "LIST", { mod = mod("PhysicalMax", "BASE", {val}, 0, KeywordFlag.Attack) })
 #mods
 
-#skill NewArcticArmour
+#skill ArcticArmour
 #flags spell duration cold
 #mods
 
@@ -142,6 +142,23 @@ local skills, mod, flag, skill = ...
 #setMod base_skill_show_average_damage_instead_of_dps==nil
 #mods
 
+#skill CorpseEruption
+#flags spell projectile fire area
+#baseMod skill("explodeCorpse", true, { type = "SkillPart", skillPart = 2 })
+	parts = {
+		{
+			name = "Spell",
+			spell = true,
+			cast = false,
+		},
+		{
+			name = "Corpse Explosion",
+			spell = false,
+			cast =  true,
+		},
+	},
+#mods
+
 #skill Cyclone
 #flags attack melee area movement
 #baseMod skill("dpsMultiplier", 2)
@@ -158,26 +175,26 @@ local skills, mod, flag, skill = ...
 #mods
 
 #skill DetonateDead
-#flags cast area fire
+#flags spell area fire
 #baseMod skill("radius", 22)
-	setupFunc = function(actor, output)
-		local skillData = actor.mainSkill.skillData
-		if skillData.corpseLife then
-			skillData.FireMin = skillData.FireMin + skillData.corpseLife * skillData.corpseExplosionLifeMultiplier
-			skillData.FireMax = skillData.FireMax + skillData.corpseLife * skillData.corpseExplosionLifeMultiplier
-		end
-	end,
+#baseMod skill("explodeCorpse", true, { type = "SkillPart", skillPart = 2 })
+	parts = {
+		{
+			name = "Spell",
+			spell = true,
+			cast = false,
+		},
+		{
+			name = "Corpse Explosion",
+			spell = false,
+			cast =  true,
+		},
+	},
 #mods
 
 #skill VaalDetonateDead
 #flags cast area fire
-	setupFunc = function(actor, output)
-		local skillData = actor.mainSkill.skillData
-		if skillData.corpseLife then
-			skillData.FireMin = skillData.FireMin + skillData.corpseLife * skillData.corpseExplosionLifeMultiplier
-			skillData.FireMax = skillData.FireMax + skillData.corpseLife * skillData.corpseExplosionLifeMultiplier
-		end
-	end,
+#baseMod skill("explodeCorpse", true)
 #mods
 
 #skill DoubleStrike
@@ -417,7 +434,7 @@ local skills, mod, flag, skill = ...
 
 #skill Reave
 #flags attack melee area
-#baseMod skill("radius", 14)
+#baseMod skill("radius", 20)
 	parts = {
 		{
 			name = "No stages",
@@ -478,6 +495,18 @@ local skills, mod, flag, skill = ...
 #global Buff
 #mods
 
+#skill ThrownShield
+#flags attack projectile shieldAttack
+	parts = {
+		{
+			name = "Shield",
+		},
+		{
+			name = "Shards",
+		},
+	},
+#mods
+
 #skill ThrownWeapon
 #flags attack projectile
 #baseMod mod("PierceChance", "BASE", 100)
@@ -510,9 +539,30 @@ local skills, mod, flag, skill = ...
 #flags attack projectile
 #mods
 
+#skill BoneLance
+#flags spell projectile
+#mods
+
 #skill ViperStrike
 #flags attack melee duration chaos
 #baseMod skill("poisonIsSkillEffect", true)
+#mods
+
+#skill VolatileDead
+#flags spell area fire
+#baseMod skill("explodeCorpse", true, { type = "SkillPart", skillPart = 2 })
+	parts = {
+		{
+			name = "Spell",
+			spell = true,
+			cast = false,
+		},
+		{
+			name = "Corpse Explosion",
+			spell = false,
+			cast =  true,
+		},
+	},
 #mods
 
 #skill WhirlingBlades

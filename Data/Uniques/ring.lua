@@ -36,7 +36,7 @@ League: Domination, Nemesis
 Requires Level 20
 +(12-16)% to Fire and Cold Resistances
 {variant:1}(10-15)% increased Fire Damage
-{variant:1}(25-30)% increased Fire Damage
+{variant:2}(25-30)% increased Fire Damage
 {variant:1}Adds 1 to (10-30) Cold Damage to Attacks
 {variant:2}Adds (20-25) to (30-50) Cold Damage to Spells and Attacks
 +(30-40) to maximum Energy Shield
@@ -202,6 +202,14 @@ Minions have 15% increased maximum Life
 Minions have 10% increased Area of Effect of Area Skills
 350 Physical Damage taken on Minion Death
 ]],[[
+The Hungry Loop
+Unset Ring
+Requires Level: 45
+Has 1 Socket 
+Consumes Socketed Support Gems when they reach Maximum Level
+Can Consume 4 Support Gems
+Has not Consumed any Gems 
+]],[[
 Kaom's Sign
 Coral Ring
 Variant: Pre 2.0.0
@@ -267,6 +275,7 @@ Malachai's Artifice
 Unset Ring
 Variant: Pre 2.6.0
 Variant: Current
+Sockets: W
 Requires Level 5
 Has 1 Socket
 {variant:1}−25% to all Elemental Resistances
@@ -494,7 +503,7 @@ Requires Level 30
 {variant:1}5% chance to Freeze, Shock and Ignite
 {variant:2}10% chance to Freeze, Shock and Ignite
 {variant:1}10% increased Damage per Freeze, Shock and Ignite on Enemy
-{variant:2}20% increased Damage per Freeze, Shock and Ignite on Enemy
+{variant:2}20% increased Damage with Hits and Ailments per Freeze, Shock and Ignite on Enemy
 ]],[[
 Tasalio's Sign
 Sapphire Ring

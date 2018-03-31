@@ -3,6 +3,18 @@
 return {
 -- Weapon: Bow
 [[
+Arborix
+Assassin Bow
+Requires Level: 62
+Adds (60–70) to (180–210) Physical Damage 
+(80–100)% increased Evasion Rating
+2 Additional Arrows
+Every 16 seconds you gain iron Reflexes for 8 seconds
+30% more Bow Damage at Close Range while you have iron Reflexes
+30% increased Attack, Cast and Movements Speed while you do not have Iron Reflexes
+You have Far Shot while you do not have Iron Reflexes
+Elder Item
+]],[[
 Chin Sol
 Assassin Bow
 Variant: Pre 1.2.0
@@ -68,33 +80,51 @@ Royal Bow
 Variant: Pre 2.0.0
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
+Variant: Pre 3.1.0
 Variant: Current
 Requires Level 28, 95 Dex
 Implicits: 3
 {variant:1,2}(6-12)% increased Elemental Damage with Weapons
 {variant:3}(20-24)% increased Elemental Damage with Weapons
-{variant:4}(20-24)% increased Elemental Damage with Attack Skills
+{variant:4,5}(20-24)% increased Elemental Damage with Attack Skills
 {variant:2,3,4}Adds (8-12) to (16-20) Physical Damage
+{variant:5}Adds (12-16) to (20-24) Physical Damage
 (10-14)% increased Attack Speed
-(30-40)% increased Critical Strike Chance
+{variant:1,2,3,4}(30-40)% increased Critical Strike Chance
 60% increased Mana Regeneration Rate
-Gain 110% of Bow Physical Damage as Extra Damage of an Element
+{variant:1,2,3,4}Gain 110% of Bow Physical Damage as Extra Damage of an Element
+{variant:5}Gain 100% of Bow Physical Damage as Extra Damage of an Element
 ]],[[
 Doomfletch's Prism
 Royal Bow
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
+Variant: Pre 3.1.0
 Variant: Current
 Requires Level 40, 95 Dex
 Implicits: 3
 {variant:1}(6-12)% increased Elemental Damage with Weapons
 {variant:2}(20-24)% increased Elemental Damage with Weapons
-{variant:3}(20-24)% increased Elemental Damage with Attack Skills
-Adds (8-12) to (16-20) Physical Damage
+{variant:3,4}(20-24)% increased Elemental Damage with Attack Skills
+{variant:1,2,3}Adds (8-12) to (16-20) Physical Damage
+{variant:4}Adds (12-16) to (20-24) Physical Damage
 (10-14)% increased Attack Speed
-(30-40)% increased Critical Strike Chance
+{variant:1,2,3}(30-40)% increased Critical Strike Chance
 60% increased Mana Regeneration Rate
-Gain 110% of Bow Physical Damage as Extra Damage of each Element
+{variant:1,2,3}Gain 110% of Bow Physical Damage as Extra Damage of each Element
+{variant:4}Gain 100% of Bow Physical Damage as Extra Damage of each Element
+]],[[
+Hopeshredder
+Ranger Bow
+Requires Level: 60
+Adds (130–150) to (270–300) Cold Damage 
+4% increased Movement Speed per Frenzy Charge 
++(400–500) to Accuracy Rating 
+12 to 14 Cold Damage per Frenzy Charge 
+2% chance to Avoid Elemental Damage when Hit per Frenzy Charge 
+0.5% of Attack Damage Leeched as Life per Frenzy Charge 
+400 Cold Damage taken per second per Frenzy Charge while moving
+Elder Item
 ]],[[
 Infractem
 Decimation Bow

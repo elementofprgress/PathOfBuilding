@@ -95,6 +95,16 @@ Your hits can't be Evaded
 +(3-5)% Chance to Block
 Adds 250 to 300 Cold Damage to Counterattacks
 ]],[[
+Magna Eclipsis
+Pinnacle Tower Shield
+Requires Level: 70
++(20–30) to maximum Life 
++2 to Level of Socketed Gems 
+Triggers Level 20 Elemental Aegis when Equipped 
+(180–220)% increased Armour 
++(60–80) to maximum Life 
++(80–100) to Evasion Rating and Energy Shield
+]],[[
 Redblade Banner
 Painted Tower Shield
 Variant: Pre 2.6.0
@@ -465,6 +475,15 @@ Adds 4 to 8 Physical Damage to Attacks
 +(30-50)% to Fire Resistance
 Curse Enemies with level 5 Vulnerability on Block
 ]],[[
+Vix Lunaris
+Cardinal Round Shield
+Requires Level: 66
++2 to Level of Socketed Gems 
+Triggers Level 20 Cold Aegis when Equipped 
+(200–250)% increased Armour and Evasion 
++(60–80) to maximum Life 
+Cannot be Frozen
+]],[[
 Wheel of the Stormsail
 Rotted Round Shield
 Requires Level 5
@@ -508,6 +527,16 @@ Gain (5-10)% of Physical Damage as Extra Chaos Damage
 {variant:1}30% Chance to gain Unholy Might on Block for 3 seconds
 {variant:2}You gain Unholy Might for 10 seconds on Block
 ]],[[
+Invictus Solaris
+Archon Kite Shield
+Requires Level: 68
++12% to all Elemental Resistances
++2 to Level of Socketed Gems 
+Triggers Level 20 Fire Aegis when Equipped 
+(200–250)% increased Armour and Energy Shield 
++(60–80) to maximum Life 
+Cannot be Ignited
+]],[[
 The Oak
 Plank Kite Shield
 Variant: Pre 2.6.0
@@ -541,14 +570,18 @@ Socketed Gems have 25% reduced Mana Reservation
 Rise of the Phoenix
 Mosaic Kite Shield
 Variant: Pre 1.1.0
+Variant: {2_6}Pre 3.1.0
 Variant: Current
 Requires Level 65, 85 Str, 85 Int
 Implicits: 2
 {variant:1}+16% to all Elemental Resistances
-{variant:2}+8% to all Elemental Resistances
+{variant:2,3}+8% to all Elemental Resistances
+{variant:3}+(40-60) Maximum Life
 (80-100)% increased Armour and Energy Shield
-6 Life Regenerated per second
-+8% to maximum Fire Resistance
+{variant:1,2}6 Life Regenerated per second 
+{variant:3}(15-20) Life Regenerated per second
+{variant:1,2}+8% to maximum Fire Resistance 
+{variant:3}+5% to maximum Fire Resistance
 +(20-25)% to Fire Resistance
 25% increased Fire Resistance while on Low Life
 10% increased Movement Speed when on Low Life
@@ -587,6 +620,18 @@ Implicits: 2
 {variant:1,2}6% of Life Regenerated per Second while on Low Life
 {variant:3}5% of Life Regenerated per Second while on Low Life
 {variant:4}3% of Life Regenerated per Second while on Low Life
+]],[[
+The Unshattered Will
+Archon Kite Shield
+League: Harbinger
+Requires Level 68, 85 Str, 85 Int
++12% to all Elemental Resistances
+Grants Summon Harbinger of Focus Skill
++(60-80) to maximum Life
++(10-15)% to all Elemental Resistances
++(30-50) Mana gained when you Block
++5% Chance to Block
+(50-70)% increased Damage with Channelling Skills
 ]],[[
 Victario's Charity
 Laminated Kite Shield
@@ -635,6 +680,16 @@ Implicits: 2
 {variant:1}15% chance to gain a Power Charge on Throwing a Trap
 {variant:2,3}25% chance to gain a Power Charge on Throwing a Trap
 Grants level 20 Bear Trap Skill
+]],[[
+Leper's Alms
+Mirrored Spiked Shield
+Requires Level: 66
+4% chance to Dodge Attacks 
+(130–150)% increased Evasion and Energy Shield 
++(60–80) to maximum Life 
+40% increased Duration of Ailments on Enemies 
++(3–4)% Chance to Block 
+Shared Suffering
 ]],[[
 Maligaro's Lens
 Compound Spiked Shield
