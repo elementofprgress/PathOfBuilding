@@ -4,8 +4,6 @@
 -- Passive skill tree viewer.
 -- Draws the passive skill tree, and also maintains the current view settings (zoom level, position, etc)
 --
-local launch, main = ...
-
 local pairs = pairs
 local ipairs = ipairs
 local t_insert = table.insert
@@ -14,13 +12,13 @@ local m_min = math.min
 local m_max = math.max
 local m_floor = math.floor
 
-local PassiveTreeViewClass = common.NewClass("PassiveTreeView", function(self)
+local PassiveTreeViewClass = newClass("PassiveTreeView", function(self)
 	self.ring = NewImageHandle()
 	self.ring:Load("Assets/ring.png", "CLAMP")
 	self.highlightRing = NewImageHandle()
 	self.highlightRing:Load("Assets/small_ring.png", "CLAMP")
 
-	self.tooltip = common.New("Tooltip")
+	self.tooltip = new("Tooltip")
 
 	self.zoomLevel = 3
 	self.zoom = 1.2 ^ self.zoomLevel
@@ -65,8 +63,8 @@ function PassiveTreeViewClass:Save(xml)
 end
 
 function PassiveTreeViewClass:Draw(build, viewPort, inputEvents)
-	local tree = build.tree
 	local spec = build.spec
+	local tree = spec.tree
 
 	local cursorX, cursorY = GetCursorPos()
 	local mOver = cursorX >= viewPort.x and cursorX < viewPort.x + viewPort.width and cursorY >= viewPort.y and cursorY < viewPort.y + viewPort.height
@@ -127,12 +125,17 @@ function PassiveTreeViewClass:Draw(build, viewPort, inputEvents)
 			self.dragX, self.dragY = cursorX, cursorY
 		end
 	end
-	
+
 	-- Ctrl-click to zoom
 	if treeClick and IsKeyDown("CTRL") then
 		self:Zoom(treeClick == "RIGHT" and -2 or 2, viewPort)
 		treeClick = nil
 	end
+
+	-- Clamp zoom offset
+	local clampFactor = self.zoom * 2 / 3
+	self.zoomX = m_min(m_max(self.zoomX, -viewPort.width * clampFactor), viewPort.width * clampFactor)
+	self.zoomY = m_min(m_max(self.zoomY, -viewPort.height * clampFactor), viewPort.height * clampFactor)
 
 	-- Create functions that will convert coordinates between the screen and tree coordinate spaces
 	local scale = m_min(viewPort.width, viewPort.height) / tree.size * self.zoom

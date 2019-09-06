@@ -33,6 +33,7 @@ All Attack Damage Chills when you Stun
 ]],[[
 Cameria's Maul
 Gavel
+Upgrade: Upgrades to unique{Cameria's Avarice} via prophecy{Cold Greed}
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
 Variant: Current
@@ -46,6 +47,18 @@ Adds (10-20) to (30-50) Cold Damage
 {variant:1,2}(30-40)% increased Cold Damage with Weapons
 {variant:3}(30-40)% increased Cold Damage with Attack Skills
 40% increased Rarity of Items Dropped by Frozen Enemies
+]],[[
+Cameria's Avarice
+Gavel
+Source: Upgraded from unique{Cameria's Maul} via prophecy{Cold Greed}
+Requires Level 60
+15% reduced Enemy Stun Threshold
+(140–180)% increased Physical Damage
+Adds (11–14) to (17–21) Physical Damage
+(15–40)% increased Critical Strike Chance
+40% increased Rarity of Items Dropped by Frozen Enemies
+(30–40)% increased Cold Damage with Attack Skills
+Trigger Level 20 Icicle Burst when you Kill a Frozen Enemy
 ]],[[
 Clayshaper
 Rock Breaker
@@ -150,6 +163,9 @@ Socketed Lightning Spells deal 100% increased Spell Damage if Triggered
 ]],[[
 Nebuloch
 Nightmare Mace
+Source: Drops from unique{The Elder} (Tier 6+)
+Variant: Pre 3.4.0
+Variant: Current
 Requires Level 68
 10% reduced Enemy Stun Threshold
 Adds (45–60) to (100–120) Physical Damage 
@@ -158,13 +174,17 @@ Gain (30–40)% of Physical Attack Damage as Extra Fire Damage
 1% reduced Elemental Damage taken when Hit per Endurance Charge 
 Adds 5 to 8 Physical Damage per Endurance Charge 
 +500 to Armour per Endurance Charge 
-400 Fire Damage taken per second per Endurance Charge if you've been Hit Recently
+{variant:1}400 Fire Damage taken per second per Endurance Charge if you've been Hit Recently
+{variant:2}200 Fire Damage taken per second per Endurance Charge if you've been Hit Recently
 Elder Item
 ]],
 -- Weapon: Sceptre
 [[
 Augyre
 Void Sceptre
+Source: Drops from unique{The Purifier} (Tier 11+)
+Variant: Pre 3.5.0
+Variant: Current
 Requires Level 68
 40% increased Elemental Damage 
 (180–200)% increased Physical Damage 
@@ -173,6 +193,7 @@ Requires Level 68
 50% of Physical Damage Converted to Lightning Damage 
 Every 16 seconds you gain Elemental Overload for 8 seconds 
 You have Resolute Technique while you do not have Elemental Overload
+{variant:2}100% increased Physical Damage while you have Resolute Technique
 Elder Item
 ]],[[
 Axiom Perpetuum
@@ -216,6 +237,7 @@ Socketed Gems are Supported by level 1 Reduced Mana
 ]],[[
 Breath of the Council
 Carnal Sceptre
+Source: prophecy{The Plaguemaw V}
 Variant: {2_6}Pre 3.0.0
 Variant: Current
 Requires Level 66, 113 Str, 113 Int
@@ -245,6 +267,19 @@ Adds (8-13) to (26-31) Physical Damage
 30% increased Fire Damage
 (15-20)% increased Attack Speed
 (30-40)% increased Critical Strike Chance
+]],[[
+Cerberus Limb
+Blood Sceptre
+League: Delve
+Source: Drops from unique{Ahuatotli, the Blind}
+Requires Level 47
+24% increased Elemental Damage
+(70–100)% increased Spell Damage
+(15–20)% increased Cast Speed
+0.5% of Spell Damage Leeched as Life if Equipped Shield has at least 30% Chance to Block
++1 to Maximum Energy Shield per 5 Armour on Equipped Shield
++5 to Armour per 5 Evasion Rating on Equipped Shield
++20 to Evasion Rating per 5 Maximum Energy Shield on Equipped Shield
 ]],[[
 The Dark Seer
 Shadow Sceptre
@@ -297,6 +332,7 @@ Socketed Gems are Supported by level 30 Iron Will
 ]],[[
 Doryani's Catalyst
 Vaal Sceptre
+Source: Drops from unique{Atziri, Queen of the Vaal} in normal{The Apex of Sacrifice}
 Variant: Pre 2.3.0
 Variant: Current
 Requires Level 75, 113 Str, 113 Int
@@ -310,6 +346,16 @@ Adds (65-85) to (100-160) Physical Damage
 (30-40)% increased Global Critical Strike Chance
 0.2% of Elemental Damage Leeched as Life
 (80-100)% increased Elemental Damage
+]],[[
+Earendel's Embrace
+Grinning Fetish
+Requires Level 35
+18% increased Elemental Damage
++(20–30) to all Attributes
+Minions deal (30–40)% increased Damage
+Summoned Skeletons Cover Enemies in Ash on Hit
+Summoned Skeletons take (15–30)% of their Maximum Life per second as Fire Damage
+Summoned Skeletons have Avatar of Fire
 ]],[[
 Mon'tregul's Grasp
 Void Sceptre
@@ -369,17 +415,20 @@ Nearby Enemies are Hindered, with 25% reduced Movement Speed
 ]],[[
 Spine of the First Claimant
 Iron Sceptre
+Source: Drops in The Lord's Labyrinth
 Variant: Pre 2.3.0
 Variant: {2_6}Pre 3.0.0
+Variant: Pre 3.5.0
 Variant: Current
 Requires Level 20, 38 Str, 38 Int
 Implicits: 2
 {variant:1}10% increased Elemental Damage
-{variant:2,3}14% increased Elemental Damage
+{variant:2,3,4}14% increased Elemental Damage
 (100-140)% increased Physical Damage
 {variant:1,2}40% increased Damage against Frozen Enemies
-{variant:3}40% increased Damage with Hits against Frozen Enemies
+{variant:3,4}40% increased Damage with Hits against Frozen Enemies
 (30-50)% increased Cold Damage
+{variant:4}+(25-35)% to Cold Damage over Time Multiplier
 (5-10)% increased Attack Speed
 (4-8)% increased Cast Speed
 5% chance to Freeze
@@ -405,6 +454,7 @@ Implicits: 2
 [[
 Brain Rattler 
 Meatgrinder
+Source: Drops from unique{Guardian of the Minotaur}
 Variant: Pre 2.6.0
 Variant: Current
 Requires Level 63, 212 Str
@@ -421,6 +471,7 @@ Damage Penetrates 20% Lightning Resistance
 ]],[[
 Chober Chaber
 Great Mallet
+Upgrade: Upgrades to unique{Chaber Cairn} via prophecy{Faith Exhumed}
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
 Variant: Current
@@ -437,8 +488,22 @@ Minions have (20-40)% increased maximum Life
 15% increased Skill Effect Duration
 20% reduced Strength Requirement
 ]],[[
+Chaber Cairn
+Great Mallet
+Source: Upgraded from unique{Chober Chaber} via prophecy{Faith Exhumed}
+Requires Level 60
+30% increased Stun Duration on Enemies
++1 to Level of Socketed Melee Gems
++2 to Level of Socketed Minion Gems
+(200–220)% increased Physical Damage
+Adds (25–35) to (45–55) Physical Damage
+25% increased maximum Mana
+Minions have (20–40)% increased maximum Life
+30% increased Skill Effect Duration
+]],[[
 Geofri's Baptism
 Brass Maul
+Upgrade: Upgrades to unique{Geofri's Devotion} via prophecy{Black Devotion}
 Variant: Pre 2.6.0
 Variant: Current
 Requires Level 27, 92 Str
@@ -450,8 +515,36 @@ Adds 11 to 23 Cold Damage
 (10-20)% increased Stun Duration on Enemies
 Never deal Critical Strikes
 ]],[[
+Geofri's Devotion
+Brass Maul
+Source: Upgraded from unique{Geofri's Baptism} via prophecy{Black Devotion}
+Requires Level 61
+20% increased Stun Duration on Enemies
+Trigger Level 20 Elemental Warding when you Hit an Enemy while Cursed
+200% increased Physical Damage
+Adds (50–56) to (73–78) Physical Damage
+Adds 11 to 23 Cold Damage
+(10–20)% increased Stun Duration on Enemies
+Never deal Critical Strikes
+]],[[
+Hrimnor's Hymn
+Sledgehammer
+Upgrade: Upgrades to unique{Hrimnor's Dirge} via prophecy{Winter's Mournful Melodies}
+Variant: Pre 2.6.0
+Variant: Current
+Requires Level 17, 62 Str
+Implicits: 2
+{variant:1}40% increased Stun Duration on Enemies
+{variant:2}45% increased Stun Duration on Enemies
+(140-200)% increased Physical Damage
++10 to Strength
+15% reduced Enemy Stun Threshold
+1% of Physical Attack Damage Leeched as Life
+(40-50)% increased Stun Duration on Enemies
+]],[[
 Hrimnor's Dirge
 Sledgehammer
+Source: Upgraded from unique{Hrimnor's Hymn} using prophecy{Winter's Mournful Melodies}
 Variant: Pre 2.6.0
 Variant: Current
 Requires Level 36, 62 Str
@@ -466,25 +559,11 @@ Adds (10-20) to (30-40) Physical Damage
 (40-50)% increased Stun Duration on Enemies
 Gain 50% of Physical Damage as Extra Cold Damage
 ]],[[
-Hrimnor's Hymn
-Sledgehammer
-Variant: Pre 2.6.0
-Variant: Current
-Requires Level 17, 62 Str
-Implicits: 2
-{variant:1}40% increased Stun Duration on Enemies
-{variant:2}45% increased Stun Duration on Enemies
-(140-200)% increased Physical Damage
-+10 to Strength
-15% reduced Enemy Stun Threshold
-1% of Physical Attack Damage Leeched as Life
-(40-50)% increased Stun Duration on Enemies
-]],[[
 Jorrhast's Blacksteel
 Steelhead
+League: Tempest
 Variant: Pre 2.6.0
 Variant: Current
-League: Tempest
 Requires Level 44, 143 Str
 Implicits: 2
 {variant:1}40% increased Stun Duration on Enemies
@@ -532,6 +611,7 @@ Adds 10 to 20 Physical Damage
 ]],[[
 Quecholli
 Jagged Maul
+Upgrade: Upgrades to unique{Panquetzaliztli} via prophecy{The Fall of an Empire}
 Variant: Pre 2.6.0
 Variant: Current
 Requires Level 22, 77 Str
@@ -544,21 +624,35 @@ Adds 5 to 25 Physical Damage
 +10 Life gained on Kill
 Enemies killed explode dealing 10% of their Life as Fire Damage
 ]],[[
+Panquetzaliztli
+Jagged Maul
+Source: Upgraded from unique{Quecholli} via prophecy{The Fall of an Empire}
+Requires Level 61
+30% increased Stun Duration on Enemies
+(80-100)% increased Physical Damage
+Adds (94-98) to (115-121) Physical Damage
++(25-50) to all Attributes
+Enemies killed explode dealing 10% of their Life as Fire Damage
+Recover 5% of Maximum Life on Kill
+]],[[
 Tidebreaker
 Imperial Maul
+Variant: Pre 3.5.0
+Variant: Current
 Requires Level 65, 212 Str
 30% increased Stun Duration on Enemies
 Socketed Gems are Supported by Level 20 Endurance Charge on Melee Stun
-Adds (60–70) to (300–350) Physical Damage
+{variant:1}Adds (60–70) to (300–350) Physical Damage
+{variant:2}Adds (70-80) to (340-375) Physical Damage
 +40 to Intelligence
 10% increased Physical Damage per Endurance Charge
 (20–30)% reduced Enemy Stun Threshold with this Weapon
 ]],[[
 Trypanon
 Great Mallet
+League: Perandus
 Variant: Pre 2.6.0
 Variant: Current
-League: Perandus
 Requires Level 40, 131 Str
 Implicits: 2
 {variant:1}20% increased Stun Duration on Enemies

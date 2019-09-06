@@ -19,10 +19,11 @@ minions["Metadata/Monsters/Axis/AxisCaster"] = {
 	damageSpread = 0.2,
 	attackTime = 1.305,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Wand",
 	weaponType2 = "Shield",
 	skillList = {
-		"Melee",
+		"MeleeUseContactPoint",
 		"SkeletonSpark",
 		"MonsterLightningThorns",
 		"AxisClaimSoldierMinions",
@@ -30,6 +31,7 @@ minions["Metadata/Monsters/Axis/AxisCaster"] = {
 	modList = {
 		-- MonsterCastsSparkText
 		-- MonsterCastsLightningThornsText
+		-- MonsterSpellBlock25Bypass30___
 	},
 }
 minions["Metadata/Monsters/Axis/AxisCasterArc"] = {
@@ -44,17 +46,44 @@ minions["Metadata/Monsters/Axis/AxisCasterArc"] = {
 	damageSpread = 0.2,
 	attackTime = 1.305,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Wand",
 	weaponType2 = "Shield",
 	skillList = {
-		"Melee",
+		"MeleeUseContactPoint",
 		"MonsterLightningThorns",
-		"MonsterArc",
+		"AxisCasterArc",
 		"AxisClaimSoldierMinions",
 	},
 	modList = {
 		-- MonsterCastsArcText
 		-- MonsterCastsLightningThornsText
+		-- MonsterSpellBlock25Bypass30___
+	},
+}
+minions["Metadata/Monsters/Axis/AxisEliteSoldier3Champion"] = {
+	name = "Solaris Champion",
+	life = 1.5,
+	armour = 0.4,
+	fireResist = 20,
+	coldResist = 20,
+	lightningResist = 20,
+	chaosResist = 0,
+	damage = 1.12,
+	damageSpread = 0.2,
+	attackTime = 1.245,
+	attackRange = 11,
+	accuracy = 1,
+	weaponType1 = "Two Handed Sword",
+	skillList = {
+		"Melee",
+		"BreachCleave",
+		"AxisDoubleStrikeTrigger",
+		"SummonFlamingAnimatedWeapons",
+		"SolarisChampionFlameVortex",
+	},
+	modList = {
+		mod("PhysicalDamageGainAsFire", "BASE", 100), -- MonsterPhysicalAddedAsFireSkeletonMaps
 	},
 }
 minions["Metadata/Monsters/Axis/AxisExperimenter"] = {
@@ -69,11 +98,13 @@ minions["Metadata/Monsters/Axis/AxisExperimenter"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Wand",
 	skillList = {
-		"Melee",
+		"MeleeUseContactPoint",
 		"SkeletonTemporalChains",
-		"ExperimenterDetonateDead",
+		"MonsterDetonateDeadExperimenter",
+		"ExperimenterEnrageDemon",
 	},
 	modList = {
 		-- MonsterCastsTemporalChainsText
@@ -92,12 +123,13 @@ minions["Metadata/Monsters/Axis/AxisExperimenter2"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Wand",
 	skillList = {
-		"ExperimenterDetonateDead",
 		"Melee",
 		"MonsterEnfeeble",
 		"MonsterProjectileWeakness",
+		"MonsterDetonateDeadExperimenter",
 	},
 	modList = {
 		-- MonsterDetonatesCorpsesText
@@ -117,11 +149,13 @@ minions["Metadata/Monsters/Axis/AxisExperimenterRaiseZombie"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Wand",
 	skillList = {
-		"Melee",
+		"MeleeUseContactPoint",
 		"MonsterEnfeeble",
 		"NecromancerRaiseZombie",
+		"ExperimenterEnrageDemon",
 	},
 	modList = {
 		-- MonsterCastsEnfeebleCurseText
@@ -140,6 +174,7 @@ minions["Metadata/Monsters/Bandits/BanditBowExplosiveArrow"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Bow",
 	skillList = {
 		"Melee",
@@ -160,6 +195,7 @@ minions["Metadata/Monsters/Bandits/BanditBowPoisonArrow"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Bow",
 	skillList = {
 		"Melee",
@@ -172,6 +208,7 @@ minions["Metadata/Monsters/Bandits/BanditBowPoisonArrow"] = {
 minions["Metadata/Monsters/Bandits/BanditMeleeWarlordsMarkMaul"] = {
 	name = "Oak's Devoted",
 	life = 1,
+	armour = 0.2,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 0,
@@ -179,7 +216,8 @@ minions["Metadata/Monsters/Bandits/BanditMeleeWarlordsMarkMaul"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.35,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	weaponType1 = "Two Handed Mace",
 	skillList = {
 		"Melee",
@@ -193,6 +231,7 @@ minions["Metadata/Monsters/Bandits/BanditMeleeWarlordsMarkMaul"] = {
 minions["Metadata/Monsters/Beasts/BeastCaveDegenAura"] = {
 	name = "Shaggy Monstrosity",
 	life = 2.1,
+	armour = 0.6,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 0,
@@ -200,7 +239,8 @@ minions["Metadata/Monsters/Beasts/BeastCaveDegenAura"] = {
 	damage = 1.5,
 	damageSpread = 0.2,
 	attackTime = 1.605,
-	attackRange = 12,
+	attackRange = 14,
+	accuracy = 1,
 	damageFixup = 0.33,
 	skillList = {
 		"Melee",
@@ -213,6 +253,7 @@ minions["Metadata/Monsters/Beasts/BeastCaveDegenAura"] = {
 minions["Metadata/Monsters/Beasts/BeastCleaveEnduringCry"] = {
 	name = "Hairy Bonecruncher",
 	life = 2.1,
+	armour = 0.6,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 0,
@@ -220,11 +261,12 @@ minions["Metadata/Monsters/Beasts/BeastCleaveEnduringCry"] = {
 	damage = 1.5,
 	damageSpread = 0.2,
 	attackTime = 1.605,
-	attackRange = 12,
+	attackRange = 14,
+	accuracy = 1,
 	damageFixup = 0.33,
 	skillList = {
 		"Melee",
-		"MonsterEnduringCry",
+		"BeastEnduringCry",
 		"BeastCleave",
 	},
 	modList = {
@@ -237,20 +279,24 @@ minions["Metadata/Monsters/Beasts/BeastCleaveEnduringCry"] = {
 minions["Metadata/Monsters/BloodChieftain/MonkeyChiefBloodEnrage"] = {
 	name = "Carnage Chieftain",
 	life = 1.5,
+	armour = 0.2,
 	fireResist = 75,
 	coldResist = 0,
 	lightningResist = 0,
 	chaosResist = 0,
 	damage = 1.5,
 	damageSpread = 0.2,
-	attackTime = 1.395,
-	attackRange = 5,
+	attackTime = 1.905,
+	attackRange = 7,
+	accuracy = 1,
 	damageFixup = 0.22,
 	weaponType1 = "One Handed Mace",
 	skillList = {
 		"Melee",
 		"BloodChieftainSummonMonkeys",
 		"MassFrenzy",
+		"MonkeyThrow",
+		"TriggeredMonkeyBomb",
 	},
 	modList = {
 		-- MonsterSpeedAndDamageFixupLarge
@@ -258,10 +304,60 @@ minions["Metadata/Monsters/BloodChieftain/MonkeyChiefBloodEnrage"] = {
 		-- MonsterCastsMassFrenzyText
 	},
 }
+minions["Metadata/Monsters/BloodChieftain/MonkeyChiefBloodParasite"] = {
+	name = "Host Chieftain",
+	life = 1.5,
+	armour = 0.2,
+	fireResist = 75,
+	coldResist = 0,
+	lightningResist = 0,
+	chaosResist = 0,
+	damage = 1.5,
+	damageSpread = 0.2,
+	attackTime = 1.905,
+	attackRange = 7,
+	accuracy = 1,
+	damageFixup = 0.22,
+	weaponType1 = "One Handed Mace",
+	skillList = {
+		"Melee",
+		"BloodChieftainSummonParasiteMonkeys",
+		"MassPower",
+	},
+	modList = {
+		-- MonsterSpeedAndDamageFixupLarge
+		-- MonsterSummonsMonkeysText
+		-- MonsterUsesMassPowerText
+	},
+}
+-- Bone Stalker
+minions["Metadata/Monsters/BoneStalker/BoneStalker"] = {
+	name = "Bone Stalker",
+	life = 2.1,
+	armour = 0.75,
+	fireResist = 0,
+	coldResist = 0,
+	lightningResist = 75,
+	chaosResist = 0,
+	damage = 1.12,
+	damageSpread = 0.2,
+	attackTime = 1.8,
+	attackRange = 12,
+	accuracy = 1,
+	weaponType1 = "One Handed Axe",
+	skillList = {
+		"Melee",
+		"BoneStalkerEarthquake",
+		"WalkingDoubleSlash",
+	},
+	modList = {
+	},
+}
 -- Bull
 minions["Metadata/Monsters/Bull/Bull"] = {
 	name = "Fighting Bull",
 	life = 2.38,
+	armour = 1,
 	fireResist = 0,
 	coldResist = 40,
 	lightningResist = 0,
@@ -269,11 +365,34 @@ minions["Metadata/Monsters/Bull/Bull"] = {
 	damage = 1.28,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	weaponType1 = "One Handed Mace",
 	skillList = {
 		"Melee",
 		"BullCharge",
+	},
+	modList = {
+	},
+}
+-- Cage Spider
+minions["Metadata/Monster/CageSpider/CageSpider2"] = {
+	name = "Sandworn Slaves",
+	life = 4.4,
+	armour = 0.6,
+	fireResist = 0,
+	coldResist = 0,
+	lightningResist = 40,
+	chaosResist = 0,
+	damage = 1.28,
+	damageSpread = 0.2,
+	attackTime = 1.755,
+	attackRange = 12,
+	accuracy = 1,
+	skillList = {
+		"Melee",
+		"CageSpiderCycloneTriggerSandstorms",
+		"CageSpiderSandSpark",
 	},
 	modList = {
 	},
@@ -289,7 +408,8 @@ minions["Metadata/Monsters/Cannibal/CannibalMaleChampion"] = {
 	damage = 1.2,
 	damageSpread = 0.2,
 	attackTime = 1.995,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	weaponType1 = "One Handed Mace",
 	skillList = {
 		"Melee",
@@ -303,6 +423,7 @@ minions["Metadata/Monsters/Cannibal/CannibalMaleChampion"] = {
 minions["Metadata/Monsters/Goatman/GoatmanLeapSlam"] = {
 	name = "Goatman",
 	life = 1,
+	armour = 0.15,
 	fireResist = 40,
 	coldResist = 0,
 	lightningResist = 0,
@@ -310,9 +431,10 @@ minions["Metadata/Monsters/Goatman/GoatmanLeapSlam"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.455,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	skillList = {
-		"MonsterLeapSlam",
+		"GoatmanLeapSlam",
 		"Melee",
 		"GoatmanWait",
 		"GoatmanWait2",
@@ -324,6 +446,7 @@ minions["Metadata/Monsters/Goatman/GoatmanLeapSlam"] = {
 minions["Metadata/Monsters/Goatman/GoatmanLightningLeapSlamMaps"] = {
 	name = "Bearded Devil",
 	life = 1,
+	armour = 0.15,
 	fireResist = 40,
 	coldResist = 0,
 	lightningResist = 0,
@@ -331,7 +454,8 @@ minions["Metadata/Monsters/Goatman/GoatmanLightningLeapSlamMaps"] = {
 	damage = 0.8,
 	damageSpread = 0.2,
 	attackTime = 1.455,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	skillList = {
 		"MonsterLeapSlam",
 		"Melee",
@@ -354,12 +478,14 @@ minions["Metadata/Monsters/Goatman/GoatmanShamanFireball"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	damageFixup = 0.11,
 	weaponType1 = "Staff",
 	skillList = {
 		"MonsterFireball",
 		"GoatmanMoltenShell",
+		"Melee",
 	},
 	modList = {
 		-- MonsterSpeedAndDamageFixupSmall
@@ -379,7 +505,8 @@ minions["Metadata/Monsters/Goatman/GoatmanShamanFireChampion"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	damageFixup = 0.11,
 	weaponType1 = "Staff",
 	skillList = {
@@ -403,7 +530,8 @@ minions["Metadata/Monsters/Goatman/GoatmanShamanLightning"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	damageFixup = 0.11,
 	weaponType1 = "Staff",
 	skillList = {
@@ -418,6 +546,54 @@ minions["Metadata/Monsters/Goatman/GoatmanShamanLightning"] = {
 		-- MonsterCastsSparkText
 	},
 }
+minions["Metadata/Monsters/Goatman/MountainGoatmanChampion"] = {
+	name = "Colossus Crusher",
+	life = 2.1,
+	armour = 0.15,
+	fireResist = 0,
+	coldResist = 75,
+	lightningResist = 0,
+	chaosResist = 0,
+	damage = 1.28,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 12,
+	accuracy = 1,
+	damageFixup = 0.11,
+	weaponType1 = "Two Handed Mace",
+	skillList = {
+		"Melee",
+		"GoatmanEarthquake",
+		"GoatmanMonsterSlam",
+	},
+	modList = {
+		-- MonsterSpeedAndDamageFixupSmall
+	},
+}
+minions["Metadata/Monsters/Goatman/MountainGoatmanShamanIceSpear"] = {
+	name = "Alpine Shaman",
+	life = 1,
+	energyShield = 0.2,
+	fireResist = 0,
+	coldResist = 75,
+	lightningResist = 0,
+	chaosResist = 0,
+	damage = 1,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 8,
+	accuracy = 1,
+	damageFixup = 0.11,
+	weaponType1 = "Staff",
+	skillList = {
+		"MountainGoatmanIceSpear",
+	},
+	modList = {
+		-- MonsterSpeedAndDamageFixupSmall
+		mod("Speed", "INC", -50, ModFlag.Cast), -- MonsterGoatmanShamanCastSpeed
+		-- MonsterCastsIceSpearText
+	},
+}
 -- Miscreation
 minions["Metadata/Monsters/DemonFemale/DemonFemale"] = {
 	name = "Whipping Miscreation",
@@ -429,9 +605,11 @@ minions["Metadata/Monsters/DemonFemale/DemonFemale"] = {
 	damage = 0.88,
 	damageSpread = 0.2,
 	attackTime = 2.445,
-	attackRange = 16,
+	attackRange = 18,
+	accuracy = 1,
 	skillList = {
 		"Melee",
+		"MeleeDemonFemale",
 	},
 	modList = {
 		-- MonsterChanceToVulnerabilityOnHit2
@@ -447,12 +625,19 @@ minions["Metadata/Monsters/DemonModular/DemonFemaleRanged"] = {
 	damage = 0.84,
 	damageSpread = 0.2,
 	attackTime = 3,
-	attackRange = 4,
+	attackRange = 6,
+	accuracy = 1,
 	skillList = {
-		"DemonFemaleRangedProjectile",
+		"DemonFemaleRangedGeometryProjectileLeft",
+		"DemonFemaleRangedGeometryProjectileRight",
+		"EmptyActionFemaleDemonProjectiles",
+		"DemonFemaleRangedGeometryProjectileLeftAhead",
+		"DemonFemaleRangedGeometryProjectileRightAhead",
+		"EmptyActionFemaleDemonProjectilesAhead",
 	},
 	modList = {
 		mod("PhysicalDamageConvertToFire", "BASE", 50), -- MonsterConvertToFireDamage2
+		-- MonsterRangeVarianceMedium
 	},
 }
 minions["Metadata/Monsters/DemonModular/DemonModularBladeVortex"] = {
@@ -465,7 +650,8 @@ minions["Metadata/Monsters/DemonModular/DemonModularBladeVortex"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 4,
+	attackRange = 6,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"DemonModularBladeVortex",
@@ -484,11 +670,13 @@ minions["Metadata/Monsters/DemonModular/DemonModularFire"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 4,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"MonsterRighteousFire",
 		"MonsterRighteousFireWhileSpectred",
+		"ModularDemonFireSuicideExplosion",
 	},
 	modList = {
 		-- MonsterCastsUnholyFireText
@@ -505,7 +693,8 @@ minions["Metadata/Monsters/Frog/Frog"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.455,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	skillList = {
 		"MonsterLeapSlam",
 		"Melee",
@@ -524,7 +713,8 @@ minions["Metadata/Monsters/Frog/Frog2"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.455,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	skillList = {
 		"MonsterLeapSlam",
 		"Melee",
@@ -545,7 +735,8 @@ minions["Metadata/Monsters/GemMonster/Iguana"] = {
 	damage = 1.12,
 	damageSpread = 0.2,
 	attackTime = 1.005,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"IguanaProjectile",
 		"Melee",
@@ -568,6 +759,7 @@ minions["Metadata/Monsters/GhostPirates/GhostPirateBlackBowMaps"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Bow",
 	skillList = {
 		"Melee",
@@ -589,7 +781,8 @@ minions["Metadata/Monsters/GhostPirates/GhostPirateBlackFlickerStrikeMaps"] = {
 	damage = 0.8,
 	damageSpread = 0.2,
 	attackTime = 1.65,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	weaponType1 = "One Handed Sword",
 	weaponType2 = "Shield",
 	skillList = {
@@ -599,6 +792,7 @@ minions["Metadata/Monsters/GhostPirates/GhostPirateBlackFlickerStrikeMaps"] = {
 	modList = {
 		mod("PhysicalDamageGainAsLightning", "BASE", 100), -- MonsterPhysicalAddedAsLightningSkeletonMaps
 		-- MonsterUsesFlickerStrikeText
+		-- MonsterAttackSpellBlock20Bypass40
 	},
 }
 minions["Metadata/Monsters/GhostPirates/GhostPirateGreenBladeVortex"] = {
@@ -612,7 +806,8 @@ minions["Metadata/Monsters/GhostPirates/GhostPirateGreenBladeVortex"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.65,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	weaponType1 = "One Handed Sword",
 	weaponType2 = "Shield",
 	skillList = {
@@ -622,12 +817,14 @@ minions["Metadata/Monsters/GhostPirates/GhostPirateGreenBladeVortex"] = {
 	},
 	modList = {
 		mod("PhysicalDamageConvertToLightning", "BASE", 50), -- MonsterElementalSkeletonLightning
+		-- MonsterAttackSpellBlock20Bypass40
 	},
 }
 -- Undying grappler
 minions["Metadata/Monsters/Grappler/Grappler"] = {
 	name = "Undying Grappler",
 	life = 1,
+	armour = 0.3,
 	fireResist = 20,
 	coldResist = 20,
 	lightningResist = 20,
@@ -635,7 +832,8 @@ minions["Metadata/Monsters/Grappler/Grappler"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.245,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"MonsterFlickerStrike",
@@ -650,6 +848,7 @@ minions["Metadata/Monsters/Grappler/Grappler"] = {
 minions["Metadata/Monsters/Grappler/GrapplerLabyrinth"] = {
 	name = "Shadow Lurker",
 	life = 1,
+	armour = 0.3,
 	fireResist = 20,
 	coldResist = 20,
 	lightningResist = 20,
@@ -657,7 +856,8 @@ minions["Metadata/Monsters/Grappler/GrapplerLabyrinth"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.245,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"MonsterFlickerStrike",
@@ -681,7 +881,8 @@ minions["Metadata/Monsters/Guardians/GuardianFire"] = {
 	damage = 1.2,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	skillList = {
 		"MonsterMultiFireball",
 		"MonsterSplitFireball",
@@ -692,6 +893,27 @@ minions["Metadata/Monsters/Guardians/GuardianFire"] = {
 	},
 	modList = {
 		-- MonsterCastsAugmentedFireballsText
+	},
+}
+minions["Metadata/Monsters/Guardians/GuardianFire_BlueMaps"] = {
+	name = "Frost Sentinel",
+	life = 1.8,
+	energyShield = 0.4,
+	fireResist = 0,
+	coldResist = 75,
+	lightningResist = 0,
+	chaosResist = 0,
+	damage = 1.2,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 8,
+	accuracy = 1,
+	skillList = {
+		"MonsterMultiIceSpear",
+		"MonsterSplitIceSpear",
+		"MonsterLesserMultiIceSpear",
+	},
+	modList = {
 	},
 }
 minions["Metadata/Monsters/Guardians/GuardianLightning"] = {
@@ -705,7 +927,8 @@ minions["Metadata/Monsters/Guardians/GuardianLightning"] = {
 	damage = 1.2,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 4,
+	attackRange = 6,
+	accuracy = 1,
 	skillList = {
 		"GuardianArc",
 	},
@@ -717,6 +940,7 @@ minions["Metadata/Monsters/Guardians/GuardianLightning"] = {
 minions["Metadata/Monsters/HalfSkeleton/HalfSkeleton"] = {
 	name = "Gut Flayer",
 	life = 1.32,
+	armour = 0.5,
 	fireResist = 20,
 	coldResist = 20,
 	lightningResist = 20,
@@ -724,7 +948,8 @@ minions["Metadata/Monsters/HalfSkeleton/HalfSkeleton"] = {
 	damage = 1.1,
 	damageSpread = 0.3,
 	attackTime = 1.5,
-	attackRange = 8,
+	attackRange = 10,
+	accuracy = 1,
 	weaponType1 = "Dagger",
 	skillList = {
 		"Melee",
@@ -732,6 +957,29 @@ minions["Metadata/Monsters/HalfSkeleton/HalfSkeleton"] = {
 	},
 	modList = {
 		-- MonsterCastsPunctureText
+	},
+}
+-- Solar Guard
+minions["Metadata/Monsters/HolyFireElemental/HolyFireElementalSolarisBeam"] = {
+	name = "Solar Guard",
+	life = 1.98,
+	energyShield = 0.1,
+	armour = 0.25,
+	fireResist = 75,
+	coldResist = 0,
+	lightningResist = 0,
+	chaosResist = 0,
+	damage = 1.12,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 9,
+	accuracy = 1,
+	skillList = {
+		"SpecialBeamCannon",
+		"HolyFireElementalFireball",
+	},
+	modList = {
+		mod("PhysicalDamageGainAsFire", "BASE", 60), -- MonsterPhysicalAddedAsFireHolyFireElemental
 	},
 }
 -- Construct
@@ -747,6 +995,7 @@ minions["Metadata/Monsters/incaminion/Fragment"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 25,
+	accuracy = 1,
 	skillList = {
 		"IncaMinionProjectile",
 	},
@@ -764,7 +1013,8 @@ minions["Metadata/Monsters/InsectSpawner/InsectSpawner"] = {
 	damage = 0.56,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 4,
+	attackRange = 6,
+	accuracy = 1,
 	skillList = {
 		"InsectSpawnerSpit",
 		"InsectSpawnerSpawn",
@@ -777,6 +1027,7 @@ minions["Metadata/Monsters/InsectSpawner/InsectSpawner"] = {
 minions["Metadata/Monsters/KaomWarrior/KaomWarrior2"] = {
 	name = "Kaom's Chosen",
 	life = 1.43,
+	armour = 0.5,
 	fireResist = 40,
 	coldResist = 0,
 	lightningResist = 0,
@@ -784,7 +1035,8 @@ minions["Metadata/Monsters/KaomWarrior/KaomWarrior2"] = {
 	damage = 1.16,
 	damageSpread = 0.2,
 	attackTime = 1.755,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"KaomWarriorMoltenStrike",
@@ -795,6 +1047,7 @@ minions["Metadata/Monsters/KaomWarrior/KaomWarrior2"] = {
 minions["Metadata/Monsters/KaomWarrior/KaomWarrior3"] = {
 	name = "Kaom's Chosen",
 	life = 1.43,
+	armour = 0.5,
 	fireResist = 40,
 	coldResist = 0,
 	lightningResist = 0,
@@ -802,12 +1055,240 @@ minions["Metadata/Monsters/KaomWarrior/KaomWarrior3"] = {
 	damage = 1.16,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"KaomWarriorGroundSlam",
 	},
 	modList = {
+	},
+}
+minions["Metadata/Monsters/KaomWarrior/KaomWarrior7"] = {
+	name = "Tukohama's Vanguard",
+	life = 1.43,
+	armour = 0.5,
+	fireResist = 40,
+	coldResist = 0,
+	lightningResist = 0,
+	chaosResist = 0,
+	damage = 1.16,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 8,
+	accuracy = 1,
+	skillList = {
+		"Melee",
+		"KaomFireBeamTotem",
+		"KaomFireBeamTotemSpectre",
+	},
+	modList = {
+		-- KaomWarriorSlowFireBeam
+		mod("TotemLife", "INC", 250), -- KaomWarriorSlowFireBeam2
+		-- MonsterKillTrapsMinesTotemsOnDeath
+	},
+}
+-- Kitava's Cultist
+minions["Metadata/Monsters/KitavaCultist/VaalCultistSpearBloodDelve"] = {
+	name = "Risen Vaal Fanatic",
+	life = 2.88,
+	armour = 0.2,
+	fireResist = 20,
+	coldResist = 20,
+	lightningResist = 20,
+	chaosResist = 0,
+	damage = 1.2,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 14,
+	accuracy = 1,
+	weaponType1 = "One Handed Sword",
+	skillList = {
+		"VaalincursionMortar",
+	},
+	modList = {
+		-- MonsterDelveDropModifiers
+	},
+}
+minions["Metadata/Monsters/KitavaCultist/VaalCultistSpearBloodChampionDelve"] = {
+	name = "Risen Vaal Advocate",
+	life = 5.4,
+	armour = 0.2,
+	fireResist = 35,
+	coldResist = 35,
+	lightningResist = 35,
+	chaosResist = 35,
+	damage = 1.5,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 14,
+	accuracy = 1,
+	weaponType1 = "One Handed Sword",
+	skillList = {
+		"VaalincursionMortar",
+		"VaalIncursionSpecialBeamCannonBlood",
+	},
+	modList = {
+		-- MonsterDelveDropModifiers
+	},
+}
+minions["Metadata/Monsters/KitavaCultist/VaalCultistSpearChaosDelve"] = {
+	name = "Risen Vaal Fanatic",
+	life = 2.88,
+	armour = 0.2,
+	fireResist = 20,
+	coldResist = 20,
+	lightningResist = 20,
+	chaosResist = 0,
+	damage = 1.2,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 14,
+	accuracy = 1,
+	weaponType1 = "One Handed Sword",
+	skillList = {
+		"FireballIncursionChaos",
+	},
+	modList = {
+		-- MonsterDelveDropModifiers
+	},
+}
+minions["Metadata/Monsters/KitavaCultist/VaalCultistSpearChaosChampionDelve"] = {
+	name = "Risen Vaal Advocate",
+	life = 5.4,
+	armour = 0.2,
+	fireResist = 35,
+	coldResist = 35,
+	lightningResist = 35,
+	chaosResist = 35,
+	damage = 1.5,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 14,
+	accuracy = 1,
+	weaponType1 = "One Handed Sword",
+	skillList = {
+		"FireballIncursionChaos",
+		"IncursionSummonPhantasms",
+		"IncursionMeteorUpheaval",
+	},
+	modList = {
+		-- MonsterDelveDropModifiers
+	},
+}
+minions["Metadata/Monsters/KitavaCultist/VaalCultistSpearFireDelve"] = {
+	name = "Risen Vaal Fanatic",
+	life = 2.88,
+	armour = 0.2,
+	fireResist = 20,
+	coldResist = 20,
+	lightningResist = 20,
+	chaosResist = 0,
+	damage = 1.2,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 14,
+	accuracy = 1,
+	weaponType1 = "One Handed Sword",
+	skillList = {
+		"FireballIncusionFire",
+	},
+	modList = {
+		-- MonsterDelveDropModifiers
+	},
+}
+minions["Metadata/Monsters/KitavaCultist/VaalCultistSpearFireChampionDelve_"] = {
+	name = "Risen Vaal Advocate",
+	life = 5.4,
+	armour = 0.2,
+	fireResist = 35,
+	coldResist = 35,
+	lightningResist = 35,
+	chaosResist = 35,
+	damage = 1.5,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 14,
+	accuracy = 1,
+	weaponType1 = "One Handed Sword",
+	skillList = {
+		"FireballIncusionFire",
+		"VaalIncursionFirestorm",
+	},
+	modList = {
+		-- MonsterDelveDropModifiers
+	},
+}
+minions["Metadata/Monsters/KitavaCultist/VaalCultistSpearLightningDelve"] = {
+	name = "Risen Vaal Fanatic",
+	life = 2.88,
+	armour = 0.2,
+	fireResist = 20,
+	coldResist = 20,
+	lightningResist = 20,
+	chaosResist = 0,
+	damage = 1.2,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 14,
+	accuracy = 1,
+	weaponType1 = "One Handed Sword",
+	skillList = {
+		"FireballIncusionLightning",
+	},
+	modList = {
+		-- MonsterDelveDropModifiers
+	},
+}
+minions["Metadata/Monsters/KitavaCultist/VaalCultistSpearLightningChampionDelve_"] = {
+	name = "Risen Vaal Advocate",
+	life = 5.4,
+	armour = 0.2,
+	fireResist = 35,
+	coldResist = 35,
+	lightningResist = 35,
+	chaosResist = 35,
+	damage = 1.5,
+	damageSpread = 0.2,
+	attackTime = 1.5,
+	attackRange = 14,
+	accuracy = 1,
+	weaponType1 = "One Handed Sword",
+	skillList = {
+		"FireballIncusionLightning",
+		"DelayedLightningSpark",
+		"SummonedSparkDaemonLightning",
+	},
+	modList = {
+		-- MonsterDelveDropModifiers
+	},
+}
+-- Kitava's Herald
+minions["Metadata/Monster/KitavaDemon/KitavaDemon"] = {
+	name = "Kitava's Herald",
+	life = 3.6,
+	armour = 0.6,
+	fireResist = 37,
+	coldResist = 37,
+	lightningResist = 37,
+	chaosResist = 0,
+	damage = 1.4,
+	damageSpread = 0.2,
+	attackTime = 1.455,
+	attackRange = 10,
+	accuracy = 1,
+	damageFixup = 0.33,
+	weaponType1 = "One Handed Sword",
+	skillList = {
+		"KitavaDemonLeapSlam",
+		"KitavaDemonCleave",
+		"KitavaDemonWhirlingBlades",
+		"KitavaDemonXMortar",
+		"Melee",
+	},
+	modList = {
+		-- MonsterInflictsBleedingText
+		-- MonsterSpeedAndDamageFixupComplete
 	},
 }
 -- Birdman
@@ -822,7 +1303,8 @@ minions["Metadata/Monsters/Kiweth/Kiweth"] = {
 	damage = 1.68,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 4,
+	attackRange = 6,
+	accuracy = 1,
 	damageFixup = 0.11,
 	skillList = {
 		"Melee",
@@ -845,7 +1327,8 @@ minions["Metadata/Monsters/Kiweth/KiwethSeagull"] = {
 	damage = 1.56,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 4,
+	attackRange = 6,
+	accuracy = 1,
 	damageFixup = 0.11,
 	skillList = {
 		"Melee",
@@ -857,10 +1340,35 @@ minions["Metadata/Monsters/Kiweth/KiwethSeagull"] = {
 		-- MonsterLesserFarShot
 	},
 }
+-- Delve League
+minions["Metadata/Monsters/LeagueDelve/ProtoVaalWarriorElite"] = {
+	name = "Stoneskin Flayer",
+	life = 8,
+	armour = 1,
+	fireResist = 35,
+	coldResist = 35,
+	lightningResist = 35,
+	chaosResist = 35,
+	damage = 1.34,
+	damageSpread = 0.2,
+	attackTime = 1.305,
+	attackRange = 12,
+	accuracy = 1,
+	weaponType1 = "One Handed Sword",
+	weaponType2 = "One Handed Sword",
+	skillList = {
+		"Melee",
+		"DelveProtovaalWhirlingCharge",
+	},
+	modList = {
+		-- MonsterDelveDropModifiers
+	},
+}
 -- Helion
 minions["Metadata/Monsters/Lion/LionDesertSkinPuncture"] = {
 	name = "Dune Hellion",
 	life = 1,
+	armour = 0.1,
 	fireResist = 40,
 	coldResist = 0,
 	lightningResist = 0,
@@ -868,7 +1376,8 @@ minions["Metadata/Monsters/Lion/LionDesertSkinPuncture"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 8,
+	attackRange = 10,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"MonsterPuncture",
@@ -881,6 +1390,7 @@ minions["Metadata/Monsters/Lion/LionDesertSkinPuncture"] = {
 minions["Metadata/Monsters/MassSkeleton/MassSkeleton"] = {
 	name = "Knitted Horror",
 	life = 2.25,
+	armour = 0.5,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 75,
@@ -888,7 +1398,8 @@ minions["Metadata/Monsters/MassSkeleton/MassSkeleton"] = {
 	damage = 0.98,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 9,
+	attackRange = 11,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"SkeletonMassBowProjectile",
@@ -908,7 +1419,8 @@ minions["Metadata/Monsters/Miner/MinerLantern"] = {
 	damage = 1.21,
 	damageSpread = 0.2,
 	attackTime = 1.395,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"MinerThrowFire",
 		"MinerThrowFireSpectre",
@@ -927,7 +1439,8 @@ minions["Metadata/Monsters/Miner/MinerLanternCrystalVeins"] = {
 	damage = 1.21,
 	damageSpread = 0.2,
 	attackTime = 1.395,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"MinerThrowFire",
 		"MinerThrowFireSpectre",
@@ -947,7 +1460,8 @@ minions["Metadata/Monsters/Monkeys/FlameBearer"] = {
 	damage = 1.1,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"FlamebearerFlameBlue",
@@ -959,6 +1473,7 @@ minions["Metadata/Monsters/Monkeys/FlameBearer"] = {
 minions["Metadata/Monsters/MossMonster/FireMonster"] = {
 	name = "Cinder Elemental",
 	life = 2.7,
+	armour = 0.5,
 	fireResist = 40,
 	coldResist = 0,
 	lightningResist = 0,
@@ -966,7 +1481,8 @@ minions["Metadata/Monsters/MossMonster/FireMonster"] = {
 	damage = 1.5,
 	damageSpread = 0.2,
 	attackTime = 1.695,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	damageFixup = 0.33,
 	skillList = {
 		"Melee",
@@ -978,19 +1494,41 @@ minions["Metadata/Monsters/MossMonster/FireMonster"] = {
 		-- ImmuneToLavaDamage
 	},
 }
+-- Mother of Flames
+minions["Metadata/Monsters/MotherOfFlames/MotherOfFlamesZombie"] = {
+	name = "Kiln Mother",
+	life = 0.9,
+	energyShield = 0.28,
+	fireResist = 40,
+	coldResist = 0,
+	lightningResist = 0,
+	chaosResist = 0,
+	damage = 1.25,
+	damageSpread = 0.2,
+	attackTime = 1.8,
+	attackRange = 8,
+	accuracy = 1,
+	skillList = {
+		"MotherOfFlamesMagmaOrb3",
+		"Melee",
+	},
+	modList = {
+	},
+}
 -- Necromancer
 minions["Metadata/Monsters/Necromancer/NecromancerConductivity"] = {
 	name = "Sin Lord",
-	life = 1.86,
+	life = 2.4,
 	energyShield = 0.4,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 75,
 	chaosResist = 0,
-	damage = 0.98,
+	damage = 0.9,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"NecromancerReviveSkeleton",
@@ -1004,20 +1542,22 @@ minions["Metadata/Monsters/Necromancer/NecromancerConductivity"] = {
 }
 minions["Metadata/Monsters/Necromancer/NecromancerEnfeebleCurse"] = {
 	name = "Diabolist",
-	life = 1.86,
+	life = 2.4,
 	energyShield = 0.4,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 75,
 	chaosResist = 0,
-	damage = 0.98,
+	damage = 0.9,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"NecromancerReviveSkeleton",
 		"NecromancerEnfeeble",
+		"AddBuffToTargetNecromancer",
 	},
 	modList = {
 		-- MonsterRaisesUndeadText
@@ -1027,16 +1567,17 @@ minions["Metadata/Monsters/Necromancer/NecromancerEnfeebleCurse"] = {
 }
 minions["Metadata/Monsters/Necromancer/NecromancerFlamability"] = {
 	name = "Ash Prophet",
-	life = 1.86,
+	life = 2.4,
 	energyShield = 0.4,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 75,
 	chaosResist = 0,
-	damage = 0.98,
+	damage = 0.9,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"NecromancerReviveSkeleton",
@@ -1051,16 +1592,17 @@ minions["Metadata/Monsters/Necromancer/NecromancerFlamability"] = {
 }
 minions["Metadata/Monsters/Necromancer/NecromancerFrostbite"] = {
 	name = "Death Bishop",
-	life = 1.86,
+	life = 2.4,
 	energyShield = 0.4,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 75,
 	chaosResist = 0,
-	damage = 0.98,
+	damage = 0.9,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"NecromancerReviveSkeleton",
@@ -1074,16 +1616,17 @@ minions["Metadata/Monsters/Necromancer/NecromancerFrostbite"] = {
 }
 minions["Metadata/Monsters/Necromancer/NecromancerElementalWeakness"] = {
 	name = "Defiler",
-	life = 1.86,
+	life = 2.4,
 	energyShield = 0.4,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 75,
 	chaosResist = 0,
-	damage = 0.98,
+	damage = 0.9,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"NecromancerReviveSkeleton",
@@ -1097,16 +1640,17 @@ minions["Metadata/Monsters/Necromancer/NecromancerElementalWeakness"] = {
 }
 minions["Metadata/Monsters/Necromancer/NecromancerProjectileWeakness"] = {
 	name = "Necromancer",
-	life = 1.86,
+	life = 2.4,
 	energyShield = 0.4,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 75,
 	chaosResist = 0,
-	damage = 0.98,
+	damage = 0.9,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"NecromancerReviveSkeleton",
@@ -1120,16 +1664,17 @@ minions["Metadata/Monsters/Necromancer/NecromancerProjectileWeakness"] = {
 }
 minions["Metadata/Monsters/Necromancer/NecromancerVulnerability"] = {
 	name = "Necromancer",
-	life = 1.86,
+	life = 2.4,
 	energyShield = 0.4,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 75,
 	chaosResist = 0,
-	damage = 0.98,
+	damage = 0.9,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"NecromancerReviveSkeleton",
@@ -1152,7 +1697,8 @@ minions["Metadata/Monsters/Pyromaniac/PyromaniacFire"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	skillList = {
 		"PyroFireball",
 		"PyroSuicideExplosion",
@@ -1174,7 +1720,8 @@ minions["Metadata/Monsters/Pyromaniac/PyromaniacPoison"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"MonsterCausticBomb",
@@ -1195,7 +1742,8 @@ minions["Metadata/Monsters/Revenant/Revenant"] = {
 	damage = 1.4,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 8,
+	attackRange = 10,
+	accuracy = 1,
 	skillList = {
 		"RevenantReviveUndead",
 		"RevenantSpellProjectile",
@@ -1217,7 +1765,8 @@ minions["Metadata/Monsters/Seawitch/SeaWitchFrostBolt"] = {
 	damage = 1.02,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	damageFixup = 0.11,
 	skillList = {
 		"SeaWitchWave",
@@ -1239,7 +1788,8 @@ minions["Metadata/Monsters/Seawitch/SeaWitchScreech"] = {
 	damage = 1.02,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	damageFixup = 0.11,
 	skillList = {
 		"SeaWitchWave",
@@ -1261,7 +1811,8 @@ minions["Metadata/Monsters/Seawitch/SeaWitchSpawnExploding"] = {
 	damage = 1.02,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	damageFixup = 0.11,
 	skillList = {
 		"SeaWitchWave",
@@ -1285,7 +1836,8 @@ minions["Metadata/Monsters/Seawitch/SeaWitchSpawnTemporalChains"] = {
 	damage = 1.02,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	damageFixup = 0.11,
 	skillList = {
 		"SeaWitchWave",
@@ -1310,7 +1862,8 @@ minions["Metadata/Monsters/Seawitch/SeaWitchVulnerabilityCurse"] = {
 	damage = 1.02,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	damageFixup = 0.11,
 	skillList = {
 		"SeaWitchWave",
@@ -1334,6 +1887,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonBowPuncture"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Bow",
 	skillList = {
 		"Melee",
@@ -1355,6 +1909,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonBowLightning"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Bow",
 	skillList = {
 		"Melee",
@@ -1368,6 +1923,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonBowLightning"] = {
 minions["Metadata/Monsters/Skeletons/SkeletonMeleeLarge"] = {
 	name = "Colossal Bonestalker",
 	life = 1.98,
+	armour = 0.8,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 40,
@@ -1375,7 +1931,8 @@ minions["Metadata/Monsters/Skeletons/SkeletonMeleeLarge"] = {
 	damage = 1.8,
 	damageSpread = 0.2,
 	attackTime = 2.25,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	weaponType1 = "One Handed Mace",
 	skillList = {
 		"Melee",
@@ -1395,6 +1952,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonBowLightning3"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Bow",
 	skillList = {
 		"Melee",
@@ -1417,6 +1975,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonCasterColdMultipleProjectiles"] = {
 	damageSpread = 0.2,
 	attackTime = 1.605,
 	attackRange = 46,
+	accuracy = 1,
 	skillList = {
 		"SkeletonProjectileCold",
 	},
@@ -1429,6 +1988,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonCasterFireMultipleProjectiles2"] = 
 	name = "Incinerated Mage",
 	life = 0.84,
 	energyShield = 0.4,
+	armour = 0.15,
 	fireResist = 40,
 	coldResist = 0,
 	lightningResist = 0,
@@ -1437,6 +1997,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonCasterFireMultipleProjectiles2"] = 
 	damageSpread = 0.2,
 	attackTime = 1.605,
 	attackRange = 46,
+	accuracy = 1,
 	skillList = {
 		"SkeletonProjectileFire",
 	},
@@ -1457,6 +2018,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonBowPoison"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Bow",
 	skillList = {
 		"Melee",
@@ -1478,6 +2040,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonBowLightning2"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Bow",
 	skillList = {
 		"Melee",
@@ -1499,6 +2062,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonBowLightning4"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Bow",
 	skillList = {
 		"Melee",
@@ -1521,6 +2085,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonCasterLightningSpark"] = {
 	damageSpread = 0.2,
 	attackTime = 1.605,
 	attackRange = 46,
+	accuracy = 1,
 	skillList = {
 		"SkeletonProjectileLightning",
 		"SkeletonSpark",
@@ -1541,6 +2106,7 @@ minions["Metadata/Monsters/Skeletons/SkeletonBowProjectileWeaknessCurse"] = {
 	damageSpread = 0.2,
 	attackTime = 1.995,
 	attackRange = 40,
+	accuracy = 1,
 	weaponType1 = "Bow",
 	skillList = {
 		"Melee",
@@ -1551,10 +2117,56 @@ minions["Metadata/Monsters/Skeletons/SkeletonBowProjectileWeaknessCurse"] = {
 		-- MonsterCastsProjectileWeaknessCurseText
 	},
 }
+minions["Metadata/Monsters/Skeletons/SkeletonMeleeKnightElementalSwordIncursionChampionDelve"] = {
+	name = "Enhanced Vaal Fallen",
+	life = 6,
+	armour = 1,
+	fireResist = 35,
+	coldResist = 35,
+	lightningResist = 35,
+	chaosResist = 35,
+	damage = 1.5,
+	damageSpread = 0.3,
+	attackTime = 1.605,
+	attackRange = 9,
+	accuracy = 1,
+	weaponType1 = "Two Handed Sword",
+	skillList = {
+		"Melee",
+		"ElementalHitSkeletonKnightIncursion",
+		"IncursionLeapSlamChampion",
+	},
+	modList = {
+		-- MonsterCastsElementalHitText
+	},
+}
+minions["Metadata/Monsters/SkeletonCannon/SkeletonCannon1"] = {
+	name = "Bone Husk",
+	life = 2.07,
+	armour = 0.25,
+	fireResist = 0,
+	coldResist = 0,
+	lightningResist = 75,
+	chaosResist = 0,
+	damage = 0.9,
+	damageSpread = 0.2,
+	attackTime = 1.8,
+	attackRange = 6,
+	accuracy = 1,
+	skillList = {
+		"SkeletonCannonMortar",
+		"SkeletonCannonBoneMortar",
+		"SkeletonCannonBoneNova",
+	},
+	modList = {
+		-- MonsterNecromancerRaisable
+	},
+}
 -- Snake
 minions["Metadata/Monsters/Snake/SnakeMeleeSpit"] = {
 	name = "Bramble Cobra",
 	life = 0.8,
+	armour = 0.15,
 	fireResist = 30,
 	coldResist = 0,
 	lightningResist = 0,
@@ -1562,7 +2174,8 @@ minions["Metadata/Monsters/Snake/SnakeMeleeSpit"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.65,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"SnakeProjectile",
@@ -1574,6 +2187,7 @@ minions["Metadata/Monsters/Snake/SnakeMeleeSpit"] = {
 minions["Metadata/Monsters/Snake/SnakeScorpionMultiShot"] = {
 	name = "Barb Serpent",
 	life = 0.94,
+	armour = 0.15,
 	fireResist = 30,
 	coldResist = 0,
 	lightningResist = 0,
@@ -1581,7 +2195,8 @@ minions["Metadata/Monsters/Snake/SnakeScorpionMultiShot"] = {
 	damage = 0.75,
 	damageSpread = 0.2,
 	attackTime = 1.65,
-	attackRange = 7,
+	attackRange = 9,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"SnakeSpineProjectile",
@@ -1602,7 +2217,8 @@ minions["Metadata/Monsters/Spiders/SpiderThornFlickerStrike"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.44,
-	attackRange = 6,
+	attackRange = 8,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"MonsterFlickerStrike",
@@ -1615,6 +2231,7 @@ minions["Metadata/Monsters/Spiders/SpiderThornFlickerStrike"] = {
 minions["Metadata/Monsters/Statue/DaressoStatueLargeMaleSpear"] = {
 	name = "Towering Figment",
 	life = 5.76,
+	armour = 1,
 	fireResist = 0,
 	coldResist = 0,
 	lightningResist = 0,
@@ -1622,7 +2239,8 @@ minions["Metadata/Monsters/Statue/DaressoStatueLargeMaleSpear"] = {
 	damage = 1.3,
 	damageSpread = 0.2,
 	attackTime = 1.875,
-	attackRange = 14,
+	attackRange = 16,
+	accuracy = 1,
 	damageFixup = 0.33,
 	weaponType1 = "One Handed Sword",
 	skillList = {
@@ -1638,6 +2256,7 @@ minions["Metadata/Monsters/Statue/DaressoStatueLargeMaleSpear"] = {
 minions["Metadata/Monsters/Taster/Taster"] = {
 	name = "Noisome Ophidian",
 	life = 1,
+	armour = 0.2,
 	fireResist = 40,
 	coldResist = 0,
 	lightningResist = 0,
@@ -1645,7 +2264,8 @@ minions["Metadata/Monsters/Taster/Taster"] = {
 	damage = 1.5,
 	damageSpread = 0.2,
 	attackTime = 1.5,
-	attackRange = 4,
+	attackRange = 6,
+	accuracy = 1,
 	weaponType1 = "Dagger",
 	skillList = {
 		"Melee",
@@ -1658,6 +2278,7 @@ minions["Metadata/Monsters/Taster/Taster"] = {
 minions["Metadata/Monsters/Undying/CityStalkerMaleCasterArmour"] = {
 	name = "Undying Evangelist",
 	life = 1.2,
+	armour = 0.5,
 	fireResist = 37,
 	coldResist = 37,
 	lightningResist = 37,
@@ -1665,7 +2286,8 @@ minions["Metadata/Monsters/Undying/CityStalkerMaleCasterArmour"] = {
 	damage = 1.2,
 	damageSpread = 0.2,
 	attackTime = 1.245,
-	attackRange = 5,
+	attackRange = 7,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"DelayedBlast",
@@ -1685,7 +2307,8 @@ minions["Metadata/Monsters/Undying/UndyingOutcastPuncture"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.65,
-	attackRange = 4,
+	attackRange = 6,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"MonsterPuncture",
@@ -1704,10 +2327,35 @@ minions["Metadata/Monsters/Undying/UndyingOutcastWhirlingBlades"] = {
 	damage = 1,
 	damageSpread = 0.2,
 	attackTime = 1.65,
-	attackRange = 4,
+	attackRange = 6,
+	accuracy = 1,
 	skillList = {
 		"Melee",
 		"UndyingWhirlingBlades",
+	},
+	modList = {
+	},
+}
+-- Wicker Man
+minions["Metadata/Monsters/WickerMan/WickerMan"] = {
+	name = "Wicker Man",
+	life = 2.25,
+	armour = 1.5,
+	fireResist = 20,
+	coldResist = 20,
+	lightningResist = 20,
+	chaosResist = 0,
+	damage = 1.5,
+	damageSpread = 0.2,
+	attackTime = 1.755,
+	attackRange = 10,
+	accuracy = 1,
+	weaponType1 = "One Handed Mace",
+	skillList = {
+		"Melee",
+		"WickerManRighteousFire",
+		"WickerManMoltenStrike",
+		"MonsterRighteousFireWhileSpectred",
 	},
 	modList = {
 	},

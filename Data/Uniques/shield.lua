@@ -20,9 +20,11 @@ You have Onslaught while at maximum Endurance Charges
 ]],[[
 The Anticipation
 Ezomyte Tower Shield
+League: Breach
+Source: Drops in Uul-Netol Breach or from unique{Uul-Netol, Unburdened Flesh}
+Upgrade: Upgrades to unique{} using currency{Blessing of Uul-Netol}
 Variant: {2_6}Pre 3.0.0
 Variant: Current
-League: Breach
 Requires Level 64, 159 Str
 Implicits: 1
 {variant:2}+(30-40) to maximum Life
@@ -34,9 +36,10 @@ Permanently Intimidate Enemies on Block
 ]],[[
 The Surrender
 Ezomyte Tower Shield
+League: Breach
+Source: Upgraded from unique{} using currency{Blessing of Uul-Netol}
 Variant: {2_6}Pre 3.0.0
 Variant: Current
-League: Breach
 Requires Level 64, 159 Str
 Implicits: 1
 {variant:2}+(30-40) to maximum Life
@@ -65,6 +68,17 @@ Implicits: 1
 {variant:1}5% chance to Curse Enemies with Enfeeble on Hit
 {variant:2}10% chance to Curse Enemies with Enfeeble on Hit
 {variant:3,4}25% chance to Curse un-cursed Enemies with Enfeeble on Hit
+]],[[
+The Eternal Apple
+Chiming Spirit Shield
+Requires Level 49
+(10–15)% increased Spell Damage
+Trigger a Socketed Warcry Skill when you lose Endurance Charges
++(60–80) to maximum Life
++(17–23)% to Chaos Resistance
+You lose all Endurance Charges at maximum Endurance Charges
+Cannot Block
+50% increased Warcry Cooldown Recovery Speed
 ]],[[
 Lioneye's Remorse
 Pinnacle Tower Shield
@@ -97,20 +111,21 @@ Adds 250 to 300 Cold Damage to Counterattacks
 ]],[[
 Magna Eclipsis
 Pinnacle Tower Shield
-Requires Level: 70
-+(20–30) to maximum Life 
-+2 to Level of Socketed Gems 
-Triggers Level 20 Elemental Aegis when Equipped 
-(180–220)% increased Armour 
-+(60–80) to maximum Life 
+Source: Vendor recipe
+Requires Level 70
++(20–30) to maximum Life
++2 to Level of Socketed Gems
+Triggers Level 20 Elemental Aegis when Equipped
+(180–220)% increased Armour
++(60–80) to maximum Life
 +(80–100) to Evasion Rating and Energy Shield
 ]],[[
 Redblade Banner
 Painted Tower Shield
+League: Warbands
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
 Variant: Current
-League: Warbands
 Requires Level 35, 87 Str
 Implicits: 1
 {variant:3}+(20-30) to maximum Life
@@ -141,10 +156,10 @@ Implicits: 1
 ]],[[
 Trolltimber Spire
 Cedar Tower Shield
+League: Tempest
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
 Variant: Current
-League: Tempest
 Requires Level 17, 46 Str
 Implicits: 1
 {variant:3}+(20-30) to maximum Life
@@ -172,6 +187,7 @@ Blood Magic
 [[
 Atziri's Mirror
 Golden Buckler
+Upgrade: Upgrades to unique{Atziri's Reflection} via prophecy{The Queen's Sacrifice}
 Variant: Pre 2.0.0
 Variant: {2_6}Pre 3.0.0
 Variant: Current
@@ -187,8 +203,22 @@ Implicits: 1
 {variant:3}20% additional Spell Block chance while Cursed
 Curse Reflection
 ]],[[
+Atziri's Reflection
+Golden Buckler
+Source: Upgraded from unique{Atziri's Mirror} via prophecy{The Queen's Sacrifice}
+Requires Level 68
+6% increased Movement Speed
++(40–60) to Intelligence
+(180–200)% increased Evasion Rating
++(180–200) to maximum Energy Shield
++(20–30)% to all Elemental Resistances
+Curse Reflection
+Unaffected by Curses
+(15–20)% increased Effect of your Curses
+]],[[
 Chalice of Horrors
 War Buckler
+Upgrade: Upgrades to unique{Thirst for Horrors} via prophecy{Mouth of Horrors}
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
 Variant: Current
@@ -205,6 +235,7 @@ Implicits: 1
 ]],[[
 Thirst for Horrors
 War Buckler
+Source: Upgraded from unique{Chalice of Horrors} using prophecy{Mouth of Horrors}
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
 Variant: Current
@@ -249,6 +280,7 @@ Adds (8-12) to (15-20) Physical Damage to Attacks
 ]],[[
 Kaltenhalt
 Painted Buckler
+Upgrade: Upgrades to unique{Kaltensoul} via prophecy{The Snuffed Flame}
 Variant: Pre 1.0.0
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
@@ -266,6 +298,7 @@ Implicits: 1
 ]],[[
 Kaltensoul
 Painted Buckler
+Source: Upgraded from unique{Kaltenhalt} using prophecy{The Snuffed Flame}
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
 Variant: Current
@@ -282,10 +315,10 @@ Reflects (25-50) Cold Damage to Melee Attackers
 ]],[[
 Mutewind Pennant
 Enameled Buckler
+League: Warbands
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
 Variant: Current
-League: Warbands
 Requires Level 42, 103 Dex
 Implicits: 1
 {variant:3}6% increased Movement Speed
@@ -315,12 +348,67 @@ Reflects 1 to 1000 Physical Damage to Attackers on Block
 ]],
 -- Shield: Energy Shield
 [[
+Apep's Slumber
+Ancient Spirit Shield
+League: Incursion
+Upgrade: Upgrades to unique{Apep's Supremacy} via currency{Vial of Awakening}
+Requires Level 45
+(5–10)% increased Spell Damage
+Adds (20-22) to (30-37) Chaos Damage
++(80-100) to maximum Energy Shield
++25% chance to be Poisoned
++3% to all maximum Resistances while Poisoned
+50 Energy Shield Regenerated per Second per Poison on you, up to 250 per second
+Poisons on you expire 50% slower
+]],[[
+Apep's Supremacy
+Vaal Spirit Shield
+League: Incursion
+Source: Upgraded from unique{Apep's Slumber} via currency{Vial of Awakening}
+Requires Level 62
+(5–10)% increased Spell Damage
+Adds (50-55) to (72-80) Chaos Damage
++(130-150) to maximum Energy Shield
+(30-50)% faster start of Energy Shield Recharge
+You take Chaos Damage instead of Physical Damage from Bleeding
++25% chance to be Poisoned
++3% to all maximum Resistances while Poisoned
+Poisons on you expire 50% slower
+]],[[
+Bitterbind Point
+Titanium Spirit Shield
+League: Betrayal
+Source: Drops from unique{Catarina, Master of Undeath}
+Variant: Fire and Cold Damage
+Variant: Cold and Lightning Damage
+Variant: Fire and Lightning Damage
+Variant: Energy Shield and Life
+Variant: Armour during Soul Gain Prevention
+Variant: Level of Socketed Support Gems
+Requires Level 68, 159 Int
+(30–50)% increased Spell Damage
+(180–220)% increased Energy Shield
+Spectres have (50–100)% increased maximum Life
+Gain Arcane Surge when you deal a Critical Strike
+Your Raised Spectres also gain Arcane Surge when you do
+(40–50)% increased Critical Strike Chance for Spells per Raised Spectre
+{variant:1}{crafted}Adds (3-12) to (5-16) Fire Damage
+{variant:1}{crafted}Adds (3-12) to (5-16) Cold Damage
+{variant:2}{crafted}Adds (3-12) to (5-16) Cold Damage
+{variant:2}{crafted}Adds 1 to (7-24) Lightning Damage
+{variant:3}{crafted}Adds (3-12) to (5-16) Fire Damage
+{variant:3}{crafted}Adds 1 to (7-24) Lightning Damage
+{variant:4}{crafted}(20-40)% increased Energy Shield
+{variant:4}{crafted}+(10-28) to maximum Life
+{variant:5}{crafted}+(500-3000) to Armour during Soul Gain Prevention
+{variant:6}{crafted}+(1-2) to Level of Socketed Support Gems
+]],[[
 Brinerot Flag
 Tarnished Spirit Shield
+League: Warbands
 Variant: Pre 2.6.0
 Variant: {2_6}Pre 3.0.0
 Variant: Current
-League: Warbands
 Requires Level 23, 60 Int
 Implicits: 2
 {variant:1,2}5% increased Spell Damage
@@ -337,6 +425,8 @@ Implicits: 2
 Esh's Mirror
 Thorium Spirit Shield
 League: Breach
+Source: Drops in Esh Breach or from unique{Esh, Forked Thought}
+Upgrade: Upgrades to unique{Esh's Visage} using currency{Blessing of Esh}
 Requires Level 53, 128 Int
 +(20-30) to Intelligence
 +(40-70) to maximum Life
@@ -347,9 +437,10 @@ Shock Reflection
 ]],[[
 Esh's Visage
 Vaal Spirit Shield
+League: Breach
+Source: Upgraded from unique{Esh's Mirror} using currency{Blessing of Esh}
 Variant: {2_6}Pre 3.0.0
 Variant: Current
-League: Breach
 Requires Level 62, 159 Int
 Implicits: 2
 {variant:1}5% increased Spell Damage
@@ -380,14 +471,18 @@ No Block Chance
 Light of Lunaris
 Jingling Spirit Shield
 Variant: {2_6}Pre 3.0.0
+Variant: Pre 3.5.0
 Variant: Current
 Requires Level 28, 71 Int
 Implicits: 2
 {variant:1}10% increased Spell Damage
-{variant:2}(10-15)% increased Spell Damage
+{variant:2,3}(10-15)% increased Spell Damage
 (60-80)% increased Critical Strike Chance for Spells
-(100-140)% increased Energy Shield
-+(3-5)% Chance to Block
+{variant:1,2}(100-140)% increased Energy Shield
+{variant:3}(475-600)% increased Energy Shield
+{variant:1,2}+(3-5)% Chance to Block
+{variant:3}+(6-10)% Chance to Block
+{variant:3}Adds (35-39) to (54-60) Cold Damage to Spells
 +1% to Critical Strike Multiplier per 1% Block Chance
 +25% to Critical Strike Multiplier if you've dealt a Non-Critical Strike Recently
 ]],[[
@@ -410,6 +505,7 @@ You are Shocked for 4 seconds on reaching Maximum Power Charges
 ]],[[
 Matua Tupuna
 Tarnished Spirit Shield
+Source: Upgrades to unique{Matua Tupuna} via prophecy{The Mentor}
 Variant: {2_6}Pre 3.0.0
 Variant: Current
 Requires Level 23, 60 Int
@@ -423,10 +519,29 @@ Implicits: 2
 10% increased Effect of Auras on your Minions
 Spreads Tar when you take a Critical Strike
 ]],[[
+Whakatutuki o Matua
+Tarnished Spirit Shield
+Source: Upgraded from unique{Matua Tupuna} via prophecy{The Mentor}
+Requires Level 63, 60 Int
+(5–10)% increased Spell Damage
++3 to Level of Socketed Minion Gems
++(40–80) to maximum Energy Shield
+(40–80)% increased Energy Shield
++(15–25) to maximum Mana
+20% increased Effect of Auras on you
+20% increased Effect of Auras on your Minions
+Spreads Tar when you Block
+If you have Blocked Recently, you and nearby Allies Regenerate 5% of Life per second
+]],[[
 Rathpith Globe
 Titanium Spirit Shield
+Variant: {2_6}Pre 3.0.0
+Variant: Pre 3.4.0
+Variant: Current
 Requires Level 68, 159 Int
-(40-60)% of Block Chance applied to Spells
+{variant:1}(40-60)% of Block Chance applied to Spells
+{variant:2}+(12-18)% chance to Block Spell Damage
+{variant:3}+(10-15)% chance to Block Spell Damage
 (40-60)% increased Spell Damage
 10% increased maximum Life
 (120-160)% increased Energy Shield
@@ -434,8 +549,13 @@ Requires Level 68, 159 Int
 ]],[[
 Sentari's Answer
 Brass Spirit Shield
+Variant: {2_6}Pre 3.0.0
+Variant: Pre 3.4.0
+Variant: Current
 Requires Level 33, 82 Int
-25% of Block Chance applied to Spells
+{variant:1}25% of Block Chance applied to Spells
+{variant:2}+7% chance to Block Spell Damage
+{variant:3}+10% chance to Block Spell Damage
 +(20-30) to Intelligence
 (4-8)% increased Quantity of Items found
 +5% Chance to Block
@@ -448,6 +568,8 @@ Applies level 15 Elemental Weakness on Blocking a Spell
 Daresso's Courage
 Baroque Round Shield
 Variant: Pre 2.6.0
+Variant: {2_6}Pre 3.0.0
+Variant: Pre 3.4.0
 Variant: Current
 Requires Level 54, 70 Str, 70 Dex
 120% increased Block Recovery
@@ -456,11 +578,13 @@ Requires Level 54, 70 Str, 70 Dex
 {variant:1}+(10-20)% to Fire Resistance
 {variant:1}+(10-20)% to Cold Resistance
 {variant:1}+(10-20)% to Lightning Resistance
-{variant:2}+(10-20)% to all Elemental Resistances
-120% of Block Chance applied to Spells when on Low Life
+{variant:2,3,4}+(10-20)% to all Elemental Resistances
+{variant:1,2}120% of Block Chance applied to Spells when on Low Life
+{variant:3}+36% chance to Block Spell Damage while on Low Life
+{variant:4}+30% chance to Block Spell Damage while on Low Life
 +(3-6)% Chance to Block
-{variant:2}20% chance to Block Spells if you've Blocked an Attack Recently
-{variant:2}20% chance to Block Attacks if you've Blocked a Spell Recently
+{variant:2,3,4}20% chance to Block Spells if you've Blocked an Attack Recently
+{variant:2,3,4}20% chance to Block Attacks if you've Blocked a Spell Recently
 ]],[[
 The Deep One's Hide
 Studded Round Shield
@@ -478,10 +602,10 @@ Curse Enemies with level 5 Vulnerability on Block
 Vix Lunaris
 Cardinal Round Shield
 Requires Level: 66
-+2 to Level of Socketed Gems 
-Triggers Level 20 Cold Aegis when Equipped 
-(200–250)% increased Armour and Evasion 
-+(60–80) to maximum Life 
++2 to Level of Socketed Gems
+Triggers Level 20 Cold Aegis when Equipped
+(200–250)% increased Armour and Evasion
++(60–80) to maximum Life
 Cannot be Frozen
 ]],[[
 Wheel of the Stormsail
@@ -500,22 +624,24 @@ Aegis Aurora
 Champion Kite Shield
 Variant: Pre 1.1.0
 Variant: {2_6}Pre 3.0.0
+Variant: Pre 3.5.0
 Variant: Current
 Requires Level 62, 85 Str, 85 Int
 {variant:1,2}(10-20)% increased Elemental Damage with Weapons
-{variant:3}(10-20)% increased Elemental Damage with Attack Skills
-(80-100)% increased Armour and Energy Shield
+{variant:3,4}(10-20)% increased Elemental Damage with Attack Skills
+{variant:1,2,3}(80-100)% increased Armour and Energy Shield
+{variant:4}(300-400)% increased Armour and Energy Shield
 +10% to all Elemental Resistances
 +5% to maximum Cold Resistance
 +6% Chance to Block
 {variant:1}Replenishes Energy Shield by 4% of Armour when you Block
-{variant:2,3}Replenishes Energy Shield by 2% of Armour when you Block
+{variant:2,3,4}Replenishes Energy Shield by 2% of Armour when you Block
 ]],[[
 Broken Faith
 Archon Kite Shield
+League: Warbands
 Variant: Pre 2.6.0
 Variant: Current
-League: Warbands
 Requires Level 68, 85 Str, 85 Int
 +12% to all Elemental Resistances
 0.4% of Chaos Damage Leeched as Life
@@ -531,25 +657,11 @@ Invictus Solaris
 Archon Kite Shield
 Requires Level: 68
 +12% to all Elemental Resistances
-+2 to Level of Socketed Gems 
-Triggers Level 20 Fire Aegis when Equipped 
-(200–250)% increased Armour and Energy Shield 
-+(60–80) to maximum Life 
++2 to Level of Socketed Gems
+Triggers Level 20 Fire Aegis when Equipped
+(200–250)% increased Armour and Energy Shield
++(60–80) to maximum Life
 Cannot be Ignited
-]],[[
-The Oak
-Plank Kite Shield
-Variant: Pre 2.6.0
-Variant: Current
-Requires Level 40
-+4% to all Elemental Resistances
-(80-120)% increased Armour and Energy Shield
-+(100-150) to maximum Life
-50% reduced Freeze Duration on You
-{variant:1}1% of Life Regenerated per Second
-{variant:2}3% of Life Regenerated per Second
-{variant:1}5% of Life Regenerated per Second while on Low Life
-{variant:2}3% of Life Regenerated per Second while on Low Life
 ]],[[
 Prism Guardian
 Archon Kite Shield
@@ -578,33 +690,38 @@ Implicits: 2
 {variant:2,3}+8% to all Elemental Resistances
 {variant:3}+(40-60) Maximum Life
 (80-100)% increased Armour and Energy Shield
-{variant:1,2}6 Life Regenerated per second 
+{variant:1,2}6 Life Regenerated per second
 {variant:3}(15-20) Life Regenerated per second
-{variant:1,2}+8% to maximum Fire Resistance 
+{variant:1,2}+8% to maximum Fire Resistance
 {variant:3}+5% to maximum Fire Resistance
 +(20-25)% to Fire Resistance
-25% increased Fire Resistance while on Low Life
++25% to Fire Resistance while on Low Life
 10% increased Movement Speed when on Low Life
 Cannot be Ignited while on Low Life
 ]],[[
 Saffell's Frame
 Branded Kite Shield
 Variant: Pre 1.1.0
+Variant: {2_6}Pre 3.0.0
+Variant: Pre 3.4.0
 Variant: Current
 Requires Level 59, 76 Str, 76 Int
 Implicits: 2
 {variant:1}+8% to all Elemental Resistances
-{variant:2}+4% to all Elemental Resistances
+{variant:2,3,4}+4% to all Elemental Resistances
 {variant:1}(100-120)% of Block Chance applied to Spells
 {variant:2}(70-80)% of Block Chance applied to Spells
+{variant:3}+(21-24)% chance to Block Spell Damage
+{variant:4}+(15-20)% chance to Block Spell Damage
 (20-30)% increased Spell Damage
 +10% to all Elemental Resistances
 {variant:1}+5% to all maximum Resistances
-{variant:2}+4% to all maximum Resistances
+{variant:2,3,4}+4% to all maximum Resistances
 Cannot Block Attacks
 ]],[[
 Springleaf
 Plank Kite Shield
+Upgrade: Upgrades to unique{The Oak} via prophecy{Nature's Resilience}
 Variant: Pre 1.1.0
 Variant: Pre 2.0.0
 Variant: Pre 2.6.0
@@ -621,6 +738,21 @@ Implicits: 2
 {variant:3}5% of Life Regenerated per Second while on Low Life
 {variant:4}3% of Life Regenerated per Second while on Low Life
 ]],[[
+The Oak
+Plank Kite Shield
+Source: Upgraded from unique{Springleaf} using prophecy{Nature's Resilience}
+Variant: Pre 2.6.0
+Variant: Current
+Requires Level 40
++4% to all Elemental Resistances
+(80-120)% increased Armour and Energy Shield
++(100-150) to maximum Life
+50% reduced Freeze Duration on You
+{variant:1}1% of Life Regenerated per Second
+{variant:2}3% of Life Regenerated per Second
+{variant:1}5% of Life Regenerated per Second while on Low Life
+{variant:2}3% of Life Regenerated per Second while on Low Life
+]],[[
 The Unshattered Will
 Archon Kite Shield
 League: Harbinger
@@ -632,6 +764,18 @@ Grants Summon Harbinger of Focus Skill
 +(30-50) Mana gained when you Block
 +5% Chance to Block
 (50-70)% increased Damage with Channelling Skills
+]],[[
+Unyielding Flame
+Archon Kite Shield
+Source: Drops in The Lord's Labyrinth
+Requires Level 68
++12% to all Elemental Resistances
+Trigger Commandment of Inferno on Critical Strike
+(50–70)% increased Global Critical Strike Chance
++(60–80) to maximum Life
++(20–30)% to Fire Resistance
+(8–12)% increased Attack Speed if you've dealt a Critical Strike Recently
+(8–12)% increased Cast Speed if you've dealt a Critical Strike Recently
 ]],[[
 Victario's Charity
 Laminated Kite Shield
@@ -683,12 +827,16 @@ Grants level 20 Bear Trap Skill
 ]],[[
 Leper's Alms
 Mirrored Spiked Shield
-Requires Level: 66
-4% chance to Dodge Attacks 
-(130–150)% increased Evasion and Energy Shield 
-+(60–80) to maximum Life 
-40% increased Duration of Ailments on Enemies 
-+(3–4)% Chance to Block 
+Source: Drops from unique{The Eradicator}
+Variant: Pre 3.5.0
+Variant: Current
+Requires Level 66
+4% chance to Dodge Attacks
+{variant:1}(130–150)% increased Evasion and Energy Shield
+{variant:2}(500-600)% increased Evasion and Energy Shield
++(60–80) to maximum Life
+40% increased Duration of Ailments on Enemies
++(3–4)% Chance to Block
 Shared Suffering
 ]],[[
 Maligaro's Lens
@@ -704,5 +852,15 @@ Implicits: 2
 −50% to all Elemental Resistances
 10% increased Area of Effect of Area Skills
 Nearby allies Recover 2% of your maximum Life when you Die
+]],[[
+Zeel's Amplifier
+Polished Spiked Shield
+Requires Level 49
+4% chance to Dodge Attack Hits
+(40–50)% increased Spell Damage
++(60–80) to maximum Energy Shield
++(50–70) to maximum Life
+1% increased Area of Effect per Enemy killed recently, up to 50%
+You have Zealot's Oath if you haven't been hit recently
 ]],
 }

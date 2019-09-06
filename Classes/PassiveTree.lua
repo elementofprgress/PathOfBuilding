@@ -5,8 +5,6 @@
 -- Responsible for downloading and loading the passive tree data and assets
 -- Also pre-calculates and pre-parses most of the data need to use the passive tree, including the node modifiers
 --
-local launch, main = ...
-
 local pairs = pairs
 local ipairs = ipairs
 local t_insert = table.insert
@@ -33,21 +31,22 @@ local function getFile(URL)
 	return #page > 0 and page
 end
 
-local PassiveTreeClass = common.NewClass("PassiveTree", function(self, targetVersion)
-	self.targetVersion = targetVersion
+local PassiveTreeClass = newClass("PassiveTree", function(self, treeVersion)
+	self.treeVersion = treeVersion
+	self.targetVersion = treeVersions[treeVersion].targetVersion
 
 	MakeDir("TreeData")
 
 	ConPrintf("Loading passive tree data...")
 	local treeText
-	local treeFile = io.open("TreeData/"..targetVersion.."/tree.lua", "r")
+	local treeFile = io.open("TreeData/"..treeVersion.."/tree.lua", "r")
 	if treeFile then
 		treeText = treeFile:read("*a")
 		treeFile:close()
 	else
 		ConPrintf("Downloading passive tree data...")
 		local page
-		local pageFile = io.open("TreeData/"..targetVersion.."/tree.txt", "r")
+		local pageFile = io.open("TreeData/"..treeVersion.."/tree.txt", "r")
 		if pageFile then
 			page = pageFile:read("*a")
 			pageFile:close()
@@ -57,13 +56,15 @@ local PassiveTreeClass = common.NewClass("PassiveTree", function(self, targetVer
 		treeText = "local tree=" .. jsonToLua(page:match("var passiveSkillTreeData = (%b{})"))
 		treeText = treeText .. "tree.classes=" .. jsonToLua(page:match("ascClasses: (%b{})"))
 		treeText = treeText .. "return tree"
-		treeFile = io.open("TreeData/"..targetVersion.."/tree.lua", "w")
+		treeFile = io.open("TreeData/"..treeVersion.."/tree.lua", "w")
 		treeFile:write(treeText)
 		treeFile:close()
 	end
 	for k, v in pairs(assert(loadstring(treeText))()) do
 		self[k] = v
 	end
+
+	local cdnRoot = treeVersion == "2_6" and "" or "https://web.poecdn.com/image"
 
 	self.size = m_min(self.max_x - self.min_x, self.max_y - self.min_y) * 1.1
 
@@ -85,7 +86,7 @@ local PassiveTreeClass = common.NewClass("PassiveTree", function(self, targetVer
 
 	ConPrintf("Loading passive tree assets...")
 	for name, data in pairs(self.assets) do
-		self:LoadImage(name..".png", data[0.3835] or data[1], data, not name:match("[OL][ri][bn][ie][tC]") and "ASYNC" or nil)--, not name:match("[OL][ri][bn][ie][tC]") and "MIPMAP" or nil)
+		self:LoadImage(name..".png", cdnRoot..(data[0.3835] or data[1]), data, not name:match("[OL][ri][bn][ie][tC]") and "ASYNC" or nil)--, not name:match("[OL][ri][bn][ie][tC]") and "MIPMAP" or nil)
 	end
 
 	-- Load sprite sheets and build sprite map
@@ -96,7 +97,7 @@ local PassiveTreeClass = common.NewClass("PassiveTree", function(self, targetVer
 		local sheet = spriteSheets[maxZoom.filename]
 		if not sheet then
 			sheet = { }
-			self:LoadImage(maxZoom.filename:gsub("%?%x+$",""), self.imageRoot.."build-gen/passive-skill-sprite/"..maxZoom.filename, sheet, "CLAMP")--, "MIPMAP")
+			self:LoadImage(maxZoom.filename:gsub("%?%x+$",""), cdnRoot..self.imageRoot.."build-gen/passive-skill-sprite/"..maxZoom.filename, sheet, "CLAMP")--, "MIPMAP")
 			spriteSheets[maxZoom.filename] = sheet
 		end
 		for name, coords in pairs(maxZoom.coords) do
@@ -162,7 +163,7 @@ local PassiveTreeClass = common.NewClass("PassiveTree", function(self, targetVer
 		data.rsq = size * size
 	end
 
-	--local err, passives = PLoadModule("Data/"..targetVersion.."/Passives.lua")
+	--local err, passives = PLoadModule("Data/"..treeVersion.."/Passives.lua")
 
 	ConPrintf("Processing tree...")
 	self.keystoneMap = { }
@@ -247,7 +248,7 @@ local PassiveTreeClass = common.NewClass("PassiveTree", function(self, targetVer
 				end
 			end
 			local line = node.sd[i]
-			local list, extra = modLib.parseMod[targetVersion](line)
+			local list, extra = modLib.parseMod[self.targetVersion](line)
 			if not list or extra then
 				-- Try to combine it with one or more of the lines that follow this one
 				local endI = i + 1
@@ -256,7 +257,7 @@ local PassiveTreeClass = common.NewClass("PassiveTree", function(self, targetVer
 					for ci = i + 1, endI do
 						comb = comb .. " " .. node.sd[ci]
 					end
-					list, extra = modLib.parseMod[targetVersion](comb, true)
+					list, extra = modLib.parseMod[self.targetVersion](comb, true)
 					if list and not extra then
 						-- Success, add dummy mod lists to the other lines that were combined with this one
 						for ci = i + 1, endI do
@@ -287,7 +288,7 @@ local PassiveTreeClass = common.NewClass("PassiveTree", function(self, targetVer
 		end
 
 		-- Build unified list of modifiers from all recognised modifier lines
-		node.modList = common.New("ModList")
+		node.modList = new("ModList")
 		for _, mod in pairs(node.mods) do
 			if mod.list and not mod.extra then
 				for i, mod in ipairs(mod.list) do
@@ -308,11 +309,11 @@ local PassiveTreeClass = common.NewClass("PassiveTree", function(self, targetVer
 	for nodeId, socket in pairs(sockets) do
 		socket.nodesInRadius = { }
 		socket.attributesInRadius = { }
-		for radiusIndex, radiusInfo in ipairs(data[targetVersion].jewelRadius) do
+		for radiusIndex, radiusInfo in ipairs(data[self.targetVersion].jewelRadius) do
 			socket.nodesInRadius[radiusIndex] = { }
 			socket.attributesInRadius[radiusIndex] = { }
 			local rSq = radiusInfo.rad * radiusInfo.rad
-			for _, node in ipairs(self.nodes) do
+			for _, node in pairs(self.nodes) do
 				if node ~= socket then
 					local vX, vY = node.x - socket.x, node.y - socket.y
 					if vX * vX + vY * vY <= rSq then 
@@ -325,7 +326,7 @@ local PassiveTreeClass = common.NewClass("PassiveTree", function(self, targetVer
 
 	-- Pregenerate the polygons for the node connector lines
 	self.connectors = { }
-	for _, node in ipairs(self.nodes) do
+	for _, node in pairs(self.nodes) do
 		for _, otherId in pairs(node.out) do
 			local other = nodeMap[otherId]
 			t_insert(node.linkedId, otherId)
@@ -353,10 +354,10 @@ function PassiveTreeClass:LoadImage(imgName, url, data, ...)
 	if imgFile then
 		imgFile:close()
 	else
-		imgFile = io.open("TreeData/"..self.targetVersion.."/"..imgName, "r")
+		imgFile = io.open("TreeData/"..self.treeVersion.."/"..imgName, "r")
 		if imgFile then
 			imgFile:close()
-			imgName = self.targetVersion.."/"..imgName
+			imgName = self.treeVersion.."/"..imgName
 		else
 			ConPrintf("Downloading '%s'...", imgName)
 			local data = getFile(url)

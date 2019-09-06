@@ -3,7 +3,6 @@
 -- Module: Data
 -- Contains static data used by other modules.
 --
-local launch = ...
 
 LoadModule("Data/Global")
 
@@ -97,20 +96,20 @@ for i = 1, 70 do
 end
 
 data.weaponTypeInfo = {
-	["None"] = { oneHand = true, melee = true, flag = "Unarmed", range = 4 },
+	["None"] = { oneHand = true, melee = true, flag = "Unarmed" },
 	["Bow"] = { oneHand = false, melee = false, flag = "Bow" },
-	["Claw"] = { oneHand = true, melee = true, flag = "Claw", range = 9 },
-	["Dagger"] = { oneHand = true, melee = true, flag = "Dagger", range = 8 },
-	["Staff"] = { oneHand = false, melee = true, flag = "Staff", range = 11 },
+	["Claw"] = { oneHand = true, melee = true, flag = "Claw" },
+	["Dagger"] = { oneHand = true, melee = true, flag = "Dagger" },
+	["Staff"] = { oneHand = false, melee = true, flag = "Staff" },
 	["Wand"] = { oneHand = true, melee = false, flag = "Wand" },
-	["One Handed Axe"] = { oneHand = true, melee = true, flag = "Axe", range = 9 },
-	["One Handed Mace"] = { oneHand = true, melee = true, flag = "Mace", range = 9 },
-	["One Handed Sword"] = { oneHand = true, melee = true, flag = "Sword", range = 9 },
-	["Sceptre"] = { oneHand = true, melee = true, flag = "Mace", range = 9, label = "One Handed Mace" },
-	["Thrusting One Handed Sword"] = { oneHand = true, melee = true, flag = "Sword", range = 12, label = "One Handed Sword" },
-	["Two Handed Axe"] = { oneHand = false, melee = true, flag = "Axe", range = 11 },
-	["Two Handed Mace"] = { oneHand = false, melee = true, flag = "Mace", range = 11 },
-	["Two Handed Sword"] = { oneHand = false, melee = true, flag = "Sword", range = 11 },
+	["One Handed Axe"] = { oneHand = true, melee = true, flag = "Axe" },
+	["One Handed Mace"] = { oneHand = true, melee = true, flag = "Mace" },
+	["One Handed Sword"] = { oneHand = true, melee = true, flag = "Sword" },
+	["Sceptre"] = { oneHand = true, melee = true, flag = "Mace", label = "One Handed Mace" },
+	["Thrusting One Handed Sword"] = { oneHand = true, melee = true, flag = "Sword", label = "One Handed Sword" },
+	["Two Handed Axe"] = { oneHand = false, melee = true, flag = "Axe" },
+	["Two Handed Mace"] = { oneHand = false, melee = true, flag = "Mace" },
+	["Two Handed Sword"] = { oneHand = false, melee = true, flag = "Sword" },
 }
 data.unarmedWeaponData = {
 	[0] = { type = "None", AttackRate = 1.2, CritChance = 0, PhysicalMin = 2, PhysicalMax = 6 }, -- Scion
@@ -168,6 +167,11 @@ for _, targetVersion in ipairs(targetVersionList) do
 	-- Misc data tables
 	dataModule("Misc", verData)
 
+	-- Stat descriptions
+	if targetVersion ~= "2_6" then
+		verData.describeStats = LoadModule("Modules/StatDescriber", targetVersion)
+	end
+
 	-- Load item modifiers
 	verData.itemMods = {
 		Item = dataModule("ModItem"),
@@ -175,7 +179,6 @@ for _, targetVersion in ipairs(targetVersionList) do
 		Jewel = dataModule("ModJewel"),
 		JewelAbyss = targetVersion ~= "2_6" and dataModule("ModJewelAbyss") or { },
 	}
-	verData.corruptedMods = dataModule("ModCorrupted")
 	verData.masterMods = dataModule("ModMaster")
 	verData.enchantments = {
 		Helmet = dataModule("EnchantmentHelmet"),
@@ -186,6 +189,19 @@ for _, targetVersion in ipairs(targetVersionList) do
 
 	-- Load skills
 	verData.skills = { }
+	verData.skillStatMap = dataModule("SkillStatMap", makeSkillMod, makeFlagMod, makeSkillDataMod)
+	verData.skillStatMapMeta = {
+		__index = function(t, key)
+			local map = verData.skillStatMap[key]
+			if map then
+				t[key] = copyTable(map, true)
+				for _, mod in ipairs(map) do
+					processMod(t._grantedEffect, mod)
+				end
+				return map
+			end
+		end
+	}
 	for _, type in pairs(skillTypes) do
 		dataModule("Skills/"..type, verData.skills, makeSkillMod, makeFlagMod, makeSkillDataMod)
 	end
@@ -204,15 +220,30 @@ for _, targetVersion in ipairs(targetVersionList) do
 				end
 			end
 		end
+		-- Install stat map metatable
+		grantedEffect.statMap = grantedEffect.statMap or { }
+		setmetatable(grantedEffect.statMap, verData.skillStatMapMeta)
+		grantedEffect.statMap._grantedEffect = grantedEffect
+		for _, map in pairs(grantedEffect.statMap) do
+			for _, mod in ipairs(map) do
+				processMod(grantedEffect, mod)
+			end
+		end
 	end
 
-	-- Build gem list
-	verData.gems = { }
-	for _, grantedEffect in pairs(verData.skills) do
-		if grantedEffect.gemTags then
-			verData.gems[grantedEffect.name] = grantedEffect
-			grantedEffect.defaultLevel = (grantedEffect.levels[20] and 20) or (grantedEffect.levels[3][2] and 3) or 1
-		end
+	-- Load gems
+	verData.gems = dataModule("Gems")
+	verData.gemForSkill = { }
+	for gemId, gem in pairs(verData.gems) do
+		gem.id = gemId
+		gem.grantedEffect = verData.skills[gem.grantedEffectId]
+		verData.gemForSkill[gem.grantedEffect] = gemId
+		gem.secondaryGrantedEffect = gem.secondaryGrantedEffectId and verData.skills[gem.secondaryGrantedEffectId]
+		gem.grantedEffectList = {
+			gem.grantedEffect,
+			gem.secondaryGrantedEffect
+		}
+		gem.defaultLevel = (#gem.grantedEffect.levels > 20 and #gem.grantedEffect.levels - 20) or (gem.grantedEffect.levels[3][1] and 3) or 1
 	end
 
 	-- Load minions
