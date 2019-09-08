@@ -271,11 +271,10 @@ to view or edit the item and add it to your build.
 You can Control + Click an item to equip it, or drag it onto the slot.
 This will also add it to your build if it's from the unique/template list.
 If there's 2 slots an item can go in, holding Shift will put it in the second.]])
-	self.controls.sharedItemList = common.New("SharedItemList", {"TOPLEFT",self.controls.craftDisplayItem, "BOTTOMLEFT"}, 0, 142, 360, 308, self)
-	self.controls.statWeightsCalc = common.New("ButtonControl", {"TOPLEFT", self.controls.craftDisplayItem, "BOTTOMLEFT"}, 0, 470, 120, 20, "Calculate Weights", function()
+	self.controls.sharedItemList  = new("SharedItemListControl", {"TOPLEFT",self.controls.craftDisplayItem, "BOTTOMLEFT"}, 0, 142, 360, 308, self)
+	self.controls.statWeightsCalc = new("ButtonControl", {"TOPLEFT", self.controls.craftDisplayItem, "BOTTOMLEFT"}, 0, 470, 120, 20, "Calculate Weights", function()
 		self:CalcStatWeights()
 	end)
-	--self.CalcStatWeights = function(self) end;
 
 	-- Display item
 	self.displayItemTooltip = new("Tooltip")
@@ -1382,8 +1381,6 @@ function ItemsTabClass:CalcStatWeights()
 		["Damage Penetrates 1% Elemental Resistance"] = {{"ElementalPenetration", "BASE", 1}},
 		["Gain 1% of Physical Damage as Extra Fire Damage"] = {{"PhysicalDamageGainAsFire", "BASE", 1}},
 		["Gain 1% of Physical Damage as Extra Cold Damage"] = {{"PhysicalDamageGainAsCold", "BASE", 1}},
-		["Gain 1% of Physical Damage as Extra Lightning Damage"] = {{"PhysicalDamageGainAsLightning", "BASE", 1}},
-		["Gain 1% of Physical Damage as Extra Chaos Damage"] = {{"PhysicalDamageGainAsChaos", "BASE", 1}},
 		["1% increased Cold Damage"] = {{"ColdDamage", "INC", 1}},
 		["1% increased Fire Damage"] = {{"FireDamage", "INC", 1}},
 		["1% increased Lightning Damage"] = {{"LightningDamage", "INC", 1}},
@@ -1420,11 +1417,12 @@ function ItemsTabClass:CalcStatWeights()
 	for k1, v1 in orderedPairs(ordered_basestats) do
 		ordered_outstr = ordered_outstr.."+"..k1.."\n";
 	end
-	controls.edit = common.New("EditControl", nil, 0, 40, 480, 420, "", nil, "^%C\t\n", nil, nil, 14)
-	controls.edit:SetText("Stat Weights go here:\n"..ordered_outstr.."\n Base DPS: "..calcBase.TotalDPS.."\n      DPS: "..output.TotalDPS)
+	controls.edit = new("EditControl", nil, 0, 40, 480, 420, "", nil, "^%C\t\n", nil, nil, 14)
+	controls.edit:SetText("Stat Weights go here:\n"..outstr)
+	--controls.edit:SetText("Stat Weights go here:\n"..ordered_outstr.."\n Base DPS: "..calcBase.TotalDPS.."\n      DPS: "..output.TotalDPS)
 	--controls.edit:SetText("Stat Weights go here:\n"..outstr)
 	controls.edit.font = "FIXED"
-	controls.cancel = common.New("ButtonControl", nil, 0, 470, 80, 20, "Cancel", function()
+	controls.cancel = new("ButtonControl", nil, 0, 470, 80, 20, "Cancel", function()
 		main:ClosePopup()
 	end)
 	main:OpenPopup(500, 500, "Stat Weights", controls, nil, "edit")
